@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bnv_home"
+        android:icon="@drawable/main_home_black_24dp"
+        android:title="@string/bnv_title_home"/>
+
+    <item
+        android:id="@+id/bnv_project"
+        android:icon="@drawable/main_project_black_24dp"
+        android:title="@string/bnv_title_project"/>
+
+    <item
+        android:id="@+id/bnv_ks"
+        android:icon="@drawable/main_ks_black_24dp"
+        android:title="@string/bnv_title_ks"/>
+
+</menu>

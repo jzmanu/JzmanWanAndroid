@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">JzmanWanAndroid</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+    <string name="bnv_title_home">主页</string>
+    <string name="bnv_title_project">项目</string>
+    <string name="bnv_title_ks">知识体系</string>
+    <string name="nv_person_center">个人中心</string>
+    <string name="nv_setting">设置</string>
+    <string name="nv_about">关于</string>
+
+    <string name="common_open">开启</string>
+    <string name="common_close">关闭</string>
+    <string name="common_collect">收藏</string>
+    <string name="common_retry">点击重试</string>
+</resources>

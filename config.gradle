@@ -1,0 +1,26 @@
+ext {
+    android = [
+            compileSdkVersion: 28,
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            applicationId    : "com.manu.wanandroid"
+    ]
+
+    version = [
+            // App版本
+            versionCode     : 1,
+            versionName     : "1.0",
+
+            supportV7       : "28.0.0",
+            constraintLayout: "1.1.3",
+            lifecycle       : "1.1.1",
+            design          : "28.0.0"
+    ]
+
+    dependencies = [
+            supportV7       : "com.android.support:appcompat-v7:${version.supportV7}",
+            constraintLayout: "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
+            lifecycle       : "android.arch.lifecycle:common-java8:${version.lifecycle}",
+            design          : "com.android.support:design:${version.design}"
+    ]
+}

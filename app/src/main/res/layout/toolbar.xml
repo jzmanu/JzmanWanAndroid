@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/md_toolbar_height"
+        android:elevation="30dp"
+        android:theme="@style/AppTheme.Toolbar"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <TextView
+            android:id="@+id/tv_center_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="标题" />
+
+    </androidx.appcompat.widget.Toolbar>
+</LinearLayout>

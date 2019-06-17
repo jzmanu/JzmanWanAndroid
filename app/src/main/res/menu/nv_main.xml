@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/groupMenu1">
+        <item
+            android:id="@+id/nv_person"
+            android:icon="@drawable/mine_person_black_24dp"
+            android:title="@string/nv_person_center" />
+        <item
+            android:id="@+id/nv_setting"
+            android:icon="@drawable/mine_settings_black_24dp"
+            android:title="@string/nv_setting" />
+        <item
+            android:id="@+id/nv_about"
+            android:icon="@drawable/mine_about_black_24dp"
+            android:title="@string/nv_about" />
+    </group>
+</menu>
