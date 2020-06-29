@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.TextView;
 
 import com.manu.wanandroid.R;
@@ -32,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         AppStatusTrack.getInstance().setAppStatus(0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         mHandler = new MHandler(this);
         mHandler.sendEmptyMessageDelayed(0, 1000);
     }

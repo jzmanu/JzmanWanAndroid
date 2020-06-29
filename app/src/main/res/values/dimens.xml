@@ -5,10 +5,15 @@
     <dimen name="md_bottom_nav_height">48dp</dimen>
     <!--AppBar-->
     <dimen name="md_toolbar_height">56dp</dimen>
+    <!--StatusBar-->
+    <dimen name="md_status_bar_height">25dp</dimen>
     <!--Banner-->
     <dimen name="app_banner_height">200dp</dimen>
 
 
     <!--FontSize-->
     <dimen name="app_recycle_title_text_size">16sp</dimen>
+
+    <!--状态栏高度+标题栏-->
+    <dimen name="actionBarWithStatusBarSize">81dp</dimen>
 </resources>

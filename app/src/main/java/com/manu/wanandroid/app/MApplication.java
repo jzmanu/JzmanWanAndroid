@@ -6,18 +6,9 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
 import com.manu.wanandroid.di.component.DaggerAppComponent;
-import com.manu.wanandroid.di.module.AppModule;
-import com.manu.wanandroid.http.api.ApiService;
-import com.manu.wanandroid.presenter.home.HomePresenter;
-import com.manu.wanandroid.utils.L;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-
-import javax.inject.Inject;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 /**
  * @Desc: MApplication

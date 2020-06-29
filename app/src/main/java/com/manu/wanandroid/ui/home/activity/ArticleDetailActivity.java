@@ -17,6 +17,7 @@ import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComponent;
 import com.manu.wanandroid.presenter.home.CollectPresenter;
 import com.manu.wanandroid.utils.L;
+import com.manu.wanandroid.utils.StatusBarUtil;
 
 import javax.inject.Inject;
 
@@ -73,6 +74,9 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
         actionBar.setTitle("文章详情页");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+
+        StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")

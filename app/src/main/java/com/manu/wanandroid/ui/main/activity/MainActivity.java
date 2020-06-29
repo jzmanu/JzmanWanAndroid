@@ -1,8 +1,15 @@
 package com.manu.wanandroid.ui.main.activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -17,6 +24,7 @@ import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
 import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
 import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
+import com.manu.wanandroid.utils.StatusBarUtil;
 
 import java.util.List;
 
@@ -25,6 +33,7 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -83,11 +92,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         setSupportActionBar(toolBar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
+        dlMain.setStatusBarBackgroundColor(getResources().getColor(R.color.light_transparent));
         actionBar.setDisplayShowTitleEnabled(false);
         ActionBarDrawerToggle toggle =
                 new ActionBarDrawerToggle(this, dlMain, toolBar, R.string.common_open, R.string.common_close);
         toggle.syncState();
         dlMain.addDrawerListener(toggle);
+
+        StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
 
     @Override

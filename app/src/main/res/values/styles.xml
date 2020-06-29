@@ -1,27 +1,51 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
+
+        <!--是否显示ActionBar-->
+        <item name="windowActionBar">false</item>
+        <!--是否显示Title-->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+
     </style>
 
+    <!--NoActionBar主题且不设置标题-->
     <style name="AppTheme.NoActionBar">
+        <!--是否显示ActionBar-->
         <item name="windowActionBar">false</item>
+        <!--是否显示Title-->
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <!--Toolbar主题-->
     <style name="AppTheme.Toolbar" parent="AppTheme">
+        <!--Toolbar标题颜色-->
         <item name="android:textColorPrimary">@color/colorWhite</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <!--Toolbar背景颜色-->
+<!--        <item name="android:background">@color/colorPrimary</item>-->
+        <!--Toolbar左侧切换图标颜色-->
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
+
+    <!--Android 4.4以上支持透明状态栏，5.0有一个渐变色-->
+    <style name="AppTheme.TransStatusBar.Base" parent="AppTheme"/>
+
+    <style name="AppTheme.TransStatusBar" parent="AppTheme.TransStatusBar.Base">
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则状态栏是半透明颜色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!--MainActivity主题-->
+    <style name="AppTheme.Main" parent="AppTheme.TransStatusBar"/>
 
 </resources>
