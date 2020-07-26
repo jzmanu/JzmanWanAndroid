@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorBoomNav</item>
 
         <!--是否显示ActionBar-->
         <item name="windowActionBar">false</item>
@@ -47,5 +47,12 @@
 
     <!--MainActivity主题-->
     <style name="AppTheme.Main" parent="AppTheme.TransStatusBar"/>
+
+    <style name="FlutterTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/light_transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
 </resources>

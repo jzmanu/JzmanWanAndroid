@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.manu.wanandroid">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".app.MApplication"
@@ -19,21 +19,38 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
+        <activity android:name=".ui.main.activity.AgentActivity" />
         <activity
             android:name=".ui.main.activity.MainActivity"
-            android:theme="@style/AppTheme.Main"
-            android:launchMode="singleTask"/>
-        <activity android:name=".common.SplashActivity">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Main" />
+        <activity
+            android:name=".common.SplashActivity"
+            android:theme="@style/AppTheme.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".common.LoginActivity" />
-
-        <activity android:name=".ui.home.activity.ArticleDetailActivity"
-            android:theme="@style/AppTheme.Main"/>
+        <activity
+            android:name=".ui.user.activity.LoginActivity"
+            android:theme="@style/AppTheme.Main" />
+        <activity
+            android:name=".ui.home.activity.ArticleDetailActivity"
+            android:theme="@style/AppTheme.Main" />
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:theme="@style/FlutterTheme"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+                android:value="true" />
+            <meta-data
+                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+                android:resource="@drawable/ic_launcher_background" />
+        </activity>
     </application>
-
 </manifest>

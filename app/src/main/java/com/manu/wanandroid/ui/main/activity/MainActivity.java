@@ -1,15 +1,9 @@
 package com.manu.wanandroid.ui.main.activity;
 
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -20,9 +14,9 @@ import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
 import com.manu.wanandroid.di.component.activity.MainActivityComponent;
-import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
 import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
+import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
 import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
 import com.manu.wanandroid.utils.StatusBarUtil;
 
@@ -33,12 +27,12 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
+import io.flutter.embedding.android.FlutterActivity;
 
 /**
  * @Desc: MainActivity
@@ -101,6 +95,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
+
 
     @Override
     public void onInitData() {
@@ -171,4 +166,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    public static void startMainActivity(Context context){
+        Intent intent = new Intent(context,MainActivity.class);
+        context.startActivity(intent);
+    }
+
+
+
 }

@@ -75,7 +75,6 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
 

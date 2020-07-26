@@ -21,6 +21,6 @@ ext {
             supportV7       : "com.android.support:appcompat-v7:${version.supportV7}",
             constraintLayout: "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             lifecycle       : "android.arch.lifecycle:common-java8:${version.lifecycle}",
-            design          : "com.android.support:design:${version.design}"
+            design          : 'com.google.android.material:material:1.0.0'
     ]
 }

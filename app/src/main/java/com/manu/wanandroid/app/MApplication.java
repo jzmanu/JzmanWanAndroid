@@ -1,7 +1,5 @@
 package com.manu.wanandroid.app;
 
-import android.app.Application;
-
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
@@ -10,12 +8,14 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import io.flutter.app.FlutterApplication;
+
 /**
  * @Desc: MApplication
  * @Author: jzman
  * @Date: 2019/5/7 0007 16:38
  */
-public class MApplication extends Application {
+public class MApplication extends FlutterApplication {
     private static final String TAG = MApplication.class.getSimpleName();
     private AppComponent mAppComponent;
 
