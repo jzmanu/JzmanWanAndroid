@@ -14,6 +14,7 @@ class LoginApp extends StatelessWidget {
       title: "Login",
       theme: ThemeData.light(),
       home: Scaffold(
+        resizeToAvoidBottomInset: true,
           body: Column(
             children: <Widget>[
               Expanded(
@@ -76,58 +77,60 @@ class _AccountPageState extends State<AccountPage>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width * 3 / 4,
-          height: height,
-          margin: const EdgeInsets.only(top: 150),
-          decoration: BoxDecoration(
-            /// Tab背景颜色
-              color: Color.fromARGB(255,172, 108, 96),
-              borderRadius: BorderRadius.circular(radius)
-          ),
-          child: Theme(
-            data: ThemeData(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width * 3 / 4,
+            height: height,
+            margin: const EdgeInsets.only(top: 150),
+            decoration: BoxDecoration(
+                /// Tab背景颜色
+                color: Color.fromARGB(255,172, 108, 96),
+                borderRadius: BorderRadius.circular(radius)
             ),
-            child: TabBar(
-              tabs: tabs,
-              controller: tabController,
-              labelColor: Colors.black87,
-              labelStyle: TextStyle(fontSize: 18),
-              unselectedLabelColor: Colors.black87,
-              indicator: BubbleTabIndicator(
-                indicatorColor: Colors.white,
-                indicatorRadius: radius,
-                indicatorHeight: height,
-                padding: EdgeInsets.zero,
-                insets: EdgeInsets.zero,
+            child: Theme(
+              data: ThemeData(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent
+              ),
+              child: TabBar(
+                tabs: tabs,
+                controller: tabController,
+                labelColor: Colors.black87,
+                labelStyle: TextStyle(fontSize: 18),
+                unselectedLabelColor: Colors.black87,
+                indicator: BubbleTabIndicator(
+                  indicatorColor: Colors.white,
+                  indicatorRadius: radius,
+                  indicatorHeight: height,
+                  padding: EdgeInsets.zero,
+                  insets: EdgeInsets.zero,
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          constraints: BoxConstraints(maxHeight: 400,minHeight: 300),
-          margin: const EdgeInsets.only(top: 20),
-          padding: const EdgeInsets.all(10),
-          child: PageView.builder(
-            itemCount: tabs.length,
-            itemBuilder: (BuildContext context, int index){
-              return widgets[index];
-            },
-            controller: pageController,
-            onPageChanged: (index){
-              tabController.animateTo(
-                  index,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.linear);
-            },
-          ),
-        )
-      ],
+          Container(
+            constraints: BoxConstraints(maxHeight: 400,minHeight: 300),
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.all(10),
+            child: PageView.builder(
+              itemCount: tabs.length,
+              itemBuilder: (BuildContext context, int index){
+                return widgets[index];
+              },
+              controller: pageController,
+              onPageChanged: (index){
+                tabController.animateTo(
+                    index,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear);
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -141,7 +144,7 @@ class _LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<_LoginWidget> {
   /// 密码是否可见
   bool isPasswordVisible = false;
-  static  MethodChannel platform  ;
+  static  MethodChannel platform ;
 
   @override
   void initState() {
