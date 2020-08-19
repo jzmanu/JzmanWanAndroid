@@ -1,38 +1,35 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:toast/toast.dart';
 
-void main() => runApp(LoginApp());
+import 'account/login_page.dart';
+import 'account/register_page.dart';
 
-class LoginApp extends StatelessWidget {
+void main() => runApp(AccountApp());
+
+class AccountApp extends StatelessWidget {
   static final String routeName = "/login";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Login",
+      title: "Account",
       theme: ThemeData.light(),
       home: Scaffold(
-        resizeToAvoidBottomInset: true,
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: double.infinity,
-                  child: AccountPage(),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('image/bg_src_tianjin.jpg'),
-                          fit: BoxFit.cover)),
-                ))
-          ],
-      )));
+          drawerDragStartBehavior: DragStartBehavior.down,
+          body: Container(
+            child: AccountPage(),
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('image/bg_src_tianjin.jpg'),
+                    fit: BoxFit.cover)),
+          )
+    ));
   }
 }
 
-/// LoginPage
+/// AccountPage
 class AccountPage extends StatefulWidget {
   @override
   State createState() => _AccountPageState();
@@ -48,8 +45,8 @@ class _AccountPageState extends State<AccountPage>
 
   /// Widgets
   var widgets = <Widget>[
-    _LoginWidget(),
-    _RegisterWidget()
+    LoginWidget(),
+    RegisterWidget()
   ];
 
   TabController tabController ;
@@ -112,7 +109,7 @@ class _AccountPageState extends State<AccountPage>
             ),
           ),
           Container(
-            constraints: BoxConstraints(maxHeight: 400,minHeight: 300),
+            constraints: BoxConstraints(maxHeight: 400,minHeight: 200),
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.all(10),
             child: PageView.builder(
@@ -135,262 +132,10 @@ class _AccountPageState extends State<AccountPage>
   }
 }
 
-/// 登录
-class _LoginWidget extends StatefulWidget {
-  @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+class AccountData {
+  String name = '';
+  String password = '';
+  String rePassword = '';
 }
-
-class _LoginWidgetState extends State<_LoginWidget> {
-  /// 密码是否可见
-  bool isPasswordVisible = false;
-  static  MethodChannel platform ;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    //android 向 flutter 通信
-    platform = const MethodChannel('com.manu.startMainActivity');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Stack(
-          overflow: Overflow.visible,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width * 3 / 4,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Form(
-                    child: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          textCapitalization: TextCapitalization.words,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                              hintText: '账号',
-                              icon: Icon(Icons.person, color: Colors.black87,),
-                              border: InputBorder.none
-                          ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.grey[350],
-                          margin: const EdgeInsets.only(bottom: 16,top: 16),
-                        ),
-                        TextFormField(
-                          textCapitalization: TextCapitalization.words,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.visiblePassword,
-                          maxLines: 1,
-                          // 是否是密码
-                          obscureText: !isPasswordVisible,
-                          decoration: InputDecoration(
-                            hintText: '密码',
-                            icon: Icon(Icons.lock, color: Colors.black87,),
-                            border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // 根据isPasswordVisible状态显示不同的图标
-                                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                                color: Theme.of(context).primaryColorDark,
-                              ),
-                              onPressed: (){
-                                setState(() {
-                                  isPasswordVisible = !isPasswordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  )
-              ),
-            ),
-            Positioned(
-              bottom: -25,
-              left: MediaQuery.of(context).size.width * 3 / 4 / 4,
-              child: Container(
-                width: MediaQuery.of(context).size.width * 3 / 4 / 2,
-                height: 50,
-                child: RaisedButton(
-                  onPressed: () {
-                    Toast.show("Login", context);
-//                    _startMainActivity();
-                    platform.invokeMethod('startMainActivity').then((value) {
-                      print("value:startMainActivity");
-                    }).catchError((e) {
-                      print(e.message);
-                    });
-                  },
-                  textColor: Colors.white,
-                  elevation: 20,
-                  color: Color(0xFFED7D0D),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  child: const Text('登录', style: TextStyle(fontSize: 20)),
-                ),
-              )
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Future<void> _startMainActivity() async {
-    try {
-      await platform.invokeMethod('startMainActivity');
-    } on PlatformException catch (e) {
-      print("_startMainActivity:${e.message}");
-    }
-    setState(() {
-
-    });
-  }
-
-}
-
-
-/// 注册
-class _RegisterWidget extends StatefulWidget {
-  @override
-  _RegisterWidgetState createState() => _RegisterWidgetState();
-}
-
-class _RegisterWidgetState extends State<_RegisterWidget> {
-  /// 密码是否可见
-  bool isPasswordVisible = false;
-  bool isRePasswordVisible = false;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Stack(
-          overflow: Overflow.visible,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width * 3 / 4,
-              height: 280,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Form(
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        textCapitalization: TextCapitalization.words,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                            hintText: '用户名',
-                            icon: Icon(Icons.person, color: Colors.black87,),
-                            border: InputBorder.none
-                        ),
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey[350],
-                        margin: const EdgeInsets.only(bottom: 16,top: 16),
-                      ),
-                      TextFormField(
-                        textCapitalization: TextCapitalization.words,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.visiblePassword,
-                        maxLines: 1,
-                        // 是否是密码
-                        obscureText: !isPasswordVisible,
-                        decoration: InputDecoration(
-                          hintText: '密码',
-                          icon: Icon(Icons.lock, color: Colors.black87,),
-                          border: InputBorder.none,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              //根据isPasswordVisible状态显示不同的图标
-                              isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorDark,
-                            ),
-                            onPressed: (){
-                              setState(() {
-                                isPasswordVisible = !isPasswordVisible;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey[350],
-                        margin: const EdgeInsets.only(bottom: 16,top: 16),
-                      ),
-                      TextFormField(
-                        textCapitalization: TextCapitalization.words,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.visiblePassword,
-                        maxLines: 1,
-                        // 是否是密码
-                        obscureText: !isPasswordVisible,
-                        decoration: InputDecoration(
-                          hintText: '重复密码',
-                          icon: Icon(Icons.lock, color: Colors.black87,),
-                          border: InputBorder.none,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              //根据isRePasswordVisible状态显示不同的图标
-                              isRePasswordVisible ? Icons.visibility : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorDark,
-                            ),
-                            onPressed: (){
-                              setState(() {
-                                isRePasswordVisible = !isRePasswordVisible;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-                bottom: -25,
-                left: MediaQuery.of(context).size.width * 3 / 4 / 4,
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 3 / 4 / 2,
-                  height: 50,
-                  child: RaisedButton(
-                    onPressed: () {},
-                    textColor: Colors.white,
-                    elevation: 20,
-                    color: Color(0xFFED7D0D),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    child: const Text('注册', style: TextStyle(fontSize: 20)),
-                  ),
-                )
-            ),
-          ],
-        )
-      ],
-    );
-  }
-}
-
 
 

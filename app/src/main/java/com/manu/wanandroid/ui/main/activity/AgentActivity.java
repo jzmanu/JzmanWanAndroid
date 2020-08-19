@@ -29,7 +29,6 @@ public class AgentActivity extends FlutterActivity {
                         result.notImplemented();
                     }
                 });
-
     }
 
     public static Intent createDefaultIntent(@NonNull Context launchContext) {

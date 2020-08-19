@@ -4,8 +4,6 @@ import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.http.exception.MException;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -56,5 +54,4 @@ public class RxUtil {
             }
         });
     }
-
 }

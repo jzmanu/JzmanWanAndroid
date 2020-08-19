@@ -32,7 +32,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
-import io.flutter.embedding.android.FlutterActivity;
 
 /**
  * @Desc: MainActivity
