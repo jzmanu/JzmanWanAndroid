@@ -14,6 +14,7 @@ class User{
   int type;
   String username;
 
+
   User(
       {this.admin,
         this.chapterTops,

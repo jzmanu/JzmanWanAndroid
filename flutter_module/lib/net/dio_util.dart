@@ -1,12 +1,16 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_module/api/Api.dart';
 import 'package:flutter_module/common/common.dart';
-import 'package:flutter_module/model/base_result_bean.dart';
-import 'package:cookie_jar/cookie_jar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_module/bean/base_result_bean.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter_module/util/log_util.dart';
+import 'package:flutter_module/util/sp_util.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+
+String tag = "Http";
 
 typedef OnListSuccess<T> = void Function(List<T> result);
 typedef OnDataSuccess<T> = void Function(T result);
@@ -40,42 +44,64 @@ class Http {
   static void request<T>(String url, bool isList, Callback<T> callback,
       {String method, Map<String, dynamic> queryParameters}) async {
     if (method == null) method = 'GET';
-
-    /// 持久化Cookie
-    Directory directory = await getTemporaryDirectory();
-    File file = new File(directory.path + '/cookies/');
-    var cookieJar = PersistCookieJar(dir: file.path);
-    _getDioInstance().interceptors.add(CookieManager(cookieJar));
+    if (url.isEmpty) {
+      Log.d(tag, "url is empty");
+      return;
+    }
+    var cookieJar;
+    if (url == Api.apiLogin) {
+      /// 持久化Cookie
+      Directory directory = await getTemporaryDirectory();
+      File file = new File(directory.path + '/cookies/');
+      cookieJar = PersistCookieJar(dir: file.path);
+      _getDioInstance().interceptors.add(CookieManager(cookieJar));
+    }
 
     try {
       Response response =
           await _getDioInstance().post(url, queryParameters: queryParameters);
 
       if (response.statusCode == HttpStatus.ok) {
-        print('response:${response.toString()}');
-        print('response.data:${response.data.toString()}');
+        Log.d(tag, 'request > response:${response.toString()}');
 
-        List<Cookie> cookies = cookieJar.loadForRequest(Uri.parse(Common.baseUrl+url));
+        /// 登录时保存Cookie
+        if (url == Api.apiLogin){
+          List<Cookie> cookies = cookieJar
+              .loadForRequest(Uri.parse(Common.baseUrl + Api.apiLogin));
 
-        if (cookies != null && cookies.length > 0) {
-          var cookie = cookies.firstWhere((element) => element.expires!=null);
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setInt(Common.expires, cookie.expires.millisecondsSinceEpoch);
+          if (cookies != null && cookies.length > 0) {
+            cookies.forEach((element) {
+              Log.d(tag,"element > name:${element.name},value:${element.value}");
+            });
+            var cookie =
+            cookies.firstWhere((element) => element != null && element.expires != null);
+            Sp.putInt(Common.expires, cookie.expires.millisecondsSinceEpoch);
+          }
         }
 
         if (isList) {
-          List<T> result =
-              BaseResultBean.fromJsonArray(response.data).getList<T>();
-          print('result:${result.length}');
-          print('result:${result.toString()}');
-          callback.onListSuccess(result);
+          BaseResultBean<T> resultBean =
+              BaseResultBean.fromJsonArray(response.data);
+          if (resultBean.errorCode == 0) {
+            List<T> result = resultBean.getList();
+            callback.onListSuccess(result);
+          } else {
+            callback.onError(resultBean.errorMsg);
+          }
         } else {
-          T result = BaseResultBean.fromJson(response.data).getObj();
-          callback.onDataSuccess(result);
+          BaseResultBean<T> resultBean = BaseResultBean.fromJson(response.data);
+          if (resultBean.errorCode == 0) {
+            T result = resultBean.getObj();
+            callback.onDataSuccess(result);
+          } else {
+            callback.onError(resultBean.errorMsg);
+          }
         }
+      } else {
+        callback.onError(response.statusMessage);
       }
     } on DioError catch (e) {
-      print(e.error);
+      callback.onError(e.toString());
     }
   }
 }

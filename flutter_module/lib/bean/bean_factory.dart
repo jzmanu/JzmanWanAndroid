@@ -1,11 +1,13 @@
 
-import 'package:flutter_module/model/banner_bean.dart';
-import 'package:flutter_module/model/user.dart';
+import 'package:flutter_module/bean//banner_bean.dart';
+import 'package:flutter_module/bean/user.dart';
+
+String tag = "BeanFactory";
 
 class BeanFactory{
 
   static T getBean<T>(json){
-    print('getBean:$json');
+    if(json == null) return null;
     if(T.toString() == "User"){
       return User.fromJson(json) as T;
     }else if(T.toString() == "BannerBean"){

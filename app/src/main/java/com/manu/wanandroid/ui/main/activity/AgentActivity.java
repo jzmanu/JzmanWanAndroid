@@ -2,10 +2,12 @@ package com.manu.wanandroid.ui.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.manu.wanandroid.utils.L;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
@@ -15,7 +17,7 @@ public class AgentActivity extends FlutterActivity {
 
     private static final String TAG = AgentActivity.class.getSimpleName();
     private static final String CHANNEL = "com.manu.startMainActivity";
-
+    
     @Override
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
@@ -24,6 +26,7 @@ public class AgentActivity extends FlutterActivity {
                 .setMethodCallHandler((methodCall, result) -> {
                     if ("startMainActivity".equals(methodCall.method)) {
                         MainActivity.startMainActivity(this);
+                        finish();
                         result.success("success");
                     } else {
                         result.notImplemented();

@@ -1,7 +1,6 @@
 package com.manu.wanandroid.common;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.ui.main.activity.AgentActivity;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
+import com.manu.wanandroid.utils.SharePreferenceHelperKt;
 import com.manu.wanandroid.utils.StatusBarUtil;
 
 import java.util.Date;
@@ -36,21 +36,19 @@ public class SplashActivity extends AppCompatActivity {
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
         Handler mHandler = new Handler(Looper.myLooper());
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Common.SP_FILE_NAME,MODE_PRIVATE);
-        long expires = sharedPreferences.getLong(Common.COOKIE_EXPIRES,0);
+        long expires = SharePreferenceHelperKt.getSpValue(Common.COOKIE_EXPIRES,0L);
         if (new Date(expires).before(new Date())){
             mHandler.postDelayed(() -> {
                 Intent intent = AgentActivity
                         .withNewEngine()
                         .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
                         .build(SplashActivity.this);
-
-//            Intent intent = AgentActivity.createDefaultIntent(this);
                 startActivity(intent);
                 finish();
             },2000);
         }else{
             MainActivity.startMainActivity(this);
+            finish();
         }
     }
 }

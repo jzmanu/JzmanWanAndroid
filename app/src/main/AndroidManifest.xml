@@ -19,8 +19,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".ui.main.activity.AgentActivity2"
-            android:theme="@style/FlutterTheme"/>
         <activity
             android:name=".ui.main.activity.MainActivity"
             android:launchMode="singleTask"

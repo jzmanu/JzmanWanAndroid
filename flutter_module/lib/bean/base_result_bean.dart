@@ -1,7 +1,5 @@
 
-import 'dart:convert';
-
-import 'package:flutter_module/model/bean_factory.dart';
+import 'package:flutter_module/bean/bean_factory.dart';
 
 /// 服务端返回基础类封装
 class BaseResultBean<Data> {
@@ -25,9 +23,7 @@ class BaseResultBean<Data> {
   BaseResultBean.fromJsonArray(Map<String, dynamic> map) {
     errorCode = map['errorCode'];
     errorMsg = map['errorMsg'];
-    print("--data-->"+map.toString());
     resultArray = map['data'];
-    print("--json-->"+json.encode(resultArray));
   }
 
   Map<String, dynamic> toJson() {

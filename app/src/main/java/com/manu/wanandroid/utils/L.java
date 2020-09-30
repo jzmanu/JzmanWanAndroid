@@ -15,6 +15,6 @@ public class L {
 
     public static void i(String tag, String message) {
         if (isDebug)
-            Log.i(tag, "---->"+message);
+            Log.i(tag, message);
     }
 }
