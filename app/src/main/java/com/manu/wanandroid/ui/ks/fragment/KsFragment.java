@@ -86,7 +86,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
         Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.ks_category_rv_divider_bg);
         assert drawable != null;
         itemDecoration.setDrawable(drawable);
-        rvKsLeft.addItemDecoration(itemDecoration);
+//        rvKsLeft.addItemDecoration(itemDecoration);
 
         mSkeletonScreenLeft = Skeleton.bind(rvKsLeft)
                 .adapter(mKsCategoryAdapter)

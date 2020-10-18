@@ -55,6 +55,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     private Banner mHomeBanner;
     private int mPageIndex;
     private SkeletonScreen mSkeletonScreen;
+    private List<String> mBannerImages;
 
     @Override
     public int onLayoutId() {
@@ -93,7 +94,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(rvHome) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
-                ArticleBean bean = mHomeArticleAdapter.getItem(holder.getAdapterPosition());
+                ArticleBean bean = mHomeArticleAdapter.getItem(holder.getAdapterPosition()-1);
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -131,17 +132,11 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     public void onHomeBannerListSuccess(List<BannerBean> result) {
         L.i(TAG, "onHomeBannerListSuccess" + result);
         if (result != null && result.size() > 0) {
-            List<String> images = new ArrayList<>();
             for (int i = 0; i < result.size(); i++) {
                 BannerBean bean = result.get(i);
-                images.add(bean.getImagePath());
+                mBannerImages.add(bean.getImagePath());
             }
-
-            if (mHomeBanner != null) {
-                mHomeBanner.setImageLoader(new GlideImageLoader());
-                mHomeBanner.setImages(images);
-                mHomeBanner.start();
-            }
+            setBannerSource();
         }
     }
 
@@ -180,6 +175,19 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     @Override
     public void onBannerInit(Banner banner) {
         mHomeBanner = banner;
-        mHomePresenter.getHomeBannerList();
+        mBannerImages = new ArrayList<>();
+        if (mBannerImages.size() > 0){
+            setBannerSource();
+        }else{
+            mHomePresenter.getHomeBannerList();
+        }
+    }
+
+    public void setBannerSource() {
+        if (mHomeBanner != null) {
+            mHomeBanner.setImageLoader(new GlideImageLoader());
+            mHomeBanner.setImages(mBannerImages);
+            mHomeBanner.start();
+        }
     }
 }

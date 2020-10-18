@@ -6,21 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.activity.ArticleDetailActivity">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/md_article_status_bar_height"
+        android:background="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:progressDrawable="@drawable/web_progress"
+        android:indeterminate="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/loadingProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

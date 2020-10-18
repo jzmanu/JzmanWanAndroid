@@ -19,26 +19,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
+            <include layout="@layout/toolbar" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_main"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:elevation="0dp">
-
-                <com.google.android.material.appbar.AppBarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/actionBarWithStatusBarSize">
-                    <include layout="@layout/toolbar" />
-                </com.google.android.material.appbar.AppBarLayout>
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/vp_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#ffffff"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:background="#ffffff"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bnv_main"
@@ -47,6 +35,7 @@
                 app:elevation="30dp"
                 app:itemIconTint="@drawable/main_bnv_item_color_selector"
                 app:itemTextColor="@drawable/main_bnv_item_color_selector"
+                app:itemBackground="@null"
                 app:menu="@menu/bnv_main" />
         </LinearLayout>
 

@@ -13,14 +13,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_ks_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 tools:listitem="@layout/recycle_home_item_article" />
         </LinearLayout>
 

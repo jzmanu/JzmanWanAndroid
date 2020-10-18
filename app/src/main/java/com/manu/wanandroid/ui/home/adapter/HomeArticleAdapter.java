@@ -9,6 +9,7 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
 import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.utils.L;
 import com.youth.banner.Banner;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<ArticleBean> {
 
     @Override
     public void onBindData(RecyclerViewHolder holder, int position, ArticleBean bean) {
+        L.i("Home","onBindData > position:"+position);
         if (holder instanceof HeaderViewHolder) {
             Banner mBanner = (Banner) holder.getView(R.id.home_banner);
             if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);

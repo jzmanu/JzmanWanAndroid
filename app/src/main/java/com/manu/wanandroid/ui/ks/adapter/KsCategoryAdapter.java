@@ -30,7 +30,7 @@ public class KsCategoryAdapter extends BaseRecyclerViewAdapter<KsBean> {
     public void onBindData(RecyclerViewHolder holder, int position, KsBean bean) {
         holder.setText(R.id.tv_item_ks_left_title, bean.getName());
         if (mSelectSparseArray.get(position)) {
-            holder.setBackgroundColor(R.id.ll_item_ks_left_title, Color.parseColor("#008577"))
+            holder.setBackgroundColor(R.id.ll_item_ks_left_title, mContext.getColor(R.color.colorPrimary))
                     .setTextColor(R.id.tv_item_ks_left_title, Color.WHITE);
         } else {
             holder.setBackgroundColor(R.id.ll_item_ks_left_title, Color.WHITE)

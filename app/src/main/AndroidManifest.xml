@@ -22,15 +22,21 @@
         <activity
             android:name=".ui.main.activity.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.Main" />
-        <activity
-            android:name=".common.SplashActivity"
-            android:theme="@style/AppTheme.Main">
+            android:theme="@style/AppTheme.Main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".common.SplashActivity"
+            android:theme="@style/AppTheme.Main">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.user.activity.LoginActivity"

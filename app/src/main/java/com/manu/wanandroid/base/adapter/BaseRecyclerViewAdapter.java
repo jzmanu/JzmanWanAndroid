@@ -76,6 +76,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         notifyItemChanged(position);
     }
 
+    public void addAllOnly(List<T> data) {
+        mData.addAll(data);
+    }
+
     public void addAll(List<T> data) {
         mData.addAll(data);
         notifyDataSetChanged();

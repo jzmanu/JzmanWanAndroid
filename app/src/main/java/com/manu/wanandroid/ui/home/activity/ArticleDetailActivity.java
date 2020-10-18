@@ -2,6 +2,7 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,12 +19,15 @@ import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComp
 import com.manu.wanandroid.presenter.home.CollectPresenter;
 import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.StatusBarUtil;
+import com.manu.wanandroid.web.MWebChromeClient;
+import com.manu.wanandroid.web.MWebViewClient;
 
 import javax.inject.Inject;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.ContentLoadingProgressBar;
 import butterknife.BindView;
 
 /**
@@ -39,15 +43,13 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     public static final String PARAM_URL = "param_url";
     public static final String PARAM_COLLECT = "param_collect";
 
-    @BindView(R.id.tv_center_title)
-    TextView tvCenterTitle;
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
-
     @Inject
     CollectPresenter mCollectPresenter;
+
     @BindView(R.id.webView)
     WebView webView;
+    @BindView(R.id.loadingProgressBar)
+    ContentLoadingProgressBar loadingProgressBar;
 
     private int mId;
     private boolean isCollect;
@@ -68,14 +70,9 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     @Override
     public void onInitToolbar() {
-        setSupportActionBar(toolBar);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("文章详情页");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
+        loadingProgressBar.setMax(100);
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
+        StatusBarUtil.setDarkMode(this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -95,12 +92,8 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webSettings.setLoadWithOverviewMode(true);
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    return false;
-                }
-            });
+            webView.setWebViewClient(new MWebViewClient());
+            webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar));
         }
     }
 

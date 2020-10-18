@@ -6,7 +6,7 @@
 
     <color name="colorGrey">#CCCCCC</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorSkeleton">#16000000</color>
+    <color name="colorSkeleton">#12000000</color>
     <color name="colorAnimator">#05000000</color>
     <color name="colorDraw">#0000ff</color>
     <color name="colorBoomNav">#dd000000</color>

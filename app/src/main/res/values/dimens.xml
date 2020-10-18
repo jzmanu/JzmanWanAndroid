@@ -7,6 +7,8 @@
     <dimen name="md_toolbar_height">56dp</dimen>
     <!--StatusBar-->
     <dimen name="md_status_bar_height">25dp</dimen>
+    <!--Article detail StatusBar-->
+    <dimen name="md_article_status_bar_height">35dp</dimen>
     <!--Banner-->
     <dimen name="app_banner_height">200dp</dimen>
 
