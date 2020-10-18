@@ -111,8 +111,8 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     public void onHomeArticleListSuccess(List<ArticleBean> result) {
         L.i(TAG, "onHomeArticleListSuccess" + result);
         onShowNormalContent();
-        mSkeletonScreen.hide();
-        if (mPageIndex == 1) {
+        if (mPageIndex == 0) {
+            mSkeletonScreen.hide();
             mHomeArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();

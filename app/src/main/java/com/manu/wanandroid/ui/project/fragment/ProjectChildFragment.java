@@ -113,8 +113,8 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     public void onProjectSuccess(List<ProjectBean> result) {
         L.i(TAG, "onProjectSuccess");
         onShowNormalContent();
-        mSkeletonScreen.hide();
-        if (mPageIndex == 1) {
+        if (mPageIndex == 0) {
+            mSkeletonScreen.hide();
             mProjectArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();
@@ -145,7 +145,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPageIndex = 1;
+        mPageIndex = 0;
         mProjectPresenter.getProjectList(mPageIndex, mCid);
     }
 }

@@ -1,5 +1,7 @@
 package com.manu.wanandroid.app;
 
+import android.annotation.SuppressLint;
+
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
@@ -7,6 +9,7 @@ import com.manu.wanandroid.di.component.DaggerAppComponent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+
 
 import io.flutter.app.FlutterApplication;
 
@@ -18,6 +21,11 @@ import io.flutter.app.FlutterApplication;
 public class MApplication extends FlutterApplication {
     private static final String TAG = MApplication.class.getSimpleName();
     private AppComponent mAppComponent;
+    @SuppressLint("StaticFieldLeak")
+    private static MApplication app;
+    public static MApplication getApp() {
+        return app;
+    }
 
     @Override
     public void onCreate() {
@@ -25,6 +33,7 @@ public class MApplication extends FlutterApplication {
         AppStatusTrack.getInstance().setAppStatus(-1);
         mAppComponent = DaggerAppComponent.create();
         mAppComponent.injectApp(this);
+        app = this;
     }
 
     public AppComponent getAppComponent() {

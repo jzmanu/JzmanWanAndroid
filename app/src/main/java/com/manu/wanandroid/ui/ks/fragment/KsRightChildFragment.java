@@ -132,8 +132,8 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
     public void onKsCategoryArticleSuccess(List<ArticleBean> result) {
         L.i(TAG, "onKsCategoryArticleSuccess");
         onShowNormalContent();
-        mSkeletonScreen.hide();
         if (mPageIndex == 0) {
+            mSkeletonScreen.hide();
             mKsCategoryArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();

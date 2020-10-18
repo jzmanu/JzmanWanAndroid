@@ -54,10 +54,11 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<ArticleBean> {
             Banner mBanner = (Banner) holder.getView(R.id.home_banner);
             if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);
         } else if (holder instanceof ContentViewHolder) {
-            holder.setText(R.id.tv_item_author, getText(bean.getAuthor()))
-                    .setText(R.id.tv_item_title, getText(bean.getTitle()))
-                    .setText(R.id.tv_item_category, getText(bean.getSuperChapterName()))
-                    .setText(R.id.tv_item_date, getText(bean.getNiceDate()));
+            ArticleBean articleBean = getItem(position-1);
+            holder.setText(R.id.tv_item_author, getText(articleBean.getAuthor()))
+                    .setText(R.id.tv_item_title, getText(articleBean.getTitle()))
+                    .setText(R.id.tv_item_category, getText(articleBean.getSuperChapterName()))
+                    .setText(R.id.tv_item_date, getText(articleBean.getNiceDate()));
         }
     }
 
