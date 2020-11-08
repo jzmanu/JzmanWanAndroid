@@ -85,15 +85,15 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             isCollect = intent.getBooleanExtra(PARAM_COLLECT, false);
             String mUrl = intent.getStringExtra(PARAM_URL);
 
-            webView.loadUrl(mUrl);
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webSettings.setUseWideViewPort(true);
             webSettings.setLoadWithOverviewMode(true);
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
-            webView.setWebViewClient(new MWebViewClient());
+            webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
             webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar));
+            webView.loadUrl(mUrl);
         }
     }
 
@@ -134,5 +134,4 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
         intent.putExtra(PARAM_COLLECT, collect);
         activity.startActivity(intent);
     }
-
 }
