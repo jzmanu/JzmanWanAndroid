@@ -3,6 +3,7 @@ package com.manu.wanandroid.ui.home.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -90,7 +91,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webSettings.setUseWideViewPort(true);
             webSettings.setLoadWithOverviewMode(true);
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
             webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar));
             webView.loadUrl(mUrl);

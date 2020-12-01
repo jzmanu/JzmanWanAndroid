@@ -1,6 +1,7 @@
 package com.manu.wanandroid.ui.home.adapter;
 
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,11 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<ArticleBean> {
             if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);
         } else if (holder instanceof ContentViewHolder) {
             ArticleBean articleBean = getItem(position-1);
-            holder.setText(R.id.tv_item_author, getText(articleBean.getAuthor()))
+            String author = TextUtils.isEmpty(articleBean.getAuthor()) ?
+                    articleBean.getShareUser():articleBean.getAuthor();
+            holder.setText(R.id.tv_item_author, getText(author))
                     .setText(R.id.tv_item_title, getText(articleBean.getTitle()))
-                    .setText(R.id.tv_item_category, getText(articleBean.getSuperChapterName()))
+                    .setText(R.id.tv_item_category, getText(articleBean.getSuperChapterName()+"/"+articleBean.getChapterName()))
                     .setText(R.id.tv_item_date, getText(articleBean.getNiceDate()));
         }
     }

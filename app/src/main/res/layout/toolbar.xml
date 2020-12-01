@@ -7,19 +7,22 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionBarWithStatusBarSize"
     android:minHeight="@dimen/md_toolbar_height"
-    android:background="@drawable/bg_src_tianjin"
+    android:background="@color/colorPrimary"
     android:elevation="30dp"
+    app:navigationIcon="@drawable/back_white_24dp"
     android:theme="@style/AppTheme.Toolbar"
     app:buttonGravity="bottom"
     app:layout_scrollFlags="scroll|exitUntilCollapsed"
     app:titleMarginTop="40dp"
     tools:title="@string/app_name">
 
-
     <TextView
         android:id="@+id/tv_center_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorWhite"
         tools:text="标题" />
 

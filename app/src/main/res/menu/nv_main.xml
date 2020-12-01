@@ -2,9 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/groupMenu1">
         <item
-            android:id="@+id/nv_person"
-            android:icon="@drawable/mine_person_black_24dp"
-            android:title="@string/nv_person_center" />
+            android:id="@+id/nv_share"
+            android:icon="@drawable/mine_share_black_24dp"
+            android:title="@string/nv_share" />
+        <item
+            android:id="@+id/nv_collect"
+            android:icon="@drawable/mine_collect_black_24dp"
+            android:title="@string/nv_collect" />
+        <item
+            android:id="@+id/nv_integral"
+            android:icon="@drawable/mine_integral_black_24dp"
+            android:title="@string/nv_integral" />
+
+        <item
+            android:id="@+id/nv_history"
+            android:icon="@drawable/mine_history_black_24dp"
+            android:title="@string/nv_history" />
+
         <item
             android:id="@+id/nv_setting"
             android:icon="@drawable/mine_settings_black_24dp"

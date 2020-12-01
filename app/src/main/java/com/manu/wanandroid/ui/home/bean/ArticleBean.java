@@ -55,6 +55,7 @@ public class ArticleBean {
     private int superChapterId;
     private String superChapterName;
     private String title;
+    private String shareUser;
     private int type;
     private int userId;
     private int visible;
@@ -83,6 +84,14 @@ public class ArticleBean {
 
     public void setChapterId(int chapterId) {
         this.chapterId = chapterId;
+    }
+
+    public String getShareUser() {
+        return shareUser;
+    }
+
+    public void setShareUser(String shareUser) {
+        this.shareUser = shareUser;
     }
 
     public String getChapterName() {
@@ -275,6 +284,7 @@ public class ArticleBean {
                 ", superChapterId=" + superChapterId +
                 ", superChapterName='" + superChapterName + '\'' +
                 ", title='" + title + '\'' +
+                ", shareUser='" + shareUser + '\'' +
                 ", type=" + type +
                 ", userId=" + userId +
                 ", visible=" + visible +

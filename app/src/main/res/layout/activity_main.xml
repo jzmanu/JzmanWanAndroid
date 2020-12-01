@@ -41,7 +41,7 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nv_main"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:insetForeground="@android:color/transparent"

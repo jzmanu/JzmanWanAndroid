@@ -14,6 +14,12 @@ import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
 import com.manu.wanandroid.di.component.activity.MainActivityComponent;
+import com.manu.wanandroid.ui.home.activity.AboutActivity;
+import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
+import com.manu.wanandroid.ui.home.activity.MineIntegralActivity;
+import com.manu.wanandroid.ui.home.activity.MineShareActivity;
+import com.manu.wanandroid.ui.home.activity.ReadHistoryActivity;
+import com.manu.wanandroid.ui.home.activity.SystemSettingActivity;
 import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
 import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
@@ -39,7 +45,7 @@ import butterknife.BindView;
  * @Date: 2019/5/8 0008 9:38
  */
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-        ViewPager.OnPageChangeListener {
+        ViewPager.OnPageChangeListener,NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -102,6 +108,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         mFragments.add(mProjectFragment);
         mFragments.add(mKsFragment);
         bnvMain.setOnNavigationItemSelectedListener(this);
+        nvMain.setNavigationItemSelectedListener(this);
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mFragments));
         vpMain.addOnPageChangeListener(this);
         vpMain.setOffscreenPageLimit(2);
@@ -127,16 +134,25 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.bnv_home:
-                vpMain.setCurrentItem(0);
-                break;
-            case R.id.bnv_project:
-                vpMain.setCurrentItem(1);
-                break;
-            case R.id.bnv_ks:
-                vpMain.setCurrentItem(2);
-                break;
+        int itemId = menuItem.getItemId();
+        if (itemId == R.id.bnv_home) {
+            vpMain.setCurrentItem(0);
+        } else if (itemId == R.id.bnv_project) {
+            vpMain.setCurrentItem(1);
+        } else if (itemId == R.id.bnv_ks) {
+            vpMain.setCurrentItem(2);
+        }else if(itemId == R.id.nv_share){
+            MineShareActivity.Companion.startMineShareActivity(this);
+        }else if(itemId == R.id.nv_collect){
+            MineCollectActivity.Companion.startMineCollectActivity(this);
+        }else if(itemId == R.id.nv_integral){
+            MineIntegralActivity.Companion.startMineIntegralActivity(this);
+        }else if(itemId == R.id.nv_history){
+            ReadHistoryActivity.Companion.startReadHistoryActivity(this);
+        }else if(itemId == R.id.nv_setting){
+            SystemSettingActivity.Companion.startSystemSettingActivity(this);
+        }else if(itemId == R.id.nv_about){
+            AboutActivity.Companion.startAboutActivity(this);
         }
         return true;
     }
@@ -170,7 +186,5 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         Intent intent = new Intent(context,MainActivity.class);
         context.startActivity(intent);
     }
-
-
 
 }
