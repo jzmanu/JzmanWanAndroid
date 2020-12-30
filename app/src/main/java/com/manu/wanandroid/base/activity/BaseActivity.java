@@ -2,7 +2,10 @@ package com.manu.wanandroid.base.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -66,4 +69,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.putExtra(AppStatusTrack.ACTION_HOME, AppStatusTrack.STATUS_FOCUS_KILLED);
         startActivity(intent);
     }
+
+    protected void toast(@NonNull String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void toast(@StringRes int messageId){
+        Toast.makeText(this,messageId, Toast.LENGTH_SHORT).show();
+    }
+
 }
