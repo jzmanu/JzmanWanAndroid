@@ -21,8 +21,11 @@ import java.util.List;
 public abstract class BaseMvpActivity<T extends IPresenter> extends BaseActivity implements IView {
     protected T mPresenter;
 
+    protected abstract T onPresenter();
+
     @Override
     public void onAttach() {
+        mPresenter = onPresenter();
         if (mPresenter != null) {
             mPresenter.onAttachView(this);
         }

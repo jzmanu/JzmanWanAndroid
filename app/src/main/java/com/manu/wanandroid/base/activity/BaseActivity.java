@@ -48,8 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (AppStatusTrack.getInstance().getAppStatus() == -1) {
             onProtectApp();
         } else {
-            onAttach();
             onInject();
+            onAttach();
             onInitMessageView();
             onInitToolbar();
             onInitData();
