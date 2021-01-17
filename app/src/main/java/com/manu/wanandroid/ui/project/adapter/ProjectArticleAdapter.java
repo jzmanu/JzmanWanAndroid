@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectBean;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
 
 import butterknife.BindView;

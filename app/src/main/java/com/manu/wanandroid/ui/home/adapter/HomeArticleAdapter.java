@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.bean.ArticleBean;
 import com.manu.wanandroid.utils.L;
 import com.youth.banner.Banner;
 

@@ -10,7 +10,7 @@ import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsRightFragmentModule;
 import com.manu.wanandroid.ui.ks.adapter.KsRightChildPageAdapter;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 
@@ -18,7 +18,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 

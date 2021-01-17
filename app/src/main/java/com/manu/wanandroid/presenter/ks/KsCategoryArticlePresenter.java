@@ -6,9 +6,7 @@ import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
-
-import java.util.List;
+import com.manu.wanandroid.bean.ArticleBean;
 
 import javax.inject.Inject;
 

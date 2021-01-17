@@ -4,11 +4,11 @@ import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.http.HttpHelperImpl;
 import com.manu.wanandroid.http.IHttpHelper;
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
-import com.manu.wanandroid.ui.home.bean.BannerBean;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 
 import java.util.List;
 

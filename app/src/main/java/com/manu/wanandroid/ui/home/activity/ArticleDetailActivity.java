@@ -7,21 +7,29 @@ import android.os.Build;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
+import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComponent;
 import com.manu.wanandroid.presenter.home.CollectPresenter;
+import com.manu.wanandroid.ui.main.activity.AgentActivity;
 import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.StatusBarUtil;
 import com.manu.wanandroid.web.MWebChromeClient;
 import com.manu.wanandroid.web.MWebViewClient;
+import com.manu.wanandroid.widget.MWebView;
+
+import org.jetbrains.annotations.Nullable;
 
 import javax.inject.Inject;
 
@@ -48,7 +56,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     CollectPresenter mCollectPresenter;
 
     @BindView(R.id.webView)
-    WebView webView;
+    MWebView webView;
     @BindView(R.id.loadingProgressBar)
     ContentLoadingProgressBar loadingProgressBar;
 
@@ -70,6 +78,11 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     }
 
     @Override
+    protected CollectContract.Presenter onPresenter() {
+        return mCollectPresenter;
+    }
+
+    @Override
     public void onInitToolbar() {
         loadingProgressBar.setMax(100);
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
@@ -82,7 +95,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
         Intent intent = getIntent();
         if (intent != null) {
-            mId = intent.getIntExtra(PARAM_ID, -1);
+            mId = intent.getIntExtra(PARAM_ID,  -1);
             isCollect = intent.getBooleanExtra(PARAM_COLLECT, false);
             String mUrl = intent.getStringExtra(PARAM_URL);
 
@@ -95,6 +108,15 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
             webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar));
             webView.loadUrl(mUrl);
+
+            webView.setOnDoubleClickListener(v -> {
+                if (Account.INSTANCE.isLogin()){
+                    toast("收藏");
+//                    mCollectPresenter.collectArticle(String.valueOf(mId));
+                }else{
+                    AgentActivity.startLoginActivity(this);
+                }
+            });
         }
     }
 
@@ -120,12 +142,18 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     @Override
     public void onCollectArticleSuccess() {
-        L.i(TAG, "onHomeArticleListSuccess");
+        L.i(TAG, "onCollectArticleSuccess");
     }
 
     @Override
     public void onUnCollectArticleSuccess() {
         L.i(TAG, "onUnCollectArticleSuccess");
+    }
+
+    @Override
+    public void onShowErrorMessage(String message) {
+        super.onShowErrorMessage(message);
+        toast(message);
     }
 
     public static void startArticleDetailActivity(AppCompatActivity activity, int id, String url, boolean collect) {

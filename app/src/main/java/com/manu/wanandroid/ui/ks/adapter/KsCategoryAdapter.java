@@ -6,7 +6,7 @@ import android.util.SparseBooleanArray;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 
 /**
  * @Desc: KsCategoryAdapter

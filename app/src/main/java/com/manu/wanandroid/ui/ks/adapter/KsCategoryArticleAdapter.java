@@ -3,7 +3,7 @@ package com.manu.wanandroid.ui.ks.adapter;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.bean.ArticleBean;
 
 /**
  * @Desc: KsCategoryArticleAdapter

@@ -1,14 +1,12 @@
 package com.manu.wanandroid.presenter.project;
 
-import android.util.Log;
-
 import com.manu.wanandroid.contract.project.ProjectContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectBean;
 import com.manu.wanandroid.utils.L;
 
 import javax.inject.Inject;

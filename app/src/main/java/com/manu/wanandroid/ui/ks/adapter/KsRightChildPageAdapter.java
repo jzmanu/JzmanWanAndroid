@@ -1,6 +1,6 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 import com.manu.wanandroid.ui.ks.fragment.KsRightChildFragment;
 
 import java.util.List;

@@ -1,12 +1,7 @@
 package com.manu.wanandroid.di.module.fragment;
 
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.home.adapter.HomeArticleAdapter;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryArticleAdapter;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;

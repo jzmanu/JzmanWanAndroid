@@ -3,13 +3,12 @@ package com.manu.wanandroid.ui.project.fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
-import com.manu.wanandroid.base.fragment.BaseMvpFragment;
 import com.manu.wanandroid.contract.project.ProjectContract;
 import com.manu.wanandroid.di.module.fragment.ProjectFragmentModule;
 import com.manu.wanandroid.presenter.project.ProjectTabPresenter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.ui.project.adapter.ProjectChildFragmentPageAdapter;
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 import com.manu.wanandroid.utils.L;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.manu.wanandroid.ui.home.bean;
+package com.manu.wanandroid.bean;
 
 import java.util.List;
 

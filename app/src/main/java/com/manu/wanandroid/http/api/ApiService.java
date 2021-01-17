@@ -1,16 +1,15 @@
 package com.manu.wanandroid.http.api;
 
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.bean.ArticleBean;
 import com.manu.wanandroid.http.BaseResultBean;
-import com.manu.wanandroid.ui.home.bean.BannerBean;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 
 import java.util.List;
 
-import dagger.internal.GenerationOptions;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -25,6 +24,9 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     String BASE_URL = "http://www.wanandroid.com/";
+
+    // https://www.wanandroid.com/user/login
+    Observable<BaseResultBean<Object>> login();
 
     /**
      * 获取banner列表

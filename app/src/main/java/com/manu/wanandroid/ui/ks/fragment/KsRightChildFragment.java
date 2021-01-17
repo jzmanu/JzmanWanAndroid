@@ -5,22 +5,19 @@ import android.view.View;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
-import com.google.android.material.tabs.TabLayout;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
-import com.manu.wanandroid.base.fragment.BaseMvpFragment;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsRightChildFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryArticlePresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.bean.ArticleBean;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryArticleAdapter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
@@ -31,7 +28,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @Desc: KsRightChildFragment

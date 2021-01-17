@@ -2,7 +2,7 @@ package com.manu.wanandroid.ui.project.adapter;
 
 import android.view.ViewGroup;
 
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 import com.manu.wanandroid.ui.project.fragment.ProjectChildFragment;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package com.manu.wanandroid.contract.home;
 
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
+import com.manu.wanandroid.bean.ArticleBean;
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.ui.home.bean.BannerBean;
+import com.manu.wanandroid.bean.BannerBean;
 
 import java.util.List;
 

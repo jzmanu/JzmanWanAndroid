@@ -5,7 +5,7 @@ import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 
 import java.util.List;
 

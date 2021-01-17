@@ -2,8 +2,8 @@ package com.manu.wanandroid.contract.ks;
 
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.KsBean;
 
 import java.util.List;
 

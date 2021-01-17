@@ -1,17 +1,15 @@
 package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.ui.home.bean.ArticleBean;
-import com.manu.wanandroid.ui.home.bean.BannerBean;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 /**
  * @Desc: IHttpHelper

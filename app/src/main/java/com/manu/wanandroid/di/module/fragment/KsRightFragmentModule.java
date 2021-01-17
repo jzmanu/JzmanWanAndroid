@@ -1,7 +1,7 @@
 package com.manu.wanandroid.di.module.fragment;
 
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 
 import java.util.ArrayList;
 import java.util.List;

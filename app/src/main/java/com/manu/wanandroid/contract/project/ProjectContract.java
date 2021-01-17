@@ -2,8 +2,8 @@ package com.manu.wanandroid.contract.project;
 
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.ui.project.bean.ProjectBean;
-import com.manu.wanandroid.ui.project.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.ProjectTabBean;
 
 import java.util.List;
 

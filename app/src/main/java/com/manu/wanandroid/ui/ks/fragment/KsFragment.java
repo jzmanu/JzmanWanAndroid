@@ -1,6 +1,5 @@
 package com.manu.wanandroid.ui.ks.fragment;
 
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,7 +13,7 @@ import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryDataPresenter;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryAdapter;
-import com.manu.wanandroid.ui.ks.bean.KsBean;
+import com.manu.wanandroid.bean.KsBean;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 

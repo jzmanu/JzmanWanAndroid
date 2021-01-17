@@ -1,23 +1,41 @@
 package com.manu.wanandroid.ui.main.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.utils.L;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.android.FlutterActivityLaunchConfigs;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
 
-
+/**
+ * @Desc: AgentActivity
+ * @Author: jzman
+ */
 public class AgentActivity extends FlutterActivity {
 
     private static final String TAG = AgentActivity.class.getSimpleName();
     private static final String CHANNEL = "com.manu.startMainActivity";
-    
+
+    /**
+     * 跳转到登陆页面
+     * @param activity 上下文
+     */
+    public static void startLoginActivity(Activity activity) {
+        Intent intent = AgentActivity
+                .withNewEngine()
+                .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
+                .build(activity);
+        activity.startActivity(intent);
+    }
+
     @Override
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
