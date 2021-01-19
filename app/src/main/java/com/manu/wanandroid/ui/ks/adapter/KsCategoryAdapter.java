@@ -6,14 +6,14 @@ import android.util.SparseBooleanArray;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.knowledge;
 
 /**
  * @Desc: KsCategoryAdapter
  * @Author: jzman
  * @Date: 2019/5/31 0031 13:46
  */
-public class KsCategoryAdapter extends BaseRecyclerViewAdapter<KsBean> {
+public class KsCategoryAdapter extends BaseRecyclerViewAdapter<knowledge> {
     private SparseBooleanArray mSelectSparseArray;
 
     public KsCategoryAdapter() {
@@ -27,7 +27,7 @@ public class KsCategoryAdapter extends BaseRecyclerViewAdapter<KsBean> {
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, KsBean bean) {
+    public void onBindData(RecyclerViewHolder holder, int position, knowledge bean) {
         holder.setText(R.id.tv_item_ks_left_title, bean.getName());
         if (mSelectSparseArray.get(position)) {
             holder.setBackgroundColor(R.id.ll_item_ks_left_title, mContext.getColor(R.color.colorPrimary))

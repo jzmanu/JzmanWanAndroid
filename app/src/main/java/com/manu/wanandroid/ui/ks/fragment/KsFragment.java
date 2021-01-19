@@ -9,11 +9,11 @@ import com.ethanhua.skeleton.SkeletonScreen;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
+import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryDataPresenter;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryAdapter;
-import com.manu.wanandroid.bean.KsBean;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 
@@ -100,7 +100,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 if (mCurrentClickPosition == position) return;
                 mCurrentClickPosition = position;
-                KsBean bean = mKsCategoryAdapter.getItem(holder.getAdapterPosition());
+                knowledge bean = mKsCategoryAdapter.getItem(holder.getAdapterPosition());
                 mKsCategoryAdapter.setSelectPosition(holder.getAdapterPosition());
                 if (mOnKsCategoryInfoListener != null)
                     mOnKsCategoryInfoListener.onKsCategoryInfo(bean);
@@ -110,7 +110,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
     }
 
     @Override
-    public void onKsCategoryDataSuccess(List<KsBean> result) {
+    public void onKsCategoryDataSuccess(List<knowledge> result) {
         L.i(TAG, "onKsCategoryDataSuccess" + result);
         onShowNormalContent();
         mSkeletonScreenLeft.hide();
@@ -134,6 +134,6 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
     }
 
     public interface OnKsCategoryInfoListener {
-        void onKsCategoryInfo(KsBean ksBean);
+        void onKsCategoryInfo(knowledge ksBean);
     }
 }

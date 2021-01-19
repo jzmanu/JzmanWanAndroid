@@ -6,7 +6,7 @@ import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.utils.L;
 
 import javax.inject.Inject;
@@ -31,9 +31,9 @@ public class ProjectPresenter extends BasePresenter<ProjectContract.ProjectView>
         addRxSubscribe(mDataManager.getProjectList(pageIndex, cid)
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<BasePageBean<ProjectBean>>(mView) {
+                .subscribeWith(new BaseObserver<BasePageBean<Project>>(mView) {
                     @Override
-                    public void onNext(BasePageBean<ProjectBean> projectTabBeans) {
+                    public void onNext(BasePageBean<Project> projectTabBeans) {
                         mView.onProjectSuccess(projectTabBeans.getDatas());
                     }
                 }));

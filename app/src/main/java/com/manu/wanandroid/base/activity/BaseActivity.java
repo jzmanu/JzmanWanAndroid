@@ -70,12 +70,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void toast(@NonNull String message){
+    protected void toast(String message){
+        if (message == null) return;
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
     protected void toast(@StringRes int messageId){
         Toast.makeText(this,messageId, Toast.LENGTH_SHORT).show();
     }
-
 }

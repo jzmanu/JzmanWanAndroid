@@ -2,8 +2,8 @@ package com.manu.wanandroid.contract.ks;
 
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.bean.ArticleBean;
-import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.knowledge;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface KsContract {
     interface CategoryView extends IView {
-        void onKsCategoryDataSuccess(List<KsBean> result);
+        void onKsCategoryDataSuccess(List<knowledge> result);
     }
 
     interface CategoryArticleView extends IView {
-        void onKsCategoryArticleSuccess(List<ArticleBean> result);
+        void onKsCategoryArticleSuccess(List<Article> result);
     }
 
     interface CategoryPresenter extends IPresenter<CategoryView> {

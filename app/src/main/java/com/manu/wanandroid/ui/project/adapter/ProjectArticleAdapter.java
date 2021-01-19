@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
 
 import butterknife.BindView;
@@ -16,7 +16,7 @@ import butterknife.BindView;
  * @Author: jzman
  * @Date: 2019/5/30 0030 14:14
  */
-public class ProjectArticleAdapter extends BaseRecyclerViewAdapter<ProjectBean> {
+public class ProjectArticleAdapter extends BaseRecyclerViewAdapter<Project> {
     @BindView(R.id.iv_item_preview)
     ImageView ivItemPreview;
     @BindView(R.id.tv_item_pro_title)
@@ -34,7 +34,7 @@ public class ProjectArticleAdapter extends BaseRecyclerViewAdapter<ProjectBean> 
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, ProjectBean bean) {
+    public void onBindData(RecyclerViewHolder holder, int position, Project bean) {
         ImageLoaderHelper.getInstance().showImageForNet(mContext,bean.getEnvelopePic(),holder.getImageView(R.id.iv_item_preview));
         holder.setText(R.id.tv_item_pro_title,bean.getTitle());
         holder.setText(R.id.tv_item_pro_desc,bean.getDesc());

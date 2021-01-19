@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.utils.L;
 import com.youth.banner.Banner;
 
@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
  * @Author: jzman
  * @Date: 2019/5/10 0010 13:09
  */
-public class HomeArticleAdapter extends BaseRecyclerViewAdapter<ArticleBean> {
+public class HomeArticleAdapter extends BaseRecyclerViewAdapter<Article> {
 
     private static final int HEADER = 0;
     private static final int CONTENT = 1;
@@ -51,13 +51,13 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<ArticleBean> {
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, ArticleBean bean) {
+    public void onBindData(RecyclerViewHolder holder, int position, Article bean) {
         L.i("Home","onBindData > position:"+position);
         if (holder instanceof HeaderViewHolder) {
             Banner mBanner = (Banner) holder.getView(R.id.home_banner);
             if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);
         } else if (holder instanceof ContentViewHolder) {
-            ArticleBean articleBean = getItem(position-1);
+            Article articleBean = getItem(position-1);
             String author = TextUtils.isEmpty(articleBean.getAuthor()) ?
                     articleBean.getShareUser():articleBean.getAuthor();
             holder.setText(R.id.tv_item_author, getText(author))

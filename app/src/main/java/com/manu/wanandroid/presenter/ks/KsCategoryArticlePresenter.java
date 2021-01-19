@@ -6,7 +6,7 @@ import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.Article;
 
 import javax.inject.Inject;
 
@@ -28,9 +28,9 @@ public class KsCategoryArticlePresenter extends BasePresenter<KsContract.Categor
         addRxSubscribe(mDataManager.getKsCategoryArticle(pageIndex, cid)
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<BasePageBean<ArticleBean>>(mView) {
+                .subscribeWith(new BaseObserver<BasePageBean<Article>>(mView) {
                     @Override
-                    public void onNext(BasePageBean<ArticleBean> beanList) {
+                    public void onNext(BasePageBean<Article> beanList) {
                         mView.onKsCategoryArticleSuccess(beanList.getDatas());
                     }
                 }));

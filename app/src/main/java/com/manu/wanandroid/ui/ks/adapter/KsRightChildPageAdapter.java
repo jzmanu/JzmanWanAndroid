@@ -1,6 +1,6 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
-import com.manu.wanandroid.bean.KsBean;
+import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.ui.ks.fragment.KsRightChildFragment;
 
 import java.util.List;
@@ -17,9 +17,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
  * @Date: 2019/6/4 0004 11:02
  */
 public class KsRightChildPageAdapter extends FragmentStatePagerAdapter {
-    private List<KsBean.ChildrenBean> mChildrenBeans;
+    private List<knowledge.ChildrenBean> mChildrenBeans;
 
-    public KsRightChildPageAdapter(@NonNull FragmentManager fm, List<KsBean.ChildrenBean> beans) {
+    public KsRightChildPageAdapter(@NonNull FragmentManager fm, List<knowledge.ChildrenBean> beans) {
         super(fm);
         this.mChildrenBeans = beans;
     }

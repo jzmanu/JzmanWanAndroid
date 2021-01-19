@@ -1,16 +1,7 @@
 package com.manu.wanandroid.base.activity;
 
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.manu.wanandroid.R;
-import com.manu.wanandroid.http.exception.MException;
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.widget.MessageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Desc: BaseMvpActivity

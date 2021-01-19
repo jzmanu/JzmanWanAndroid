@@ -7,7 +7,7 @@ import java.util.List;
  * @Author: jzman
  * @Date: 2019/5/23 0023 16:03
  */
-public class ProjectTabBean {
+public class ProjectTab {
 
     /**
      * children : []

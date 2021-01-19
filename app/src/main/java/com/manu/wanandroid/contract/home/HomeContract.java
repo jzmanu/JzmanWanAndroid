@@ -1,9 +1,9 @@
 package com.manu.wanandroid.contract.home;
 
-import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.Banner;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
 public interface HomeContract {
     interface View extends IView {
 
-        void onHomeArticleListSuccess(List<ArticleBean> result);
+        void onHomeArticleListSuccess(List<Article> result);
 
-        void onHomeBannerListSuccess(List<BannerBean> result);
+        void onHomeBannerListSuccess(List<Banner> result);
     }
 
     interface Presenter extends IPresenter<View> {

@@ -5,7 +5,7 @@ package com.manu.wanandroid.bean;
  * @Author: jzman
  * @Date: 2019/5/13 0013 14:52
  */
-public class BannerBean {
+public class Banner {
 
     /**
      * desc : 一起来做个App吧

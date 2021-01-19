@@ -14,7 +14,7 @@ import com.manu.wanandroid.presenter.project.ProjectPresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.ui.project.adapter.ProjectArticleAdapter;
-import com.manu.wanandroid.bean.ProjectBean;
+import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.utils.L;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -88,7 +88,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
         rv_project.addOnItemTouchListener(new OnRecycleItemClickListener(rv_project) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
-                ProjectBean bean = mProjectArticleAdapter.getItem(holder.getAdapterPosition());
+                Project bean = mProjectArticleAdapter.getItem(holder.getAdapterPosition());
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -109,7 +109,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     }
 
     @Override
-    public void onProjectSuccess(List<ProjectBean> result) {
+    public void onProjectSuccess(List<Project> result) {
         L.i(TAG, "onProjectSuccess");
         onShowNormalContent();
         if (mPageIndex == 0) {

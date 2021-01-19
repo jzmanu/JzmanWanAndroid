@@ -12,7 +12,7 @@ import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsRightChildFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryArticlePresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
-import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryArticleAdapter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
@@ -104,7 +104,7 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
         rvKsRight.addOnItemTouchListener(new OnRecycleItemClickListener(rvKsRight) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
-                ArticleBean bean = mKsCategoryArticleAdapter.getItem(holder.getAdapterPosition());
+                Article bean = mKsCategoryArticleAdapter.getItem(holder.getAdapterPosition());
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -125,7 +125,7 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
     }
 
     @Override
-    public void onKsCategoryArticleSuccess(List<ArticleBean> result) {
+    public void onKsCategoryArticleSuccess(List<Article> result) {
         L.i(TAG, "onKsCategoryArticleSuccess");
         onShowNormalContent();
         if (mPageIndex == 0) {

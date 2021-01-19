@@ -12,8 +12,8 @@ import com.manu.wanandroid.di.module.fragment.HomeFragmentModule;
 import com.manu.wanandroid.presenter.home.HomePresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
 import com.manu.wanandroid.ui.home.adapter.HomeArticleAdapter;
-import com.manu.wanandroid.bean.ArticleBean;
-import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.GlideImageLoader;
 import com.manu.wanandroid.utils.L;
@@ -21,7 +21,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     HomePresenter mHomePresenter;
 
     private MainActivity mActivity;
-    private Banner mHomeBanner;
+    private com.youth.banner.Banner mHomeBanner;
     private int mPageIndex;
     private SkeletonScreen mSkeletonScreen;
     private List<String> mBannerImages;
@@ -94,7 +93,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(rvHome) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
-                ArticleBean bean = mHomeArticleAdapter.getItem(holder.getAdapterPosition()-1);
+                Article bean = mHomeArticleAdapter.getItem(holder.getAdapterPosition()-1);
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -109,7 +108,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     }
 
     @Override
-    public void onHomeArticleListSuccess(List<ArticleBean> result) {
+    public void onHomeArticleListSuccess(List<Article> result) {
         L.i(TAG, "onHomeArticleListSuccess" + result);
         onShowNormalContent();
         if (mPageIndex == 0) {
@@ -129,11 +128,11 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     }
 
     @Override
-    public void onHomeBannerListSuccess(List<BannerBean> result) {
+    public void onHomeBannerListSuccess(List<Banner> result) {
         L.i(TAG, "onHomeBannerListSuccess" + result);
         if (result != null && result.size() > 0) {
             for (int i = 0; i < result.size(); i++) {
-                BannerBean bean = result.get(i);
+                Banner bean = result.get(i);
                 mBannerImages.add(bean.getImagePath());
             }
             setBannerSource();
@@ -173,7 +172,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     }
 
     @Override
-    public void onBannerInit(Banner banner) {
+    public void onBannerInit(com.youth.banner.Banner banner) {
         mHomeBanner = banner;
         mBannerImages = new ArrayList<>();
         if (mBannerImages.size() > 0){

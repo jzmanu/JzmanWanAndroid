@@ -5,7 +5,7 @@ import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ public class ProjectTabPresenter extends BasePresenter<ProjectContract.TabView> 
         addRxSubscribe(mDataManager.getProjectTabList()
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<List<ProjectTabBean>>(mView) {
+                .subscribeWith(new BaseObserver<List<ProjectTab>>(mView) {
                     @Override
-                    public void onNext(List<ProjectTabBean> projectTabBeans) {
+                    public void onNext(List<ProjectTab> projectTabBeans) {
                         mView.onProjectTabSuccess(projectTabBeans);
                     }
                 }));

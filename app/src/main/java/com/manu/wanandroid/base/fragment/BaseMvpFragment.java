@@ -49,24 +49,18 @@ public abstract class BaseMvpFragment<T extends IPresenter> extends BaseFragment
 
     @Override
     public void onShowNormalContent() {
-//        setNormalContentView(true);
     }
 
     @Override
     public void onHideNormalContent() {
-//        setNormalContentView(false);
     }
 
     @Override
     public void onShowErrorMessage(String message) {
-//        setNormalContentView(false);
-//        mMessageView.showErrorMessage(message);
     }
 
     @Override
     public void onShowEmptyMessage() {
-//        setNormalContentView(false);
-//        mMessageView.showEmptyMessage();
     }
 
     @Override
@@ -77,29 +71,4 @@ public abstract class BaseMvpFragment<T extends IPresenter> extends BaseFragment
         }
         super.onDestroy();
     }
-
-//    private void initNormalContentView(ViewGroup viewGroup) {
-//        int size = viewGroup.getChildCount();
-//        for (int i = 0; i < size; i++) {
-//            View view = viewGroup.getChildAt(i);
-//            if (view instanceof MessageView) {
-//
-//            } else {
-//                mContentViews.add(view);
-//            }
-//        }
-//    }
-//
-//    private void setNormalContentView(boolean isVisable) {
-//        int size = mContentViews.size();
-//        for (int i = 0; i < size; i++) {
-//            if (isVisable) {
-//                mContentViews.get(i).setVisibility(View.VISIBLE);
-//                mMessageView.setVisibility(View.GONE);
-//            } else {
-//                mContentViews.get(i).setVisibility(View.GONE);
-//                mMessageView.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
 }

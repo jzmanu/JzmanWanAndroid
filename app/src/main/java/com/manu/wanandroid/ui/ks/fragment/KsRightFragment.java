@@ -7,10 +7,10 @@ import com.ethanhua.skeleton.SkeletonScreen;
 import com.google.android.material.tabs.TabLayout;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
+import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.di.module.fragment.KsRightFragmentModule;
 import com.manu.wanandroid.ui.ks.adapter.KsRightChildPageAdapter;
-import com.manu.wanandroid.bean.KsBean;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 
@@ -37,7 +37,7 @@ public class KsRightFragment extends BaseLoadMvpFragment<KsContract.CategoryArti
     ViewPager vpKsRight;
 
     @Inject
-    List<KsBean.ChildrenBean> mKsChildrenBeans;
+    List<knowledge.ChildrenBean> mKsChildrenBeans;
     @BindView(R.id.normal_view)
     LinearLayout normalView;
 
@@ -79,14 +79,14 @@ public class KsRightFragment extends BaseLoadMvpFragment<KsContract.CategoryArti
     }
 
     @Override
-    public void onKsCategoryInfo(KsBean ksBean) {
+    public void onKsCategoryInfo(knowledge ksBean) {
         L.i(TAG, "onKsCategoryInfo->" + (ksBean != null));
         mSkeletonScreenRight.hide();
         if (ksBean != null) {
             mKsChildrenBeans = ksBean.getChildren();
             if (mKsChildrenBeans.size() > 0) {
                 tlKsRight.removeAllTabs();
-                for (KsBean.ChildrenBean bean : mKsChildrenBeans) {
+                for (knowledge.ChildrenBean bean : mKsChildrenBeans) {
                     tlKsRight.addTab(tlKsRight.newTab()
                             .setText(bean.getName())
                             .setTag(bean.getId()));

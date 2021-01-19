@@ -2,8 +2,8 @@ package com.manu.wanandroid.contract.project;
 
 import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.bean.ProjectBean;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ProjectContract {
     interface TabView extends IView {
-        void onProjectTabSuccess(List<ProjectTabBean> result);
+        void onProjectTabSuccess(List<ProjectTab> result);
     }
 
     interface TabPresenter extends IPresenter<TabView> {
@@ -22,7 +22,7 @@ public interface ProjectContract {
     }
 
     interface ProjectView extends IView {
-        void onProjectSuccess(List<ProjectBean> result);
+        void onProjectSuccess(List<Project> result);
     }
 
     interface ProjectPresenter extends IPresenter<ProjectView> {

@@ -3,33 +3,39 @@ package com.manu.wanandroid.bean;
 import java.util.List;
 
 /**
- * @Desc: ArticleBean
+ * @Desc: ProjectBean
  * @Author: jzman
- * @Date: 2019/5/8 0008 11:16
+ * @Date: 2019/5/23 0023 16:07
  */
-public class ArticleBean {
+public class Project {
 
     /**
      * apkLink :
-     * author : TeaOf
-     * chapterId : 99
-     * chapterName : 具体案例
+     * author : ITGungnir
+     * chapterId : 294
+     * chapterName : 完整项目
      * collect : false
      * courseId : 13
-     * desc :
-     * envelopePic :
+     * desc : Kotlin + MVVM + 模块化 + 响应式 的WanAndroid客户端，简约优雅。
+     * <p>
+     * ## 技术点
+     * 基于APT和ASM的GRouter路由框架实现模块化通信；
+     * 参考Redux的原理，实现一套事件总线框架；
+     * 封装MVVM和UI库，可供其他应用使用；
+     * 项目整体使用响应式编程风格，简介优雅易读。
+     * envelopePic : https://www.wanandroid.com/blogimgs/d95d3a13-85ae-4aa7-bec0-ca9f4bba9eae.png
      * fresh : false
-     * id : 8356
-     * link : https://www.jianshu.com/p/f144d6645877
-     * niceDate : 2019-05-04
+     * id : 8480
+     * link : http://www.wanandroid.com/blog/show/2575
+     * niceDate : 1天前
      * origin :
      * prefix :
-     * projectLink :
-     * publishTime : 1556976665000
-     * superChapterId : 94
-     * superChapterName : 自定义控件
-     * tags : []
-     * title : 仿写一个QQ空间图片预览Dialog
+     * projectLink : https://github.com/ITGungnir/KotlinWanAndroid
+     * publishTime : 1558454743000
+     * superChapterId : 294
+     * superChapterName : 开源项目主Tab
+     * tags : [{"name":"项目","url":"/project/list/1?cid=294"}]
+     * title : WanAndroid模块化响应式客户端
      * type : 0
      * userId : -1
      * visible : 1
@@ -55,12 +61,11 @@ public class ArticleBean {
     private int superChapterId;
     private String superChapterName;
     private String title;
-    private String shareUser;
     private int type;
     private int userId;
     private int visible;
     private int zan;
-    private List<?> tags;
+    private List<TagsBean> tags;
 
     public String getApkLink() {
         return apkLink;
@@ -84,14 +89,6 @@ public class ArticleBean {
 
     public void setChapterId(int chapterId) {
         this.chapterId = chapterId;
-    }
-
-    public String getShareUser() {
-        return shareUser;
-    }
-
-    public void setShareUser(String shareUser) {
-        this.shareUser = shareUser;
     }
 
     public String getChapterName() {
@@ -254,17 +251,51 @@ public class ArticleBean {
         this.zan = zan;
     }
 
-    public List<?> getTags() {
+    public List<TagsBean> getTags() {
         return tags;
     }
 
-    public void setTags(List<?> tags) {
+    public void setTags(List<TagsBean> tags) {
         this.tags = tags;
+    }
+
+    public static class TagsBean {
+        /**
+         * name : 项目
+         * url : /project/list/1?cid=294
+         */
+
+        private String name;
+        private String url;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return "TagsBean{" +
+                    "name='" + name + '\'' +
+                    ", url='" + url + '\'' +
+                    '}';
+        }
     }
 
     @Override
     public String toString() {
-        return "ArticleBean{" +
+        return "ProjectBean{" +
                 "apkLink='" + apkLink + '\'' +
                 ", author='" + author + '\'' +
                 ", chapterId=" + chapterId +
@@ -284,7 +315,6 @@ public class ArticleBean {
                 ", superChapterId=" + superChapterId +
                 ", superChapterName='" + superChapterName + '\'' +
                 ", title='" + title + '\'' +
-                ", shareUser='" + shareUser + '\'' +
                 ", type=" + type +
                 ", userId=" + userId +
                 ", visible=" + visible +

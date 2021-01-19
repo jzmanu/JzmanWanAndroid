@@ -10,6 +10,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseActivity;
+import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
@@ -112,6 +113,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mFragments));
         vpMain.addOnPageChangeListener(this);
         vpMain.setOffscreenPageLimit(2);
+
+        if (Account.INSTANCE.isLogin()){
+
+        }
     }
 
     @Override

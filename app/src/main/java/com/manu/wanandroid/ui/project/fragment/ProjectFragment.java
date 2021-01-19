@@ -8,7 +8,7 @@ import com.manu.wanandroid.di.module.fragment.ProjectFragmentModule;
 import com.manu.wanandroid.presenter.project.ProjectTabPresenter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.ui.project.adapter.ProjectChildFragmentPageAdapter;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.ProjectTab;
 import com.manu.wanandroid.utils.L;
 
 import java.util.List;
@@ -66,11 +66,11 @@ public class ProjectFragment extends BaseLoadMvpFragment<ProjectContract.TabPres
     }
 
     @Override
-    public void onProjectTabSuccess(List<ProjectTabBean> result) {
+    public void onProjectTabSuccess(List<ProjectTab> result) {
         L.i(TAG, "onProjectTabSuccess" + result);
         onShowNormalContent();
         if (result != null && result.size() > 0) {
-            for (ProjectTabBean tabBean : result) {
+            for (ProjectTab tabBean : result) {
                 tlProject.addTab(tlProject.newTab().setText(tabBean.getName()));
             }
             tlProject.setTabMode(TabLayout.MODE_SCROLLABLE);

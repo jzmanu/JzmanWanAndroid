@@ -93,7 +93,8 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void toast(@NonNull String message){
+    protected void toast(String message){
+        if (message == null) return;
         Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
     }
 
