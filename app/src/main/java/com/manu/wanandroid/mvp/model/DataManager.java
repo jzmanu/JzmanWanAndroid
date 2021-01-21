@@ -1,14 +1,15 @@
 package com.manu.wanandroid.mvp.model;
 
+import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.http.HttpHelperImpl;
 import com.manu.wanandroid.http.IHttpHelper;
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.bean.ArticleBean;
-import com.manu.wanandroid.bean.BannerBean;
-import com.manu.wanandroid.bean.KsBean;
-import com.manu.wanandroid.bean.ProjectBean;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
+import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -30,12 +31,17 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ArticleBean>>> getHomeArticleList(int pageIndex) {
+    public Observable<BaseResultBean<User>> login(String username, String password) {
+        return mHttpHelper.login(username,password);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
         return mHttpHelper.getHomeArticleList(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<BannerBean>>> getHomeBannerList() {
+    public Observable<BaseResultBean<List<Banner>>> getHomeBannerList() {
         return mHttpHelper.getHomeBannerList();
     }
 
@@ -50,22 +56,22 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<List<ProjectTabBean>>> getProjectTabList() {
+    public Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList() {
         return mHttpHelper.getProjectTabList();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ProjectBean>>> getProjectList(int pageIndex, int cid) {
+    public Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
         return mHttpHelper.getProjectList(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<List<KsBean>>> getKsCategoryData() {
+    public Observable<BaseResultBean<List<knowledge>>> getKsCategoryData() {
         return mHttpHelper.getKsCategoryData();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ArticleBean>>> getKsCategoryArticle(int pageIndex, int cid) {
+    public Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
         return mHttpHelper.getKsCategoryArticle(pageIndex, cid);
     }
 }

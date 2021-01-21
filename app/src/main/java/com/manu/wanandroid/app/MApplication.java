@@ -2,6 +2,9 @@ package com.manu.wanandroid.app;
 
 import android.annotation.SuppressLint;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
@@ -19,12 +22,19 @@ import io.flutter.app.FlutterApplication;
  * @Date: 2019/5/7 0007 16:38
  */
 public class MApplication extends FlutterApplication {
+
     private static final String TAG = MApplication.class.getSimpleName();
-    private AppComponent mAppComponent;
     @SuppressLint("StaticFieldLeak")
     private static MApplication app;
+    private AppComponent mAppComponent;
+    private PersistentCookieJar mCookieJar;
+
     public static MApplication getApp() {
         return app;
+    }
+
+    public PersistentCookieJar getCookieJar() {
+        return mCookieJar;
     }
 
     @Override
@@ -33,6 +43,7 @@ public class MApplication extends FlutterApplication {
         AppStatusTrack.getInstance().setAppStatus(-1);
         mAppComponent = DaggerAppComponent.create();
         mAppComponent.injectApp(this);
+        mCookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this));
         app = this;
     }
 

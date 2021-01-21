@@ -1,6 +1,5 @@
 package com.manu.wanandroid.common;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,14 +8,10 @@ import android.widget.TextView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.ui.main.activity.AgentActivity;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
-import com.manu.wanandroid.utils.SharePreferenceHelperKt;
 import com.manu.wanandroid.utils.StatusBarUtil;
-
-import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
-import io.flutter.embedding.android.FlutterActivityLaunchConfigs;
 
 /**
  * @Desc: SplashActivity
@@ -36,16 +31,16 @@ public class SplashActivity extends AppCompatActivity {
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
         Handler mHandler = new Handler(Looper.myLooper());
 
-        long expires = SharePreferenceHelperKt.getSpValue(Common.COOKIE_EXPIRES,0L);
-        if (new Date(expires).before(new Date())){
-            mHandler.postDelayed(() -> {
-                Intent intent = AgentActivity
-                        .withNewEngine()
-                        .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
-                        .build(SplashActivity.this);
-                startActivity(intent);
+        if (Config.INSTANCE.getConfigStartLoginAuth()){
+            if (Account.INSTANCE.isLogin()){
+                MainActivity.startMainActivity(this);
                 finish();
-            },2000);
+            }else{
+                mHandler.postDelayed(() -> {
+                    AgentActivity.startLoginActivity(this);
+                    finish();
+                },1500);
+            }
         }else{
             MainActivity.startMainActivity(this);
             finish();

@@ -6,8 +6,10 @@ import com.manu.wanandroid.contract.home.HomeContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.bean.ArticleBean;
-import com.manu.wanandroid.bean.BannerBean;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -30,9 +32,9 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
         addRxSubscribe(mDataManager.getHomeBannerList()
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<List<BannerBean>>(mView) {
+                .subscribeWith(new BaseObserver<List<Banner>>(mView) {
                     @Override
-                    public void onNext(List<BannerBean> bannerBeans) {
+                    public void onNext(@NotNull List<Banner> bannerBeans) {
                         mView.onHomeBannerListSuccess(bannerBeans);
                     }
                 })
@@ -44,9 +46,9 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
         addRxSubscribe(mDataManager.getHomeArticleList(pageIndex)
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<BasePageBean<ArticleBean>>(mView) {
+                .subscribeWith(new BaseObserver<BasePageBean<Article>>(mView) {
                     @Override
-                    public void onNext(BasePageBean<ArticleBean> result) {
+                    public void onNext(@NotNull BasePageBean<Article> result) {
                         mView.onHomeArticleListSuccess(result.getDatas());
                     }
                 })

@@ -1,12 +1,13 @@
 package com.manu.wanandroid.http;
 
+import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.bean.ArticleBean;
+import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.http.api.ApiService;
-import com.manu.wanandroid.bean.BannerBean;
-import com.manu.wanandroid.bean.KsBean;
-import com.manu.wanandroid.bean.ProjectBean;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.Banner;
+import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import io.reactivex.Observable;
  * @Date: 2019/5/8 0008 13:21
  */
 public class HttpHelperImpl implements IHttpHelper {
-    private ApiService mApiService;
+    private final ApiService mApiService;
 
     @Inject
     public HttpHelperImpl(ApiService mApiService) {
@@ -28,12 +29,17 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ArticleBean>>> getHomeArticleList(int pageIndex) {
+    public Observable<BaseResultBean<User>> login(String username, String password) {
+        return mApiService.login(username,password);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
         return mApiService.getHomeArticleList(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<BannerBean>>> getHomeBannerList() {
+    public Observable<BaseResultBean<List<Banner>>> getHomeBannerList() {
         return mApiService.getBannerList();
     }
 
@@ -48,22 +54,22 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<List<ProjectTabBean>>> getProjectTabList() {
+    public Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList() {
         return mApiService.getProjectTabList();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ProjectBean>>> getProjectList(int pageIndex, int cid) {
+    public Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
         return mApiService.getProjectList(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<List<KsBean>>> getKsCategoryData() {
+    public Observable<BaseResultBean<List<knowledge>>> getKsCategoryData() {
         return mApiService.getKsCagegoryData();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<ArticleBean>>> getKsCategoryArticle(int pageIndex, int cid) {
+    public Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
         return mApiService.getKsCategoryArticle(pageIndex, cid);
     }
 

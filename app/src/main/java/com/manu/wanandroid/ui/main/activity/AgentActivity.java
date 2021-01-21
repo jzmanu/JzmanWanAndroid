@@ -3,8 +3,6 @@ package com.manu.wanandroid.ui.main.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseMvpFlutterActivity;
@@ -19,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.android.FlutterActivityLaunchConfigs;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -38,12 +35,6 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
     LoginPresenter mLoginPresenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        L.i(TAG, "onCreate");
-    }
-
-    @Override
     protected void onInject() {
         MApplication mApplication = (MApplication) getApplication();
         DaggerAgentActivityComponent.builder()
@@ -53,16 +44,12 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
     }
 
     @Override
-    public void configureFlutterEngine(FlutterEngine flutterEngine) {
+    public void configureFlutterEngine(@NotNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         L.i(TAG, "configureFlutterEngine");
         new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL)
                 .setMethodCallHandler((methodCall, result) -> {
-                    if ("startMainActivity".equals(methodCall.method)) {
-                        MainActivity.startMainActivity(this);
-                        finish();
-                        result.success("success");
-                    } else if("login".equals(methodCall.method)){
+                    if("login".equals(methodCall.method)){
                         if (mLoginPresenter != null){
                             mLoginPresenter.login(methodCall.argument("username"),methodCall.argument("password"));
                         }
@@ -75,21 +62,20 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
 
     @Override
     protected LoginContract.Presenter onPresenter() {
-        L.i(TAG,"onPresenter > mLoginPresenter is null:"+(mLoginPresenter == null));
         return mLoginPresenter;
     }
 
     @Override
     public void onLoginSuccess(@NotNull User user) {
         L.i(TAG, "onLoginSuccess");
-        MainActivity.startMainActivity(this);
+        finish();
     }
 
     @Override
     public void onShowErrorMessage(String message) {
         super.onShowErrorMessage(message);
         L.i(TAG, "onShowErrorMessage > message:"+message);
-        toast(-1);
+        toast(message);
     }
 
     /**

@@ -1,11 +1,12 @@
 package com.manu.wanandroid.http;
 
+import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.bean.ArticleBean;
-import com.manu.wanandroid.bean.BannerBean;
-import com.manu.wanandroid.bean.KsBean;
-import com.manu.wanandroid.bean.ProjectBean;
-import com.manu.wanandroid.bean.ProjectTabBean;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
+import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -18,19 +19,26 @@ import io.reactivex.Observable;
  */
 public interface IHttpHelper {
     /**
+     * 登录
+     * @param username 用户名称
+     * @param password 密码
+     * @return Observable<BaseResultBean<User>>
+     */
+    Observable<BaseResultBean<User>> login(String username, String password);
+    /**
      * 获取首页文章列表
      *
      * @param pageIndex page index
      * @return
      */
-    Observable<BaseResultBean<BasePageBean<ArticleBean>>> getHomeArticleList(int pageIndex);
+    Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex);
 
     /**
      * 获取banner列表
      *
      * @return
      */
-    Observable<BaseResultBean<List<BannerBean>>> getHomeBannerList();
+    Observable<BaseResultBean<List<Banner>>> getHomeBannerList();
 
     /**
      * 收藏文章
@@ -52,7 +60,7 @@ public interface IHttpHelper {
      *
      * @return
      */
-    Observable<BaseResultBean<List<ProjectTabBean>>> getProjectTabList();
+    Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList();
 
     /**
      * 获取项目分类Tab下的文章
@@ -61,14 +69,14 @@ public interface IHttpHelper {
      * @param cid
      * @return
      */
-    Observable<BaseResultBean<BasePageBean<ProjectBean>>> getProjectList(int pageIndex, int cid);
+    Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid);
 
     /**
      * 获取知识体系分类
      *
      * @return
      */
-    Observable<BaseResultBean<List<KsBean>>> getKsCategoryData();
+    Observable<BaseResultBean<List<knowledge>>> getKsCategoryData();
 
     /**
      * 获取知识体系分类下面的文章
@@ -77,5 +85,5 @@ public interface IHttpHelper {
      * @param cid
      * @return
      */
-    Observable<BaseResultBean<BasePageBean<ArticleBean>>> getKsCategoryArticle(int pageIndex, int cid);
+    Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid);
 }

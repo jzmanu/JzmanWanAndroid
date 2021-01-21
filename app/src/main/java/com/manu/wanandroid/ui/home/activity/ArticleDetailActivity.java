@@ -2,18 +2,10 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
@@ -29,13 +21,9 @@ import com.manu.wanandroid.web.MWebChromeClient;
 import com.manu.wanandroid.web.MWebViewClient;
 import com.manu.wanandroid.widget.MWebView;
 
-import org.jetbrains.annotations.Nullable;
-
 import javax.inject.Inject;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.ContentLoadingProgressBar;
 import butterknife.BindView;
 
@@ -112,7 +100,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webView.setOnDoubleClickListener(v -> {
                 if (Account.INSTANCE.isLogin()){
                     toast("收藏");
-//                    mCollectPresenter.collectArticle(String.valueOf(mId));
+                    mCollectPresenter.collectArticle(String.valueOf(mId));
                 }else{
                     AgentActivity.startLoginActivity(this);
                 }

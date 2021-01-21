@@ -30,9 +30,7 @@ public abstract class BaseMvpFlutterActivity<T extends IPresenter> extends Flutt
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onInject();
-        L.i(TAG,"onCreate");
         mPresenter = onPresenter();
-        L.i(TAG,"onCreate > mPresenter is null :"+(mPresenter == null));
         if (mPresenter != null) {
             mPresenter.onAttachView(this);
         }

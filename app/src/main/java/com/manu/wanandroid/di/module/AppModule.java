@@ -2,7 +2,6 @@ package com.manu.wanandroid.di.module;
 
 import com.manu.wanandroid.BuildConfig;
 import com.manu.wanandroid.app.MApplication;
-import com.manu.wanandroid.http.IHttpHelper;
 import com.manu.wanandroid.http.api.ApiService;
 
 import java.util.concurrent.TimeUnit;
@@ -11,6 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,17 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
-//    private final MApplication mApplication;
-//
-//    public AppModule(MApplication application) {
-//        this.mApplication = application;
-//    }
-
-//    @Singleton
-//    @Provides
-//    MApplication providerApplication(){
-//        return mApplication;
-//    }
 
     @Singleton
     @Provides
@@ -45,7 +34,13 @@ public class AppModule {
 
     @Singleton
     @Provides
-    OkHttpClient providerOkHttpClient(OkHttpClient.Builder builder) {
+    CookieJar providerCookieJar(){
+        return MApplication.getApp().getCookieJar();
+    }
+
+    @Singleton
+    @Provides
+    OkHttpClient providerOkHttpClient(OkHttpClient.Builder builder, CookieJar cookieJar) {
         if (BuildConfig.DEBUG) {
             // 设置OkHttp日志拦截器
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -56,7 +51,8 @@ public class AppModule {
         builder.connectTimeout(20, TimeUnit.SECONDS);
         builder.writeTimeout(30, TimeUnit.SECONDS);
         builder.readTimeout(30, TimeUnit.SECONDS);
-
+        // 设置CookieJar
+        builder.cookieJar(cookieJar);
         return builder.build();
     }
 

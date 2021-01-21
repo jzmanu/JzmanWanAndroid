@@ -1,27 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_module/common/common.dart';
+import 'package:flutter_module/bean/user.dart';
 import 'package:flutter_module/common/widget/common_widget.dart';
 import 'package:flutter_module/main.dart';
-import 'package:flutter_module/bean/user.dart';
 import 'package:flutter_module/model/account_model.dart';
 import 'package:flutter_module/util/log_util.dart';
 import 'package:toast/toast.dart';
 
 String tag = "LoginWidget";
+
 /// 登录
 class LoginWidget extends StatefulWidget {
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
-
+class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
   /// 密码是否可见
   bool _isPasswordVisible = false;
+
   /// MethodChannel
   MethodChannel _platform;
+
   /// 登录账号数据
   AccountData _accountData;
   AccountModel _accountModel;
@@ -39,10 +39,10 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
 
   @override
   Widget build(BuildContext context) {
-
     Widget formColumn = Column(
       children: <Widget>[
         TextFormField(
+          initialValue: "jzmanuc",
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
@@ -55,10 +55,10 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
                 color: Colors.black87,
               ),
               border: InputBorder.none),
-          onFieldSubmitted: (value){
-            print('onFieldSubmitted:'+value);
+          onFieldSubmitted: (value) {
+            print('onFieldSubmitted:' + value);
           },
-          onSaved: (value){
+          onSaved: (value) {
             _accountData.name = value;
           },
         ),
@@ -68,6 +68,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
           margin: const EdgeInsets.only(bottom: 16, top: 16),
         ),
         TextFormField(
+          initialValue: "wanandroid",
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,
@@ -75,15 +76,15 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
           // 是否是密码
           obscureText: !_isPasswordVisible,
           validator: _validatePassword,
-          decoration: buildPassInputDecoration(context, _isPasswordVisible, (){
+          decoration: buildPassInputDecoration(context, _isPasswordVisible, () {
             setState(() {
               _isPasswordVisible = !_isPasswordVisible;
             });
           }),
-          onFieldSubmitted: (value){
-            print('onFieldSubmitted:'+value);
+          onFieldSubmitted: (value) {
+            print('onFieldSubmitted:' + value);
           },
-          onSaved: (value){
+          onSaved: (value) {
             _accountData.password = value;
           },
         ),
@@ -104,15 +105,12 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
               ),
               child: Padding(
                   padding: EdgeInsets.all(12),
-                  child: Form(
-                    key: _formKey,
-                    child: formColumn
-                  )),
+                  child: Form(key: _formKey, child: formColumn)),
             ),
             Positioned(
-                bottom: -25,
-                left: MediaQuery.of(context).size.width * 3 / 4 / 4,
-                child: buildAccountButton(context, () => _login()),
+              bottom: -25,
+              left: MediaQuery.of(context).size.width * 3 / 4 / 4,
+              child: buildAccountButton(context, () => _login()),
             ),
           ],
         ),
@@ -122,7 +120,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
 
   @override
   void onLoginSuccess(User result) {
-    Log.d(tag, "onLoginSuccess > result:"+result.toString());
+    Log.d(tag, "onLoginSuccess > result:" + result.toString());
     _startMainActivity();
   }
 
@@ -132,12 +130,29 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
     Toast.show(error, context);
   }
 
+  /// 跳转首页
   Future<void> _startMainActivity() async {
     _platform.invokeMethod('startMainActivity').then((value) {
-      Log.d(tag,"_startMainActivity > value:$value");
+      Log.d(tag, "_startMainActivity > value:$value");
     }).catchError((e) {
-      Log.d(tag,e.message);
+      Log.d(tag, e.message);
     });
+  }
+
+  /// 登录
+  Future<void> _loginNative() async {
+    /// 表单校验
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      _platform.invokeMethod('login', {
+        "username": "${_accountData.name}",
+        "password": "${_accountData.password}"
+      }).then((value) {
+        Log.d(tag, "_loginNative > value:$value");
+      }).catchError((e) {
+        Log.d(tag, e.message);
+      });
+    }
   }
 
   /// 用户名校验
@@ -145,24 +160,26 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener{
     Log.d(tag, "_validateName > value:$value");
     if (value.isEmpty) return '请输入用户名';
     final RegExp nameExp = RegExp(r'^[A-Za-z0-9]+$');
-    if (!nameExp.hasMatch(value))
-      return '请输入[A-Za-z0-9]之内的字符';
+    if (!nameExp.hasMatch(value)) return '请输入[A-Za-z0-9]之内的字符';
     return null;
   }
 
   /// 密码校验
   String _validatePassword(String value) {
     Log.d(tag, "_validatePassword > value:$value");
-    if(value == null || value.isEmpty) return "请输入密码";
+    if (value == null || value.isEmpty) return "请输入密码";
     return null;
   }
 
   /// 登录
-  void _login(){
+  void _login() {
     /// 表单校验
-    if( _formKey.currentState.validate()){
+    if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-     _accountModel.login(_accountData.name, _accountData.password);
+      /// Flutter方式进行登录
+      // _accountModel.login(_accountData.name, _accountData.password);
+      /// 使用原生的方式登录，便于Cookie统一管理
+      _loginNative();
     }
   }
 }
