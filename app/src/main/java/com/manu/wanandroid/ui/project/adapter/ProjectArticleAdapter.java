@@ -1,15 +1,10 @@
 package com.manu.wanandroid.ui.project.adapter;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
-
-import butterknife.BindView;
 
 /**
  * @Desc: ProjectArticleAdapter
@@ -17,16 +12,6 @@ import butterknife.BindView;
  * @Date: 2019/5/30 0030 14:14
  */
 public class ProjectArticleAdapter extends BaseRecyclerViewAdapter<Project> {
-    @BindView(R.id.iv_item_preview)
-    ImageView ivItemPreview;
-    @BindView(R.id.tv_item_pro_title)
-    TextView tvItemProTitle;
-    @BindView(R.id.tv_item_pro_desc)
-    TextView tvItemProDesc;
-    @BindView(R.id.tv_item_pro_author)
-    TextView tvItemProAuthor;
-    @BindView(R.id.tv_item_pro_date)
-    TextView tvItemProDate;
 
     @Override
     public int onLayoutId() {

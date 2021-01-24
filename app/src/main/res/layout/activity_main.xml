@@ -19,7 +19,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/toolbar" />
+            <include
+                android:id="@+id/toolBarInclude"
+                layout="@layout/toolbar" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vp_main"

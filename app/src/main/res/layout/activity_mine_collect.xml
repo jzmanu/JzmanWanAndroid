@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.activity.MineCollectActivity">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolBarInclude"
+        layout="@layout/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

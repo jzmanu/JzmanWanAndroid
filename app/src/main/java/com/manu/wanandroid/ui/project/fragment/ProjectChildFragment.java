@@ -8,15 +8,15 @@ import com.ethanhua.skeleton.SkeletonScreen;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
+import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.contract.project.ProjectContract;
+import com.manu.wanandroid.databinding.FragmentProjectChildBinding;
 import com.manu.wanandroid.di.module.fragment.ProjectChildFragmentModule;
 import com.manu.wanandroid.presenter.project.ProjectPresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.ui.project.adapter.ProjectArticleAdapter;
-import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.utils.L;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -28,7 +28,6 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * @Desc: ProjectChildFragment
@@ -40,10 +39,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     private static final String TAG = ProjectChildFragment.class.getSimpleName();
     private static final String ARG_PARAM_TAB_ID = "arg_param_tab_id";
 
-    @BindView(R.id.rv_project)
-    RecyclerView rv_project;
-    @BindView(R.id.normal_view)
-    SmartRefreshLayout srlProject;
+    private FragmentProjectChildBinding binding;
 
     @Inject
     ProjectPresenter mProjectPresenter;
@@ -56,8 +52,9 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     private SkeletonScreen mSkeletonScreen;
 
     @Override
-    public int onLayoutId() {
-        return R.layout.fragment_project_child;
+    public View onLayout() {
+        binding = FragmentProjectChildBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -74,25 +71,25 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
         Bundle bundle = getArguments();
         assert bundle != null;
         mCid = bundle.getInt(ARG_PARAM_TAB_ID);
-        rv_project.setLayoutManager(new LinearLayoutManager(mActivity));
-        srlProject.setOnRefreshListener(this);
-        srlProject.setOnLoadMoreListener(this);
+        binding.rvProject.setLayoutManager(new LinearLayoutManager(mActivity));
+        binding.normalView.setOnRefreshListener(this);
+        binding.normalView.setOnLoadMoreListener(this);
 
-        mSkeletonScreen = Skeleton.bind(rv_project)
+        mSkeletonScreen = Skeleton.bind(binding.rvProject)
                 .adapter(mProjectArticleAdapter)
                 .load(R.layout.recycle_project_item_article_skeleton)
                 .color(R.color.colorAnimator)
                 .duration(1500)
                 .show();
 
-        rv_project.addOnItemTouchListener(new OnRecycleItemClickListener(rv_project) {
+        binding.rvProject.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvProject) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 Project bean = mProjectArticleAdapter.getItem(holder.getAdapterPosition());
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
-        srlProject.autoRefresh();
+        binding.normalView.autoRefresh();
     }
 
     @Override
@@ -117,23 +114,23 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
             mProjectArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();
-                srlProject.setEnableLoadMore(false);
+                binding.normalView.setEnableLoadMore(false);
             }
         }
 
         mProjectArticleAdapter.addAll(result);
-        if (result.size() == 0) srlProject.setEnableLoadMore(false);
+        if (result.size() == 0) binding.normalView.setEnableLoadMore(false);
 
-        srlProject.finishRefresh();
-        srlProject.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 
     @Override
     public void onShowErrorMessage(String message) {
         super.onShowErrorMessage(message);
         mSkeletonScreen.hide();
-        srlProject.finishRefresh();
-        srlProject.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 
     @Override

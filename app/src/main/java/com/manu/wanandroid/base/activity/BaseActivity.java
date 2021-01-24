@@ -2,16 +2,14 @@ package com.manu.wanandroid.base.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import com.manu.wanandroid.common.AppStatusTrack;
+import com.manu.wanandroid.ui.main.activity.MainActivity;
+
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
-import com.manu.wanandroid.ui.main.activity.MainActivity;
-import com.manu.wanandroid.common.AppStatusTrack;
 
 
 /**
@@ -23,9 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    private Unbinder unbinder;
-
-    public abstract int onLayoutId();
+    public abstract View onLayout();
 
     public abstract void onInitData();
 
@@ -43,8 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(onLayoutId());
-        unbinder = ButterKnife.bind(this);
+        setContentView(onLayout());
         if (AppStatusTrack.getInstance().getAppStatus() == -1) {
             onProtectApp();
         } else {
@@ -53,14 +48,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             onInitMessageView();
             onInitToolbar();
             onInitData();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (unbinder != null) {
-            unbinder.unbind();
         }
     }
 

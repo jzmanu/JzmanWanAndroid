@@ -1,28 +1,26 @@
 package com.manu.wanandroid.ui.home.fragment;
 
 import android.view.View;
-import android.widget.Toast;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.contract.home.HomeContract;
+import com.manu.wanandroid.databinding.FragmentHomeBinding;
 import com.manu.wanandroid.di.module.fragment.HomeFragmentModule;
 import com.manu.wanandroid.presenter.home.HomePresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
 import com.manu.wanandroid.ui.home.adapter.HomeArticleAdapter;
-import com.manu.wanandroid.bean.Article;
-import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.GlideImageLoader;
 import com.manu.wanandroid.utils.L;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,6 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * @Desc: HomeFragment
@@ -43,10 +40,8 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         OnRefreshLoadMoreListener, OnLoadMoreListener, HomeArticleAdapter.OnBannerListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
-    @BindView(R.id.rv_home)
-    RecyclerView rvHome;
-    @BindView(R.id.normal_view)
-    SmartRefreshLayout srlHome;
+    private FragmentHomeBinding binding;
+
     @Inject
     HomeArticleAdapter mHomeArticleAdapter;
     @Inject
@@ -60,8 +55,9 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     private List<Banner> mBannerList;
 
     @Override
-    public int onLayoutId() {
-        return R.layout.fragment_home;
+    public View onLayout() {
+        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -81,19 +77,19 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     @Override
     public void onInitData() {
         L.i(TAG, "onInitData");
-        srlHome.setOnRefreshListener(this);
-        srlHome.setOnLoadMoreListener(this);
-        rvHome.setLayoutManager(new LinearLayoutManager(mActivity));
+        binding.normalView.setOnRefreshListener(this);
+        binding.normalView.setOnLoadMoreListener(this);
+        binding.rvHome.setLayoutManager(new LinearLayoutManager(mActivity));
         mHomeArticleAdapter.setOnBannerListener(this);
 
-        mSkeletonScreen = Skeleton.bind(rvHome)
+        mSkeletonScreen = Skeleton.bind(binding.rvHome)
                 .adapter(mHomeArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
                 .duration(1500)
                 .show();
 
-        rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(rvHome) {
+        binding.rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvHome) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 if (position == 0) return;
@@ -102,7 +98,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
             }
         });
 
-        srlHome.autoRefresh();
+        binding.normalView.autoRefresh();
     }
 
     @Override
@@ -119,15 +115,15 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
             mHomeArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();
-                srlHome.setEnableLoadMore(false);
+                binding.normalView.setEnableLoadMore(false);
             }
         }
 
         mHomeArticleAdapter.addAll(result);
-        if (result.size() == 0) srlHome.setEnableLoadMore(false);
+        if (result.size() == 0) binding.normalView.setEnableLoadMore(false);
 
-        srlHome.finishRefresh();
-        srlHome.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 
     @Override
@@ -148,8 +144,8 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     public void onShowErrorMessage(String message) {
         super.onShowErrorMessage(message);
         mSkeletonScreen.hide();
-        srlHome.finishRefresh();
-        srlHome.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 
     @Override

@@ -12,7 +12,8 @@
         android:id="@+id/iv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_data_error_128dp" />
+        android:background="@drawable/ic_data_error_128dp"
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/tv_message"

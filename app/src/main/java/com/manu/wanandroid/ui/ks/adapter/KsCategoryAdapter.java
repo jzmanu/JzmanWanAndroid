@@ -30,7 +30,7 @@ public class KsCategoryAdapter extends BaseRecyclerViewAdapter<knowledge> {
     public void onBindData(RecyclerViewHolder holder, int position, knowledge bean) {
         holder.setText(R.id.tv_item_ks_left_title, bean.getName());
         if (mSelectSparseArray.get(position)) {
-            holder.setBackgroundColor(R.id.ll_item_ks_left_title, mContext.getColor(R.color.colorPrimary))
+            holder.setBackgroundColor(R.id.ll_item_ks_left_title, mContext.getResources().getColor(R.color.colorPrimary))
                     .setTextColor(R.id.tv_item_ks_left_title, Color.WHITE);
         } else {
             holder.setBackgroundColor(R.id.ll_item_ks_left_title, Color.WHITE)
@@ -42,11 +42,7 @@ public class KsCategoryAdapter extends BaseRecyclerViewAdapter<knowledge> {
         int size = getData().size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                if (position == i) {
-                    mSelectSparseArray.put(i, true);
-                } else {
-                    mSelectSparseArray.put(i, false);
-                }
+                mSelectSparseArray.put(i, position == i);
             }
             notifyDataSetChanged();
         }

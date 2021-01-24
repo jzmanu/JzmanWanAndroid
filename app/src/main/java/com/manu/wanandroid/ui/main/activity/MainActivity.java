@@ -4,15 +4,16 @@ package com.manu.wanandroid.ui.main.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseActivity;
-import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.SplashActivity;
+import com.manu.wanandroid.databinding.ActivityMainBinding;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
 import com.manu.wanandroid.di.component.activity.MainActivityComponent;
 import com.manu.wanandroid.ui.home.activity.AboutActivity;
@@ -34,11 +35,8 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
 
 /**
  * @Desc: MainActivity
@@ -50,17 +48,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
-    @BindView(R.id.vp_main)
-    ViewPager vpMain;
-    @BindView(R.id.bnv_main)
-    BottomNavigationView bnvMain;
-    @BindView(R.id.nv_main)
-    NavigationView nvMain;
-    @BindView(R.id.dl_main)
-    DrawerLayout dlMain;
-
     @Inject
     HomeFragment mHomeFragment;
     @Inject
@@ -71,10 +58,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     List<Fragment> mFragments;
 
     public MainActivityComponent mMainActivityComponent;
+    private ActivityMainBinding binding;
 
     @Override
-    public int onLayoutId() {
-        return R.layout.activity_main;
+    public View onLayout() {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -89,15 +78,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     public void onInitToolbar() {
         super.onInitToolbar();
-        setSupportActionBar(toolBar);
+        setSupportActionBar(binding.toolBarInclude.toolBar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        dlMain.setStatusBarBackgroundColor(getResources().getColor(R.color.light_transparent));
+        binding.dlMain.setStatusBarBackgroundColor(getResources().getColor(R.color.light_transparent));
         actionBar.setDisplayShowTitleEnabled(false);
         ActionBarDrawerToggle toggle =
-                new ActionBarDrawerToggle(this, dlMain, toolBar, R.string.common_open, R.string.common_close);
+                new ActionBarDrawerToggle(this, binding.dlMain, binding.toolBarInclude.toolBar, R.string.common_open, R.string.common_close);
         toggle.syncState();
-        dlMain.addDrawerListener(toggle);
+        binding.dlMain.addDrawerListener(toggle);
 
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
@@ -108,15 +97,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         mFragments.add(mHomeFragment);
         mFragments.add(mProjectFragment);
         mFragments.add(mKsFragment);
-        bnvMain.setOnNavigationItemSelectedListener(this);
-        nvMain.setNavigationItemSelectedListener(this);
-        vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mFragments));
-        vpMain.addOnPageChangeListener(this);
-        vpMain.setOffscreenPageLimit(2);
-
-        if (Account.INSTANCE.isLogin()){
-
-        }
+        binding.bnvMain.setOnNavigationItemSelectedListener(this);
+        binding.nvMain.setNavigationItemSelectedListener(this);
+        binding.vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mFragments));
+        binding.vpMain.addOnPageChangeListener(this);
+        binding.vpMain.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -141,11 +126,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int itemId = menuItem.getItemId();
         if (itemId == R.id.bnv_home) {
-            vpMain.setCurrentItem(0);
+            binding.vpMain.setCurrentItem(0);
         } else if (itemId == R.id.bnv_project) {
-            vpMain.setCurrentItem(1);
+            binding.vpMain.setCurrentItem(1);
         } else if (itemId == R.id.bnv_ks) {
-            vpMain.setCurrentItem(2);
+            binding.vpMain.setCurrentItem(2);
         }else if(itemId == R.id.nv_share){
             MineShareActivity.Companion.startMineShareActivity(this);
         }else if(itemId == R.id.nv_collect){
@@ -171,13 +156,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void onPageSelected(int position) {
         switch (position) {
             case 0:
-                bnvMain.setSelectedItemId(R.id.bnv_home);
+                binding.bnvMain.setSelectedItemId(R.id.bnv_home);
                 break;
             case 1:
-                bnvMain.setSelectedItemId(R.id.bnv_project);
+                binding.bnvMain.setSelectedItemId(R.id.bnv_project);
                 break;
             case 2:
-                bnvMain.setSelectedItemId(R.id.bnv_ks);
+                binding.bnvMain.setSelectedItemId(R.id.bnv_ks);
                 break;
         }
     }
@@ -191,5 +176,4 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         Intent intent = new Intent(context,MainActivity.class);
         context.startActivity(intent);
     }
-
 }

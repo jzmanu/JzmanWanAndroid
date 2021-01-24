@@ -109,12 +109,10 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
         return new MCacheEngineIntentBuilder(AgentActivity.class, engineId);
     }
 
-
     static class MCacheEngineIntentBuilder extends CachedEngineIntentBuilder {
 
         protected MCacheEngineIntentBuilder(@NonNull Class<? extends FlutterActivity> activityClass, @NonNull String engineId) {
             super(activityClass, engineId);
         }
     }
-
 }

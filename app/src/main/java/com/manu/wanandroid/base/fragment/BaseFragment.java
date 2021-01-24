@@ -6,15 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.manu.wanandroid.R;
 
 /**
  * @Desc: BaseFragment
@@ -22,7 +18,6 @@ import com.manu.wanandroid.R;
  * @Date: 2019/5/9 0009 10:26
  */
 public abstract class BaseFragment extends Fragment {
-    private Unbinder unbinder;
 
     private boolean isFirstLoad = true;
     private boolean isInitView = false;
@@ -31,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public abstract int onLayoutId();
+    public abstract View onLayout();
 
     public abstract void onInject();
 
@@ -54,8 +49,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(onLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, view);
+        View view = onLayout();
         onInject();
         onAttach();
         onInitData();
@@ -87,10 +81,6 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
         isFirstLoad = true;
         isInitView = false;
-        if (unbinder != null) {
-            unbinder.unbind();
-            unbinder = null;
-        }
     }
 
     protected void toast(String message){

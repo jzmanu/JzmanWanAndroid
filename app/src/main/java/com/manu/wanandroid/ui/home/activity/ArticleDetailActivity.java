@@ -2,15 +2,16 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.View;
 import android.webkit.WebSettings;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
 import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.contract.home.CollectContract;
+import com.manu.wanandroid.databinding.ActivityArticleDetailBinding;
 import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComponent;
 import com.manu.wanandroid.presenter.home.CollectPresenter;
 import com.manu.wanandroid.ui.main.activity.AgentActivity;
@@ -18,13 +19,10 @@ import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.StatusBarUtil;
 import com.manu.wanandroid.web.MWebChromeClient;
 import com.manu.wanandroid.web.MWebViewClient;
-import com.manu.wanandroid.widget.MWebView;
 
 import javax.inject.Inject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ContentLoadingProgressBar;
-import butterknife.BindView;
 
 /**
  * @Desc: ArticleDetailActivity
@@ -43,19 +41,16 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     @Inject
     CollectPresenter mCollectPresenter;
 
-    @BindView(R.id.webView)
-    MWebView webView;
-    @BindView(R.id.loadingProgressBar)
-    ContentLoadingProgressBar loadingProgressBar;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
-
     private int mId;
     private boolean isCollect;
 
+
+    private ActivityArticleDetailBinding binding;
+
     @Override
-    public int onLayoutId() {
-        return R.layout.activity_article_detail;
+    public View onLayout() {
+        binding = ActivityArticleDetailBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -74,7 +69,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     @Override
     public void onInitToolbar() {
-        loadingProgressBar.setMax(100);
+        binding.loadingProgressBar.setMax(100);
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
         StatusBarUtil.setDarkMode(this);
     }
@@ -87,22 +82,22 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             mId = intent.getIntExtra(PARAM_ID, -1);
             isCollect = intent.getBooleanExtra(PARAM_COLLECT, false);
             boolean isBrowser = intent.getBooleanExtra(PARAM_ONLY_BROWSER, false);
-            fab.setActivated(isCollect);
-            if (isBrowser) fab.hide();
+            binding.fab.setActivated(isCollect);
+            if (isBrowser) binding.fab.hide();
             String mUrl = intent.getStringExtra(PARAM_URL);
 
-            WebSettings webSettings = webView.getSettings();
+            WebSettings webSettings = binding.webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webSettings.setUseWideViewPort(true);
             webSettings.setLoadWithOverviewMode(true);
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-            webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
-            webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar, fab));
-            webView.loadUrl(mUrl);
+            binding.webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
+            binding.webView.setWebChromeClient(new MWebChromeClient(binding.loadingProgressBar, binding.fab));
+            binding.webView.loadUrl(mUrl);
 
-            webView.setOnDoubleClickListener(v -> finish());
-            fab.setOnClickListener(v -> {
+            binding.webView.setOnDoubleClickListener(v -> finish());
+            binding.fab.setOnClickListener(v -> {
                 if (Account.INSTANCE.isLogin()) {
                     if (isCollect){
                         mCollectPresenter.unCollectArticle(String.valueOf(mId));
@@ -119,8 +114,8 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     @Override
     public void onCollectArticleSuccess() {
         L.i(TAG, "onCollectArticleSuccess");
-        Snackbar.make(webView, R.string.common_collect_success, Snackbar.LENGTH_SHORT).show();
-        fab.setActivated(true);
+        Snackbar.make(binding.webView, R.string.common_collect_success, Snackbar.LENGTH_SHORT).show();
+        binding.fab.setActivated(true);
         isCollect = true;
 
     }
@@ -128,8 +123,8 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     @Override
     public void onUnCollectArticleSuccess() {
         L.i(TAG, "onUnCollectArticleSuccess");
-        Snackbar.make(webView, R.string.common_collect_cancel, Snackbar.LENGTH_SHORT).show();
-        fab.setActivated(false);
+        Snackbar.make(binding.webView, R.string.common_collect_cancel, Snackbar.LENGTH_SHORT).show();
+        binding.fab.setActivated(false);
         isCollect = false;
     }
 

@@ -3,10 +3,10 @@ package com.manu.wanandroid.ui.home.activity
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
+import android.view.View
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.activity.BaseActivity
+import com.manu.wanandroid.databinding.ActivitySystemSettingBinding
 import com.manu.wanandroid.utils.StatusBarUtil
 
 /**
@@ -22,14 +22,16 @@ class SystemSettingActivity : BaseActivity() {
         }
     }
 
-    override fun onLayoutId(): Int {
-        return R.layout.activity_system_setting
+    private lateinit var binding: ActivitySystemSettingBinding;
+
+    override fun onLayout(): View {
+        binding = ActivitySystemSettingBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onInitToolbar() {
         super.onInitToolbar()
-        val toolBar = findViewById<Toolbar>(R.id.toolBar)
-        setSupportActionBar(toolBar)
+        setSupportActionBar(binding.toolBarInclude.toolBar)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setHomeButtonEnabled(true)
@@ -38,8 +40,7 @@ class SystemSettingActivity : BaseActivity() {
     }
 
     override fun onInitData() {
-        val title = findViewById<TextView>(R.id.tv_center_title)
-        title.text = getString(R.string.nv_setting)
+        binding.toolBarInclude.tvCenterTitle.text = getString(R.string.nv_setting)
     }
 
     override fun onInject() {

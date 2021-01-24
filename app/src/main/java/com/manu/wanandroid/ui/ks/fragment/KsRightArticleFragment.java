@@ -8,15 +8,15 @@ import com.ethanhua.skeleton.SkeletonScreen;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
+import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.contract.ks.KsContract;
+import com.manu.wanandroid.databinding.FragmentKsArticleRightBinding;
 import com.manu.wanandroid.di.module.fragment.KsRightChildFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryArticlePresenter;
 import com.manu.wanandroid.ui.home.activity.ArticleDetailActivity;
-import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryArticleAdapter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
@@ -27,23 +27,19 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * @Desc: KsRightChildFragment
  * @Author: jzman
  * @Date: 2019/5/9 0009 10:55
  */
-public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.CategoryArticlePresenter> implements KsContract.CategoryArticleView,
+public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.CategoryArticlePresenter> implements KsContract.CategoryArticleView,
         OnRefreshLoadMoreListener {
 
-    private static final String TAG = KsRightChildFragment.class.getSimpleName();
+    private static final String TAG = KsRightArticleFragment.class.getSimpleName();
     private static final String ARG_PARAM_TAB_ID = "arg_param_tab_id";
 
-    @BindView(R.id.rv_ks_right)
-    RecyclerView rvKsRight;
-    @BindView(R.id.normal_view)
-    SmartRefreshLayout srlKsRight;
+    private FragmentKsArticleRightBinding binding;
 
     @Inject
     KsCategoryArticleAdapter mKsCategoryArticleAdapter;
@@ -56,8 +52,9 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
     private SkeletonScreen mSkeletonScreen;
 
     @Override
-    public int onLayoutId() {
-        return R.layout.fragment_ks_article_right;
+    public View onLayout() {
+        binding = FragmentKsArticleRightBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -74,8 +71,8 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
         return mKsCategoryArticlePresenter;
     }
 
-    public static KsRightChildFragment newInstance(int tabId) {
-        KsRightChildFragment fragment = new KsRightChildFragment();
+    public static KsRightArticleFragment newInstance(int tabId) {
+        KsRightArticleFragment fragment = new KsRightArticleFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM_TAB_ID, tabId);
         fragment.setArguments(args);
@@ -90,18 +87,18 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
         assert bundle != null;
         mId = bundle.getInt(ARG_PARAM_TAB_ID);
 
-        srlKsRight.setOnRefreshListener(this);
-        srlKsRight.setOnLoadMoreListener(this);
-        rvKsRight.setLayoutManager(new LinearLayoutManager(mActivity));
+        binding.normalView.setOnRefreshListener(this);
+        binding.normalView.setOnLoadMoreListener(this);
+        binding.rvKsRight.setLayoutManager(new LinearLayoutManager(mActivity));
 
-        mSkeletonScreen = Skeleton.bind(rvKsRight)
+        mSkeletonScreen = Skeleton.bind(binding.rvKsRight)
                 .adapter(mKsCategoryArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
                 .duration(1500)
                 .show();
 
-        rvKsRight.addOnItemTouchListener(new OnRecycleItemClickListener(rvKsRight) {
+        binding.rvKsRight.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvKsRight) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 Article bean = mKsCategoryArticleAdapter.getItem(holder.getAdapterPosition());
@@ -109,7 +106,7 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
             }
         });
 
-        srlKsRight.autoRefresh();
+        binding.normalView.autoRefresh();
     }
 
     @Override
@@ -133,22 +130,22 @@ public class KsRightChildFragment extends BaseLoadMvpFragment<KsContract.Categor
             mKsCategoryArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();
-                srlKsRight.setEnableLoadMore(false);
+                binding.normalView.setEnableLoadMore(false);
             }
         }
 
         mKsCategoryArticleAdapter.addAll(result);
-        if (result.size() == 0) srlKsRight.setEnableLoadMore(false);
+        if (result.size() == 0) binding.normalView.setEnableLoadMore(false);
 
-        srlKsRight.finishRefresh();
-        srlKsRight.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 
     @Override
     public void onShowErrorMessage(String message) {
         super.onShowErrorMessage(message);
         mSkeletonScreen.hide();
-        srlKsRight.finishRefresh();
-        srlKsRight.finishLoadMore();
+        binding.normalView.finishRefresh();
+        binding.normalView.finishLoadMore();
     }
 }

@@ -2,7 +2,7 @@ package com.manu.wanandroid.di.component.fragment;
 
 import com.manu.wanandroid.di.module.fragment.KsRightChildFragmentModule;
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.ks.fragment.KsRightChildFragment;
+import com.manu.wanandroid.ui.ks.fragment.KsRightArticleFragment;
 
 import dagger.Subcomponent;
 
@@ -14,5 +14,5 @@ import dagger.Subcomponent;
 @PreFragment
 @Subcomponent(modules = KsRightChildFragmentModule.class)
 public interface KsRightChildFragmentComponent {
-    void injectKsRightArticleFragment(KsRightChildFragment ksRightFragment);
+    void injectKsRightArticleFragment(KsRightArticleFragment ksRightFragment);
 }

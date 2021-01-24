@@ -1,7 +1,7 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
 import com.manu.wanandroid.bean.knowledge;
-import com.manu.wanandroid.ui.ks.fragment.KsRightChildFragment;
+import com.manu.wanandroid.ui.ks.fragment.KsRightArticleFragment;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class KsRightChildPageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return KsRightChildFragment.newInstance(mChildrenBeans.get(position).getId());
+        return KsRightArticleFragment.newInstance(mChildrenBeans.get(position).getId());
     }
 
     @Override

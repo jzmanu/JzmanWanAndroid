@@ -2,7 +2,6 @@ package com.manu.wanandroid.ui.ks.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -11,6 +10,7 @@ import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.contract.ks.KsContract;
+import com.manu.wanandroid.databinding.FragmentKsBinding;
 import com.manu.wanandroid.di.module.fragment.KsFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryDataPresenter;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryAdapter;
@@ -26,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * @Desc: HomeFragment
@@ -36,10 +35,7 @@ import butterknife.BindView;
 public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter> implements KsContract.CategoryView {
     private static final String TAG = KsFragment.class.getSimpleName();
 
-    @BindView(R.id.rv_ks_left)
-    RecyclerView rvKsLeft;
-    @BindView(R.id.fl_ks_right_container)
-    FrameLayout flKsRightContainer;
+    private FragmentKsBinding binding;
 
     @Inject
     KsCategoryAdapter mKsCategoryAdapter;
@@ -58,8 +54,9 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
     }
 
     @Override
-    public int onLayoutId() {
-        return R.layout.fragment_ks;
+    public View onLayout() {
+        binding = FragmentKsBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
@@ -80,14 +77,14 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
             fm.beginTransaction().add(R.id.fl_ks_right_container, mKsRightFragment).commit();
         }
 
-        rvKsLeft.setLayoutManager(new LinearLayoutManager(mActivity));
+        binding.rvKsLeft.setLayoutManager(new LinearLayoutManager(mActivity));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL);
         Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.ks_category_rv_divider_bg);
         assert drawable != null;
         itemDecoration.setDrawable(drawable);
 //        rvKsLeft.addItemDecoration(itemDecoration);
 
-        mSkeletonScreenLeft = Skeleton.bind(rvKsLeft)
+        mSkeletonScreenLeft = Skeleton.bind(binding.rvKsLeft)
                 .adapter(mKsCategoryAdapter)
                 .load(R.layout.recycle_ks_item_first_category_skeleton)
                 .color(R.color.colorAnimator)
@@ -95,7 +92,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
                 .show();
 
 
-        rvKsLeft.addOnItemTouchListener(new OnRecycleItemClickListener(rvKsLeft) {
+        binding.rvKsLeft.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvKsLeft) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 if (mCurrentClickPosition == position) return;
