@@ -2,11 +2,10 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.webkit.WebSettings;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
@@ -39,6 +38,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     public static final String PARAM_ID = "param_id";
     public static final String PARAM_URL = "param_url";
     public static final String PARAM_COLLECT = "param_collect";
+    public static final String PARAM_ONLY_BROWSER = "param_only_browser";
 
     @Inject
     CollectPresenter mCollectPresenter;
@@ -47,6 +47,8 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     MWebView webView;
     @BindView(R.id.loadingProgressBar)
     ContentLoadingProgressBar loadingProgressBar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     private int mId;
     private boolean isCollect;
@@ -80,11 +82,13 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onInitData() {
-
         Intent intent = getIntent();
         if (intent != null) {
-            mId = intent.getIntExtra(PARAM_ID,  -1);
+            mId = intent.getIntExtra(PARAM_ID, -1);
             isCollect = intent.getBooleanExtra(PARAM_COLLECT, false);
+            boolean isBrowser = intent.getBooleanExtra(PARAM_ONLY_BROWSER, false);
+            fab.setActivated(isCollect);
+            if (isBrowser) fab.hide();
             String mUrl = intent.getStringExtra(PARAM_URL);
 
             WebSettings webSettings = webView.getSettings();
@@ -94,14 +98,18 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
-            webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar));
+            webView.setWebChromeClient(new MWebChromeClient(loadingProgressBar, fab));
             webView.loadUrl(mUrl);
 
-            webView.setOnDoubleClickListener(v -> {
-                if (Account.INSTANCE.isLogin()){
-                    toast("收藏");
-                    mCollectPresenter.collectArticle(String.valueOf(mId));
-                }else{
+            webView.setOnDoubleClickListener(v -> finish());
+            fab.setOnClickListener(v -> {
+                if (Account.INSTANCE.isLogin()) {
+                    if (isCollect){
+                        mCollectPresenter.unCollectArticle(String.valueOf(mId));
+                    }else {
+                        mCollectPresenter.collectArticle(String.valueOf(mId));
+                    }
+                } else {
                     AgentActivity.startLoginActivity(this);
                 }
             });
@@ -109,33 +117,20 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.collect_toolbar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            case R.id.home_collect:
-                item.setIcon(R.drawable.home_collect_yes_24dp);
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public void onCollectArticleSuccess() {
         L.i(TAG, "onCollectArticleSuccess");
+        Snackbar.make(webView, R.string.common_collect_success, Snackbar.LENGTH_SHORT).show();
+        fab.setActivated(true);
+        isCollect = true;
+
     }
 
     @Override
     public void onUnCollectArticleSuccess() {
         L.i(TAG, "onUnCollectArticleSuccess");
+        Snackbar.make(webView, R.string.common_collect_cancel, Snackbar.LENGTH_SHORT).show();
+        fab.setActivated(false);
+        isCollect = false;
     }
 
     @Override
@@ -145,10 +140,19 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     }
 
     public static void startArticleDetailActivity(AppCompatActivity activity, int id, String url, boolean collect) {
+        startArticleDetailActivity(activity,id,url,collect,false);
+    }
+
+    public static void startArticleDetailActivityOnlyBrowser(AppCompatActivity activity, int id, String url) {
+        startArticleDetailActivity(activity,id,url,false,true);
+    }
+
+    public static void startArticleDetailActivity(AppCompatActivity activity, int id, String url, boolean collect, boolean onlyBrowser) {
         Intent intent = new Intent(activity, ArticleDetailActivity.class);
         intent.putExtra(PARAM_ID, id);
         intent.putExtra(PARAM_URL, url);
         intent.putExtra(PARAM_COLLECT, collect);
+        intent.putExtra(PARAM_ONLY_BROWSER, onlyBrowser);
         activity.startActivity(intent);
     }
 }

@@ -18,4 +18,6 @@
 
     <!--状态栏高度+标题栏-->
     <dimen name="actionBarWithStatusBarSize">81dp</dimen>
+
+    <dimen name ="design_fab_image_size">48dp</dimen>
 </resources>

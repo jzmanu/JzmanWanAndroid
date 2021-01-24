@@ -7,6 +7,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -47,7 +48,7 @@ public class RxUtil {
     private static <T> Observable<T> rxCreateObservable(T data) {
         return Observable.create(emitter -> {
             try {
-                emitter.onNext(data);
+                if (data != null) emitter.onNext(data);
                 emitter.onComplete();
             } catch (Exception e) {
                 emitter.onError(e);

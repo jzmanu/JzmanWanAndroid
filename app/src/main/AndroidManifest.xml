@@ -69,7 +69,7 @@
                 android:value="true" />
             <meta-data
                 android:name="io.flutter.embedding.android.SplashScreenDrawable"
-                android:resource="@drawable/bg_src_tianjin" />
+                android:resource="@drawable/bg_login" />
         </activity>
     </application>
 </manifest>

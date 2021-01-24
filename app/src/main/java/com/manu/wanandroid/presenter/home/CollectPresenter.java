@@ -6,6 +6,8 @@ import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 /**
@@ -26,7 +28,12 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
                 .compose(RxUtil.rxHandlerResult())
                 .subscribeWith(new BaseObserver<Object>(mView) {
                     @Override
-                    public void onNext(Object o) {
+                    public void onNext(@NotNull Object o) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
                         mView.onCollectArticleSuccess();
                     }
                 })
@@ -41,6 +48,11 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
                 .subscribeWith(new BaseObserver<Object>(mView) {
                     @Override
                     public void onNext(Object o) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
                         mView.onUnCollectArticleSuccess();
                     }
                 })

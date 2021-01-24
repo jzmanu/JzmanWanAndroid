@@ -1,6 +1,7 @@
 package com.manu.wanandroid.ui.home.fragment;
 
 import android.view.View;
+import android.widget.Toast;
 
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -21,6 +22,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     private int mPageIndex;
     private SkeletonScreen mSkeletonScreen;
     private List<String> mBannerImages;
+    private List<Banner> mBannerList;
 
     @Override
     public int onLayoutId() {
@@ -93,7 +96,8 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(rvHome) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
-                Article bean = mHomeArticleAdapter.getItem(holder.getAdapterPosition()-1);
+                if (position == 0) return;
+                Article bean = mHomeArticleAdapter.getItem(position-1);
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -104,7 +108,6 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     @Override
     public void onLazyLoad() {
         L.i(TAG, "onLazyLoad");
-
     }
 
     @Override
@@ -130,7 +133,9 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     @Override
     public void onHomeBannerListSuccess(List<Banner> result) {
         L.i(TAG, "onHomeBannerListSuccess" + result);
+        mBannerList = new ArrayList<>();
         if (result != null && result.size() > 0) {
+            mBannerList = result;
             for (int i = 0; i < result.size(); i++) {
                 Banner bean = result.get(i);
                 mBannerImages.add(bean.getImagePath());
@@ -186,6 +191,10 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         if (mHomeBanner != null) {
             mHomeBanner.setImageLoader(new GlideImageLoader());
             mHomeBanner.setImages(mBannerImages);
+            mHomeBanner.setOnBannerListener(position -> {
+                Banner data = mBannerList.get(position);
+                ArticleDetailActivity.startArticleDetailActivityOnlyBrowser(mActivity,data.getId(),data.getUrl());
+            });
             mHomeBanner.start();
         }
     }

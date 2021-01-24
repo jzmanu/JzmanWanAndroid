@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @Date: 2019/5/10 0010 11:37
  */
 public abstract class OnRecycleItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
-    private GestureDetector mGestureDetector;
+    private final GestureDetector mGestureDetector;
 
     public OnRecycleItemClickListener(final RecyclerView rv) {
         mGestureDetector = new GestureDetector(rv.getContext(), new GestureDetector.SimpleOnGestureListener() {

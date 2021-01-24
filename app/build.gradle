@@ -36,6 +36,10 @@ android {
     packagingOptions {
         exclude 'META-INF/proguard/coroutines.pro'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

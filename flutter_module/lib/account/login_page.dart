@@ -42,7 +42,6 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
     Widget formColumn = Column(
       children: <Widget>[
         TextFormField(
-          initialValue: "jzmanuc",
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
@@ -68,7 +67,6 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
           margin: const EdgeInsets.only(bottom: 16, top: 16),
         ),
         TextFormField(
-          initialValue: "wanandroid",
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,

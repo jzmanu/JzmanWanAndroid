@@ -12,7 +12,7 @@
         android:layout_height="90dp"
         android:layout_marginTop="65dp"
         android:layout_marginBottom="40dp"
-        android:src="@drawable/bg_src_tianjin"
+        android:src="@drawable/bg_login"
         app:civ_border_color="@color/colorWhite"
         app:civ_border_width="2dp"
         app:civ_fill_color="@color/colorWhite"
