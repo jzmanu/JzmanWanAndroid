@@ -1,11 +1,11 @@
 package com.manu.wanandroid.http;
 
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.http.api.ApiService;
 import com.manu.wanandroid.bean.Banner;
-import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
 
@@ -64,7 +64,7 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<List<knowledge>>> getKsCategoryData() {
+    public Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData() {
         return mApiService.getKsCagegoryData();
     }
 

@@ -1,26 +1,39 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.manu.wanandroid.R;
-import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
-import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
+import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter;
 import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding;
+
+import androidx.annotation.NonNull;
 
 /**
  * @Desc: KsCategoryArticleAdapter
  * @Author: jzman
  * @Date: 2019/5/31 0031 15:13
  */
-public class KsCategoryArticleAdapter extends BaseRecyclerViewAdapter<Article> {
+public class KsCategoryArticleAdapter extends SingleRecyclerViewAdapter<Article,RecycleHomeItemArticleBinding> {
+
     @Override
-    public int onLayoutId() {
+    protected int getItemViewType(Article data, int position) {
         return R.layout.recycle_home_item_article;
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, Article bean) {
-        holder.setText(R.id.tv_item_author, getText(bean.getAuthor()))
-                .setText(R.id.tv_item_title, getText(bean.getTitle()))
-                .setText(R.id.tv_item_category, getText(bean.getSuperChapterName()))
-                .setText(R.id.tv_item_date, getText(bean.getNiceDate()));
+    protected RecycleHomeItemArticleBinding onBinding(@NonNull ViewGroup viewGroup, int viewType) {
+        RecycleHomeItemArticleBinding binding =
+                RecycleHomeItemArticleBinding.inflate(mLayoutInflater, viewGroup, false);
+        return binding;
+    }
+
+    @Override
+    public void onBindData(BindingViewHolder<RecycleHomeItemArticleBinding> holder, int position, Article bean, int viewType) {
+        holder.getBinding().tvItemAuthor.setText(bean.getAuthor());
+        holder.getBinding().tvItemTitle.setText(bean.getTitle());
+        holder.getBinding().tvItemCategory.setText(bean.getSuperChapterName());
+        holder.getBinding().tvItemDate.setText(bean.getNiceDate());
     }
 }

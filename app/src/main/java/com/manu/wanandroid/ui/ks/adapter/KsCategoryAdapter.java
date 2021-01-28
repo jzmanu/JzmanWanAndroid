@@ -2,19 +2,23 @@ package com.manu.wanandroid.ui.ks.adapter;
 
 import android.graphics.Color;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
-import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
-import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
-import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter;
+import com.manu.wanandroid.bean.Knowledge;
+import com.manu.wanandroid.databinding.RecycleKsItemFirstCategoryBinding;
+
+import androidx.annotation.NonNull;
 
 /**
  * @Desc: KsCategoryAdapter
  * @Author: jzman
  * @Date: 2019/5/31 0031 13:46
  */
-public class KsCategoryAdapter extends BaseRecyclerViewAdapter<knowledge> {
-    private SparseBooleanArray mSelectSparseArray;
+public class KsCategoryAdapter extends SingleRecyclerViewAdapter<Knowledge, RecycleKsItemFirstCategoryBinding> {
+    private final SparseBooleanArray mSelectSparseArray;
 
     public KsCategoryAdapter() {
         super();
@@ -22,20 +26,27 @@ public class KsCategoryAdapter extends BaseRecyclerViewAdapter<knowledge> {
     }
 
     @Override
-    public int onLayoutId() {
+    public void onBindData(BindingViewHolder<RecycleKsItemFirstCategoryBinding> holder, int position, Knowledge bean, int viewType) {
+        holder.getBinding().tvItemKsLeftTitle.setText(bean.getName());
+        if (mSelectSparseArray.get(position)) {
+            holder.getBinding().llItemKsLeftTitle.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.getBinding().tvItemKsLeftTitle.setTextColor(Color.WHITE);
+        } else {
+            holder.getBinding().llItemKsLeftTitle.setBackgroundColor(Color.WHITE);
+            holder.getBinding().tvItemKsLeftTitle.setTextColor(Color.GRAY);
+        }
+    }
+
+    @Override
+    protected int getItemViewType(Knowledge data, int position) {
         return R.layout.recycle_ks_item_first_category;
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, knowledge bean) {
-        holder.setText(R.id.tv_item_ks_left_title, bean.getName());
-        if (mSelectSparseArray.get(position)) {
-            holder.setBackgroundColor(R.id.ll_item_ks_left_title, mContext.getResources().getColor(R.color.colorPrimary))
-                    .setTextColor(R.id.tv_item_ks_left_title, Color.WHITE);
-        } else {
-            holder.setBackgroundColor(R.id.ll_item_ks_left_title, Color.WHITE)
-                    .setTextColor(R.id.tv_item_ks_left_title, Color.GRAY);
-        }
+    protected RecycleKsItemFirstCategoryBinding onBinding(@NonNull ViewGroup viewGroup, int viewType) {
+        RecycleKsItemFirstCategoryBinding binding =
+                RecycleKsItemFirstCategoryBinding.inflate(mLayoutInflater,viewGroup,false);
+        return binding;
     }
 
     public void setSelectPosition(int position) {

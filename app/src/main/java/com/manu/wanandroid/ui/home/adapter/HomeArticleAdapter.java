@@ -10,7 +10,8 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
 import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
 import com.manu.wanandroid.bean.Article;
-import com.manu.wanandroid.utils.L;
+import com.manu.wanandroid.databinding.HomeBannerHeaderBinding;
+import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding;
 import com.youth.banner.Banner;
 
 import androidx.annotation.NonNull;
@@ -22,9 +23,6 @@ import androidx.annotation.NonNull;
  */
 public class HomeArticleAdapter extends BaseRecyclerViewAdapter<Article> {
 
-    private static final int HEADER = 0;
-    private static final int CONTENT = 1;
-
     private OnBannerListener mOnBannerListener;
 
     public void setOnBannerListener(OnBannerListener mOnBannerListener) {
@@ -32,64 +30,62 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<Article> {
     }
 
     @Override
-    public int onLayoutId() {
-        return R.layout.recycle_home_item_article;
+    public void onBindData(RecyclerViewHolder holder, int position, Article bean,int viewType) {
+        if (holder instanceof HeaderViewHolder) {
+            Banner mBanner = (Banner) ((HeaderViewHolder) holder).binding.homeBanner;
+            if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);
+        } else if (holder instanceof ContentViewHolder) {
+            ContentViewHolder viewHolder = (ContentViewHolder) holder;
+            Article articleBean = getItem(position-1);
+            String author = TextUtils.isEmpty(articleBean.getAuthor()) ?
+                    articleBean.getShareUser():articleBean.getAuthor();
+            viewHolder.binding.tvItemAuthor.setText(author);
+            viewHolder.binding.tvItemTitle.setText(articleBean.getTitle());
+            viewHolder.binding.tvItemCategory.setText(String.format("%s/%s", articleBean.getSuperChapterName(), articleBean.getChapterName()));
+            viewHolder.binding.tvItemDate.setText(articleBean.getNiceDate());
+        }
+    }
+
+    @Override
+    protected int getItemViewType(Article data, int position) {
+        if (position == 0) {
+            return R.layout.home_banner_header;
+        } else {
+            return R.layout.recycle_home_item_article;
+        }
     }
 
     @NonNull
     @Override
-    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view;
-        if (i == HEADER) {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_banner_header, viewGroup, false);
-            return new HeaderViewHolder(view);
-        } else if (i == CONTENT) {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycle_home_item_article, viewGroup, false);
-            return new ContentViewHolder(view);
-        }
-        return null;
-    }
-
-    @Override
-    public void onBindData(RecyclerViewHolder holder, int position, Article bean) {
-        L.i("Home","onBindData > position:"+position);
-        if (holder instanceof HeaderViewHolder) {
-            Banner mBanner = (Banner) holder.getView(R.id.home_banner);
-            if (mOnBannerListener!=null) mOnBannerListener.onBannerInit(mBanner);
-        } else if (holder instanceof ContentViewHolder) {
-            Article articleBean = getItem(position-1);
-            String author = TextUtils.isEmpty(articleBean.getAuthor()) ?
-                    articleBean.getShareUser():articleBean.getAuthor();
-            holder.setText(R.id.tv_item_author, getText(author))
-                    .setText(R.id.tv_item_title, getText(articleBean.getTitle()))
-                    .setText(R.id.tv_item_category, getText(articleBean.getSuperChapterName()+"/"+articleBean.getChapterName()))
-                    .setText(R.id.tv_item_date, getText(articleBean.getNiceDate()));
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEADER;
-        } else {
-            return CONTENT;
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == R.layout.home_banner_header) {
+            HomeBannerHeaderBinding binding = HomeBannerHeaderBinding.inflate(
+                    LayoutInflater.from(mContext),parent,false);
+            return new HeaderViewHolder(binding);
+        } else{
+            RecycleHomeItemArticleBinding binding = RecycleHomeItemArticleBinding.inflate(
+                    LayoutInflater.from(mContext),parent,false);
+            return new ContentViewHolder(binding);
         }
     }
 
     public static class HeaderViewHolder extends RecyclerViewHolder {
-        HeaderViewHolder(@NonNull View itemView) {
-            super(itemView);
+        private final HomeBannerHeaderBinding binding;
+        public HeaderViewHolder(HomeBannerHeaderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public static class ContentViewHolder extends RecyclerViewHolder {
-        ContentViewHolder(@NonNull View itemView) {
-            super(itemView);
+        private final RecycleHomeItemArticleBinding binding;
+        ContentViewHolder(RecycleHomeItemArticleBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
     public interface OnBannerListener{
         void onBannerInit(Banner banner);
     }
-
 }

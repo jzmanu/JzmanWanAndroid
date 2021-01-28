@@ -1,11 +1,11 @@
 package com.manu.wanandroid.http.api;
 
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.bean.Banner;
-import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
 
@@ -104,7 +104,7 @@ public interface ApiService {
      */
 
     @GET("tree/json")
-    Observable<BaseResultBean<List<knowledge>>> getKsCagegoryData();
+    Observable<BaseResultBean<List<Knowledge>>> getKsCagegoryData();
 
     /**
      * 获取知识体系下面的文章

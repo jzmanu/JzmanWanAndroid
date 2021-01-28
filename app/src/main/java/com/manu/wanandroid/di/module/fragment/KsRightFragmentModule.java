@@ -1,7 +1,7 @@
 package com.manu.wanandroid.di.module.fragment;
 
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.bean.knowledge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class KsRightFragmentModule {
 
     @PreFragment
     @Provides
-    List<knowledge.ChildrenBean> providerKsRightTabList() {
+    List<Knowledge.ChildrenBean> providerKsRightTabList() {
         return new ArrayList<>();
     }
 }
