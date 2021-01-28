@@ -1,6 +1,6 @@
 package com.manu.wanandroid.presenter.ks;
 
-import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.RxUtil;
@@ -29,9 +29,9 @@ public class KsCategoryDataPresenter extends BasePresenter<KsContract.CategoryVi
         addRxSubscribe(mDataManager.getKsCategoryData()
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
-                .subscribeWith(new BaseObserver<List<knowledge>>(mView) {
+                .subscribeWith(new BaseObserver<List<Knowledge>>(mView) {
                     @Override
-                    public void onNext(List<knowledge> ksBeans) {
+                    public void onNext(List<Knowledge> ksBeans) {
                         mView.onKsCategoryDataSuccess(ksBeans);
                     }
                 }));

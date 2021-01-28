@@ -3,7 +3,6 @@ package com.manu.wanandroid.base.adapter;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -12,28 +11,33 @@ import java.util.List;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 /**
- * @Desc: BaseRecyclerViewAdapter
+ * @Desc: SingleRecyclerViewAdapter
  * @Author: jzman
  * @Date: 2019/5/10 0010 11:38
  */
-public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private static final String TAG = BaseRecyclerViewAdapter.class.getSimpleName();
+public abstract class SingleRecyclerViewAdapter<T, B extends ViewBinding> extends
+        RecyclerView.Adapter<SingleRecyclerViewAdapter.BindingViewHolder<B>> {
+    private static final String TAG = SingleRecyclerViewAdapter.class.getSimpleName();
     protected Context mContext;
+    protected LayoutInflater mLayoutInflater;
     private RecyclerView mRecyclerView;
     private final List<T> mData;
 
     @LayoutRes
     protected abstract int getItemViewType(T data, int position);
 
-    protected abstract void onBindData(RecyclerViewHolder holder, int position, T bean, int viewType);
+    protected abstract B onBinding(@NonNull ViewGroup viewGroup, int viewType);
 
-    public BaseRecyclerViewAdapter() {
+    protected abstract void onBindData(BindingViewHolder<B> holder, int position, T bean, int viewType);
+
+    public SingleRecyclerViewAdapter() {
         this.mData = new ArrayList<>();
     }
 
-    public BaseRecyclerViewAdapter(@NonNull List<T> mData) {
+    public SingleRecyclerViewAdapter(@NonNull List<T> mData) {
         this.mData = mData;
     }
 
@@ -49,8 +53,17 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         if (mRecyclerView != null) mRecyclerView = null;
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int i) {
+    public BindingViewHolder<B> onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        this.mContext = viewGroup.getContext();
+        mLayoutInflater = LayoutInflater.from(mContext);
+        BindingViewHolder<B> holder = new BindingViewHolder<>(onBinding(viewGroup,viewType));
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BindingViewHolder holder, int i) {
         onBindData(holder, i, getItem(i), getItemViewType(i));
     }
 
@@ -94,5 +107,21 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
     public T getItem(int position) {
         return mData.get(position);
+    }
+
+    protected String getText(String text) {
+        return TextUtils.isEmpty(text) ? "" : text;
+    }
+
+    public static class BindingViewHolder<B extends ViewBinding> extends RecyclerViewHolder {
+        private final B binding;
+        public BindingViewHolder(B binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public B getBinding() {
+            return binding;
+        }
     }
 }

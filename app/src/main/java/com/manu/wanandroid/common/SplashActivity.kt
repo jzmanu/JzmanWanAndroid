@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this)
-        val mHandler: Handler = Handler(Looper.myLooper())
+        val mHandler = Handler(Looper.myLooper())
         if (Config.configStartLoginAuth) {
             if (Account.isLogin()) {
                 MainActivity.startMainActivity(this)

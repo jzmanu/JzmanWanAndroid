@@ -1,29 +1,39 @@
 package com.manu.wanandroid.ui.project.adapter;
 
+import android.view.ViewGroup;
+
 import com.manu.wanandroid.R;
-import com.manu.wanandroid.base.adapter.BaseRecyclerViewAdapter;
-import com.manu.wanandroid.base.adapter.RecyclerViewHolder;
+import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter;
 import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.databinding.RecycleProjectItemArticleBinding;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
+
+import androidx.annotation.NonNull;
 
 /**
  * @Desc: ProjectArticleAdapter
  * @Author: jzman
  * @Date: 2019/5/30 0030 14:14
  */
-public class ProjectArticleAdapter extends BaseRecyclerViewAdapter<Project> {
-
+public class ProjectArticleAdapter extends SingleRecyclerViewAdapter<Project, RecycleProjectItemArticleBinding> {
     @Override
-    public int onLayoutId() {
+    protected int getItemViewType(Project data, int position) {
         return R.layout.recycle_project_item_article;
     }
 
     @Override
-    public void onBindData(RecyclerViewHolder holder, int position, Project bean) {
-        ImageLoaderHelper.getInstance().showImageForNet(mContext,bean.getEnvelopePic(),holder.getImageView(R.id.iv_item_preview));
-        holder.setText(R.id.tv_item_pro_title,bean.getTitle());
-        holder.setText(R.id.tv_item_pro_desc,bean.getDesc());
-        holder.setText(R.id.tv_item_pro_author,bean.getAuthor());
-        holder.setText(R.id.tv_item_pro_date,bean.getNiceDate());
+    protected RecycleProjectItemArticleBinding onBinding(@NonNull ViewGroup viewGroup, int viewType) {
+        RecycleProjectItemArticleBinding binding =
+                RecycleProjectItemArticleBinding.inflate(mLayoutInflater,viewGroup,false);
+        return binding;
+    }
+
+    @Override
+    protected void onBindData(BindingViewHolder<RecycleProjectItemArticleBinding> holder, int position, Project bean, int viewType) {
+        ImageLoaderHelper.getInstance().showImageForNet(mContext,bean.getEnvelopePic(),holder.getBinding().ivItemPreview);
+        holder.getBinding().tvItemProTitle.setText(bean.getTitle());
+        holder.getBinding().tvItemProDesc.setText(bean.getDesc());
+        holder.getBinding().tvItemProAuthor.setText(bean.getAuthor());
+        holder.getBinding().tvItemProDate.setText(bean.getNiceDate());
     }
 }

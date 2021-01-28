@@ -1,5 +1,6 @@
 package com.manu.wanandroid.mvp.model;
 
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.http.HttpHelperImpl;
@@ -7,7 +8,6 @@ import com.manu.wanandroid.http.IHttpHelper;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
-import com.manu.wanandroid.bean.knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
 
@@ -66,7 +66,7 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<List<knowledge>>> getKsCategoryData() {
+    public Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData() {
         return mHttpHelper.getKsCategoryData();
     }
 

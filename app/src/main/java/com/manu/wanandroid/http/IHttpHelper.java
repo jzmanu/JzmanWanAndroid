@@ -4,7 +4,7 @@ import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
-import com.manu.wanandroid.bean.knowledge;
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
 
@@ -76,7 +76,7 @@ public interface IHttpHelper {
      *
      * @return
      */
-    Observable<BaseResultBean<List<knowledge>>> getKsCategoryData();
+    Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData();
 
     /**
      * 获取知识体系分类下面的文章
