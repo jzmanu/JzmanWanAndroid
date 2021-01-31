@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.http.exception.MException;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
+import com.manu.wanandroid.mvp.presenter.IPresenter;
 import com.manu.wanandroid.widget.MessageView;
 
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ import java.util.List;
  * @Author: jzman
  * @Date: 2019/5/20 0020 10:02
  */
-public abstract class BaseLoadMvpActivity<T extends BasePresenter> extends BaseMvpActivity<T> {
+@SuppressWarnings("all")
+public abstract class BaseLoadMvpActivity<T extends IPresenter> extends BaseMvpActivity<T> {
     private MessageView mMessageView;
     private List<View> mContentViews;
 

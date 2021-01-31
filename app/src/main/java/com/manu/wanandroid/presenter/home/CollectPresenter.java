@@ -1,7 +1,9 @@
 package com.manu.wanandroid.presenter.home;
 
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
+import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
 import com.manu.wanandroid.mvp.model.DataManager;
 import com.manu.wanandroid.mvp.presenter.BasePresenter;
@@ -9,6 +11,8 @@ import com.manu.wanandroid.mvp.presenter.BasePresenter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  * @Desc: CollectPresenter
@@ -57,5 +61,18 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
                     }
                 })
         );
+    }
+
+    @Override
+    public void getCollectArticle(int pageIndex) {
+        addRxSubscribe(mDataManager.getCollectArticle(pageIndex)
+                .compose(RxUtil.rxSchedulers())
+                .compose(RxUtil.rxHandlerResult())
+                .subscribeWith(new BaseObserver<BasePageBean<Collect>>(mView) {
+                    @Override
+                    public void onNext(@NonNull BasePageBean<Collect> result) {
+                        mView.onGetCollectArticleSuccess(result.getDatas());
+                    }
+                }));
     }
 }

@@ -8,6 +8,8 @@ import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.databinding.RecycleProjectItemArticleBinding;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -29,7 +31,7 @@ public class ProjectArticleAdapter extends SingleRecyclerViewAdapter<Project, Re
     }
 
     @Override
-    protected void onBindData(BindingViewHolder<RecycleProjectItemArticleBinding> holder, int position, Project bean, int viewType) {
+    protected void onBindData(@NotNull BindingViewHolder<RecycleProjectItemArticleBinding> holder, int position, Project bean, int viewType) {
         ImageLoaderHelper.getInstance().showImageForNet(mContext,bean.getEnvelopePic(),holder.getBinding().ivItemPreview);
         holder.getBinding().tvItemProTitle.setText(bean.getTitle());
         holder.getBinding().tvItemProDesc.setText(bean.getDesc());

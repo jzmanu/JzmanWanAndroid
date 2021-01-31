@@ -2,6 +2,7 @@ package com.manu.wanandroid.base.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -49,6 +50,15 @@ public abstract class BaseActivity extends AppCompatActivity {
             onInitToolbar();
             onInitData();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return false;
     }
 
     protected void onProtectApp() {

@@ -1,5 +1,6 @@
 package com.manu.wanandroid.http;
 
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
@@ -51,6 +52,11 @@ public class HttpHelperImpl implements IHttpHelper {
     @Override
     public Observable<BaseResultBean<Object>> unCollectArticle(String id) {
         return mApiService.unCollectArticle(id);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex) {
+        return mApiService.getCollectArticle(pageIndex);
     }
 
     @Override

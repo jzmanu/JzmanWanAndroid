@@ -1,5 +1,6 @@
 package com.manu.wanandroid.mvp.model;
 
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
@@ -23,7 +24,7 @@ import io.reactivex.Observable;
  * @Date: 2019/5/9 0009 9:45
  */
 public class DataManager implements IHttpHelper {
-    private IHttpHelper mHttpHelper;
+    private final IHttpHelper mHttpHelper;
 
     @Inject
     public DataManager(HttpHelperImpl mHttpHelper) {
@@ -53,6 +54,11 @@ public class DataManager implements IHttpHelper {
     @Override
     public Observable<BaseResultBean<Object>> unCollectArticle(String id) {
         return mHttpHelper.unCollectArticle(id);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex) {
+        return mHttpHelper.getCollectArticle(pageIndex);
     }
 
     @Override

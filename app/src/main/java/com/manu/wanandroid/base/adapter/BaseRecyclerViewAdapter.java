@@ -20,9 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
     private static final String TAG = BaseRecyclerViewAdapter.class.getSimpleName();
-    protected Context mContext;
     private RecyclerView mRecyclerView;
     private final List<T> mData;
+
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
 
     @LayoutRes
     protected abstract int getItemViewType(T data, int position);

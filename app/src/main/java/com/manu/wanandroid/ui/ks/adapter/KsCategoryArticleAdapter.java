@@ -8,6 +8,8 @@ import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -30,7 +32,7 @@ public class KsCategoryArticleAdapter extends SingleRecyclerViewAdapter<Article,
     }
 
     @Override
-    public void onBindData(BindingViewHolder<RecycleHomeItemArticleBinding> holder, int position, Article bean, int viewType) {
+    public void onBindData(@NotNull BindingViewHolder<RecycleHomeItemArticleBinding> holder, int position, Article bean, int viewType) {
         holder.getBinding().tvItemAuthor.setText(bean.getAuthor());
         holder.getBinding().tvItemTitle.setText(bean.getTitle());
         holder.getBinding().tvItemCategory.setText(bean.getSuperChapterName());

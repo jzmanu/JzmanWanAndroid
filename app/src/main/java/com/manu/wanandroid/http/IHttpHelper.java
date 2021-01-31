@@ -1,5 +1,6 @@
 package com.manu.wanandroid.http;
 
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
@@ -42,18 +43,24 @@ public interface IHttpHelper {
 
     /**
      * 收藏文章
-     *
-     * @return
+     *  @param id 收藏内容id
+     * @return Observable<BaseResultBean<Object>>
      */
     Observable<BaseResultBean<Object>> collectArticle(String id);
 
     /**
      * 取消收藏文章
-     *
-     * @return
+     * @param id 收藏内容id
+     * @return Observable<BaseResultBean<Object>>
      */
     Observable<BaseResultBean<Object>> unCollectArticle(String id);
 
+    /**
+     * 收藏的文章列表
+     * @param pageIndex 页面
+     * @return  Observable<BaseResultBean<BasePageBean<Collect>>>
+     */
+    Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex);
 
     /**
      * 获取项目分类Tab

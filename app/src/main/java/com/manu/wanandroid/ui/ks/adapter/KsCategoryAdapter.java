@@ -10,6 +10,8 @@ import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.databinding.RecycleKsItemFirstCategoryBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -26,7 +28,7 @@ public class KsCategoryAdapter extends SingleRecyclerViewAdapter<Knowledge, Recy
     }
 
     @Override
-    public void onBindData(BindingViewHolder<RecycleKsItemFirstCategoryBinding> holder, int position, Knowledge bean, int viewType) {
+    public void onBindData(@NotNull BindingViewHolder<RecycleKsItemFirstCategoryBinding> holder, int position, Knowledge bean, int viewType) {
         holder.getBinding().tvItemKsLeftTitle.setText(bean.getName());
         if (mSelectSparseArray.get(position)) {
             holder.getBinding().llItemKsLeftTitle.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));

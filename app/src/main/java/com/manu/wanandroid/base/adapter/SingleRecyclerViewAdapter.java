@@ -31,7 +31,7 @@ public abstract class SingleRecyclerViewAdapter<T, B extends ViewBinding> extend
 
     protected abstract B onBinding(@NonNull ViewGroup viewGroup, int viewType);
 
-    protected abstract void onBindData(BindingViewHolder<B> holder, int position, T bean, int viewType);
+    protected abstract void onBindData(@NonNull BindingViewHolder<B> holder, int position, T bean, int viewType);
 
     public SingleRecyclerViewAdapter() {
         this.mData = new ArrayList<>();

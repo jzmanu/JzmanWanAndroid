@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.databinding.ActivityArticleDetailBinding;
@@ -19,6 +20,10 @@ import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.StatusBarUtil;
 import com.manu.wanandroid.web.MWebChromeClient;
 import com.manu.wanandroid.web.MWebViewClient;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -43,8 +48,6 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     private int mId;
     private boolean isCollect;
-
-
     private ActivityArticleDetailBinding binding;
 
     @Override
@@ -126,6 +129,11 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
         Snackbar.make(binding.webView, R.string.common_collect_cancel, Snackbar.LENGTH_SHORT).show();
         binding.fab.setActivated(false);
         isCollect = false;
+    }
+
+    @Override
+    public void onGetCollectArticleSuccess(@NotNull List<Collect> result) {
+
     }
 
     @Override

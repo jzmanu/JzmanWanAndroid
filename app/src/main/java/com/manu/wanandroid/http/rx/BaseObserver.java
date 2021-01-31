@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http.rx;
 
 import com.google.gson.JsonParseException;
+import com.manu.wanandroid.http.exception.MException;
 import com.manu.wanandroid.http.exception.MExceptionFactory;
 import com.manu.wanandroid.mvp.view.IView;
 import com.manu.wanandroid.utils.L;
@@ -41,7 +42,9 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
             mView.onShowErrorMessage("Json解析失败");
         } else if (e instanceof UnknownHostException) {
             mView.onShowErrorMessage("未连接网络");
-        } else {
+        } else if (e instanceof MException){
+            mView.onShowErrorMessage(((MException) e).getErrorMessage());
+        }else{
             mView.onShowErrorMessage("未知错误");
         }
     }

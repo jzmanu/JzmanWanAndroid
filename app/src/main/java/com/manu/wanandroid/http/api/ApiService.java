@@ -1,5 +1,6 @@
 package com.manu.wanandroid.http.api;
 
+import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
@@ -29,6 +30,7 @@ public interface ApiService {
     String BASE_URL = "https://www.wanandroid.com/";
 
     /**
+     * 登录
      * https://www.wanandroid.com/user/login
      * @return
      */
@@ -72,9 +74,17 @@ public interface ApiService {
      * @param id
      * @return
      */
-
     @POST("lg/uncollect_originId/{id}/json")
     Observable<BaseResultBean<Object>> unCollectArticle(@Path("id") String id);
+
+    /**
+     * 收藏列表
+     * https://www.wanandroid.com/lg/collect/list/0/json
+     * @param pageIndex 页码
+     * @return Observable<BaseResultBean<BasePageBean<Article>>>
+     */
+    @GET("lg/collect/list/{pageIndex}/json")
+    Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(@Path("pageIndex") int pageIndex);
 
 
     /**

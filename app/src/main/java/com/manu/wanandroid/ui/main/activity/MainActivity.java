@@ -38,6 +38,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+//import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
+
 /**
  * @Desc: MainActivity
  * @Author: jzman
@@ -132,17 +134,23 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else if (itemId == R.id.bnv_ks) {
             binding.vpMain.setCurrentItem(2);
         }else if(itemId == R.id.nv_share){
-            MineShareActivity.Companion.startMineShareActivity(this);
+            MineShareActivity.startMineShareActivity(this);
+            binding.dlMain.close();
         }else if(itemId == R.id.nv_collect){
-            MineCollectActivity.Companion.startMineCollectActivity(this);
+            MineCollectActivity.startMineCollectActivity(this);
+            binding.dlMain.close();
         }else if(itemId == R.id.nv_integral){
-            MineIntegralActivity.Companion.startMineIntegralActivity(this);
+            MineIntegralActivity.startMineIntegralActivity(this);
+            binding.dlMain.close();
         }else if(itemId == R.id.nv_history){
-            ReadHistoryActivity.Companion.startReadHistoryActivity(this);
+            ReadHistoryActivity.startReadHistoryActivity(this);
+            binding.dlMain.close();
         }else if(itemId == R.id.nv_setting){
-            SystemSettingActivity.Companion.startSystemSettingActivity(this);
+            SystemSettingActivity.startSystemSettingActivity(this);
+            binding.dlMain.close();
         }else if(itemId == R.id.nv_about){
-            AboutActivity.Companion.startAboutActivity(this);
+            AboutActivity.startMineAboutActivity(this);
+            binding.dlMain.close();
         }
         return true;
     }
