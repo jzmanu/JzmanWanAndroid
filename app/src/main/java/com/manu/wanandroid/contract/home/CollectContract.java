@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 /**
  * @Desc: CollectContract
  * @Author: jzman
- * @Date: 2019/5/16 0016 15:53
+ * @Date: 2019/5/16
  */
 public interface CollectContract {
     interface View extends IView {

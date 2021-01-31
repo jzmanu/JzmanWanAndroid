@@ -28,9 +28,11 @@ import javax.inject.Inject
  * @Desc: 我的收藏
  * @Author: jzman
  */
-class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), CollectContract.View, OnRefreshLoadMoreListener, OnLoadMoreListener {
+class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), CollectContract.View,
+        OnRefreshLoadMoreListener, OnLoadMoreListener {
     @Inject
     lateinit var mCollectArticleAdapter: CollectArticleAdapter
+
     @Inject
     lateinit var mCollPresenter: CollectPresenter
 
@@ -123,6 +125,7 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
 
     companion object {
         private val TAG = MineCollectActivity::class.java.simpleName
+
         @JvmStatic
         fun startMineCollectActivity(context: Activity) {
             val intent = Intent(context, MineCollectActivity::class.java)

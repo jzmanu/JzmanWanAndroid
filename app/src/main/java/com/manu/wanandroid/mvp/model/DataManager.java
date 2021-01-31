@@ -6,6 +6,7 @@ import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
 import com.manu.wanandroid.http.HttpHelperImpl;
 import com.manu.wanandroid.http.IHttpHelper;
+import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
@@ -79,5 +80,10 @@ public class DataManager implements IHttpHelper {
     @Override
     public Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
         return mHttpHelper.getKsCategoryArticle(pageIndex, cid);
+    }
+
+    @Override
+    public Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex) {
+        return mHttpHelper.getShareArticle(pageIndex);
     }
 }

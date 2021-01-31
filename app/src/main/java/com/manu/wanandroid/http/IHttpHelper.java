@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
@@ -93,4 +94,11 @@ public interface IHttpHelper {
      * @return
      */
     Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid);
+
+    /**
+     * 我的分享
+     * @param pageIndex 页码，从1开始
+     * @return Observable<BaseResultBean<BasePageBean<Article>>>
+     */
+    Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex);
 }

@@ -2,6 +2,7 @@ package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Knowledge;
+import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
@@ -79,4 +80,8 @@ public class HttpHelperImpl implements IHttpHelper {
         return mApiService.getKsCategoryArticle(pageIndex, cid);
     }
 
+    @Override
+    public Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex) {
+        return mApiService.getShareArticle(pageIndex);
+    }
 }

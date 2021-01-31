@@ -3,6 +3,7 @@ package com.manu.wanandroid.http.api;
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
+import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.http.BaseResultBean;
@@ -127,6 +128,13 @@ public interface ApiService {
     @GET("article/list/{pageIndex}/json")
     Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
 
+    /**
+     * https://wanandroid.com/user/lg/private_articles/1/json
+     * @param pageIndex 页码，从1开始
+     * @return Observable<BaseResultBean<BasePageBean<BaseResultBean<List<Article>>>>>
+     */
+    @GET("user/lg/private_articles/{pageIndex}/json")
+    Observable<BaseResultBean<Share<Article>>> getShareArticle(@Path("pageIndex") int pageIndex);
 }
 
 

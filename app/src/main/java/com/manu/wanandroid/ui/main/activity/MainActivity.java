@@ -38,8 +38,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-//import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
-
 /**
  * @Desc: MainActivity
  * @Author: jzman

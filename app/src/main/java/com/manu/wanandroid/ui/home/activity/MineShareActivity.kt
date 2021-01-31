@@ -3,23 +3,55 @@ package com.manu.wanandroid.ui.home.activity
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.manu.wanandroid.R
-import com.manu.wanandroid.base.activity.BaseActivity
+import com.manu.wanandroid.app.MApplication
+import com.manu.wanandroid.base.activity.BaseLoadMvpActivity
+import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener
+import com.manu.wanandroid.bean.Article
+import com.manu.wanandroid.contract.home.ShareContract
 import com.manu.wanandroid.databinding.ActivityMineShareBinding
+import com.manu.wanandroid.di.component.activity.DaggerMineShareActivityComponent
+import com.manu.wanandroid.presenter.home.SharePresenter
+import com.manu.wanandroid.ui.home.adapter.ShareArticleAdapter
+import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import javax.inject.Inject
 
 /**
  * @Desc: 我的分享
  * @Author: jzman
  */
-class MineShareActivity : BaseActivity() {
+class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareContract.View,
+        OnRefreshLoadMoreListener, OnLoadMoreListener {
+    @Inject
+    lateinit var mCollectArticleAdapter: ShareArticleAdapter
+
+    @Inject
+    lateinit var mCollPresenter: SharePresenter
+
     private lateinit var binding: ActivityMineShareBinding
+    private lateinit var mSkeletonScreen: SkeletonScreen
+    private var mPageIndex = 0
+
     override fun onLayout(): View {
         binding = ActivityMineShareBinding.inflate(layoutInflater)
         return binding.root
     }
 
-    override fun onInject() {}
+    override fun onInject() {
+        val mMApplication = application as MApplication
+        DaggerMineShareActivityComponent.builder()
+                .appComponent(mMApplication.appComponent)
+                .build()
+                .injectMineShareActivity(this)
+    }
 
     override fun onInitToolbar() {
         super.onInitToolbar()
@@ -33,9 +65,64 @@ class MineShareActivity : BaseActivity() {
 
     override fun onInitData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_share)
+        binding.normalView.setOnRefreshListener(this)
+        binding.normalView.setOnLoadMoreListener(this)
+        binding.rvCollect.layoutManager = LinearLayoutManager(this)
+        mSkeletonScreen = Skeleton.bind(binding.rvCollect)
+                .adapter(mCollectArticleAdapter)
+                .load(R.layout.recycle_home_item_article_skeleton)
+                .color(R.color.colorAnimator)
+                .duration(1500)
+                .show()
+        binding.rvCollect.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvCollect) {
+            override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
+                val bean = mCollectArticleAdapter.getItem(holder.adapterPosition)
+                ArticleDetailActivity.startArticleDetailActivity(this@MineShareActivity, bean.id, bean.link, bean.isCollect)
+            }
+        })
+        binding.normalView.autoRefresh()
+    }
+
+    override fun onPresenter(): ShareContract.Presenter {
+        return mCollPresenter
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        mPageIndex = 0
+        mCollPresenter.getShareArticle(mPageIndex)
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+        mPageIndex++
+        mCollPresenter.getShareArticle(mPageIndex)
+    }
+
+    override fun onGetShareArticleSuccess(list: List<Article>) {
+        L.i(TAG, "onGetShareArticleSuccess")
+        onShowNormalContent()
+        if (mPageIndex == 0) {
+            mSkeletonScreen.hide()
+            mCollectArticleAdapter.clear()
+            if (list.isEmpty()) {
+                onShowEmptyMessage()
+                binding.normalView.setEnableLoadMore(false)
+            }
+        }
+        mCollectArticleAdapter.addAll(list)
+        if (list.isEmpty()) binding.normalView.setEnableLoadMore(false)
+        binding.normalView.finishRefresh()
+        binding.normalView.finishLoadMore()
+    }
+
+    override fun onShowErrorMessage(message: String) {
+        super.onShowErrorMessage(message)
+        mSkeletonScreen.hide()
+        binding.normalView.finishRefresh()
+        binding.normalView.finishLoadMore()
     }
 
     companion object {
+        private val TAG = MineShareActivity::class.java.simpleName
         @JvmStatic
         fun startMineShareActivity(context: Activity) {
             val intent = Intent(context, MineShareActivity::class.java)

@@ -38,7 +38,7 @@ class MineIntegralActivity : BaseActivity() {
     companion object {
         @JvmStatic
         fun startMineIntegralActivity(context: Activity) {
-            val intent = Intent(context, AboutActivity::class.java)
+            val intent = Intent(context, MineIntegralActivity::class.java)
             context.startActivity(intent)
         }
     }
