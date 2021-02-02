@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http.api;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.bean.Share;
@@ -79,13 +80,13 @@ public interface ApiService {
     Observable<BaseResultBean<Object>> unCollectArticle(@Path("id") String id);
 
     /**
-     * 收藏列表
+     * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
      * @param pageIndex 页码
      * @return Observable<BaseResultBean<BasePageBean<Article>>>
      */
     @GET("lg/collect/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(@Path("pageIndex") int pageIndex);
+    Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(@Path("pageIndex") int pageIndex);
 
 
     /**
@@ -129,12 +130,23 @@ public interface ApiService {
     Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
 
     /**
+     * 我的分享
      * https://wanandroid.com/user/lg/private_articles/1/json
      * @param pageIndex 页码，从1开始
      * @return Observable<BaseResultBean<BasePageBean<BaseResultBean<List<Article>>>>>
      */
     @GET("user/lg/private_articles/{pageIndex}/json")
-    Observable<BaseResultBean<Share<Article>>> getShareArticle(@Path("pageIndex") int pageIndex);
+    Observable<BaseResultBean<Share<Article>>> mineShareArticle(@Path("pageIndex") int pageIndex);
+
+    /**
+     * 我的积分
+     * https://www.wanandroid.com//lg/coin/list/1/json
+     * @param pageIndex 页码，从1开始
+     * @return
+     */
+    @GET("lg/collect/list/{pageIndex}/json")
+    Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(@Path("pageIndex") int pageIndex);
+
 }
 
 

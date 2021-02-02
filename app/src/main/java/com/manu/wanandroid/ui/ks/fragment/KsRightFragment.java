@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.Knowledge;
+import com.manu.wanandroid.common.Config;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.databinding.FragmentKsRightBinding;
 import com.manu.wanandroid.di.module.fragment.KsRightFragmentModule;
@@ -68,7 +69,7 @@ public class KsRightFragment extends BaseLoadMvpFragment<KsContract.CategoryArti
         mSkeletonScreenRight = Skeleton.bind(binding.normalView)
                 .load(R.layout.fragment_ks_right_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.INSTANCE.getSkeletonDuration())
                 .show();
     }
 

@@ -14,7 +14,7 @@ import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.databinding.ActivityArticleDetailBinding;
 import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComponent;
-import com.manu.wanandroid.presenter.home.CollectPresenter;
+import com.manu.wanandroid.presenter.home.MineCollectPresenter;
 import com.manu.wanandroid.ui.main.activity.AgentActivity;
 import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.StatusBarUtil;
@@ -44,7 +44,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     public static final String PARAM_ONLY_BROWSER = "param_only_browser";
 
     @Inject
-    CollectPresenter mCollectPresenter;
+    MineCollectPresenter mCollectPresenter;
 
     private int mId;
     private boolean isCollect;

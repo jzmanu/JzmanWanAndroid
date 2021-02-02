@@ -9,6 +9,7 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.common.Config;
 import com.manu.wanandroid.contract.project.ProjectContract;
 import com.manu.wanandroid.databinding.FragmentProjectChildBinding;
 import com.manu.wanandroid.di.module.fragment.ProjectChildFragmentModule;
@@ -79,7 +80,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
                 .adapter(mProjectArticleAdapter)
                 .load(R.layout.recycle_project_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.INSTANCE.getSkeletonDuration())
                 .show();
 
         binding.rvProject.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvProject) {

@@ -1,6 +1,10 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
+import android.app.LauncherActivity;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
@@ -33,8 +37,14 @@ public class KsCategoryArticleAdapter extends SingleRecyclerViewAdapter<Article,
 
     @Override
     public void onBindData(@NotNull BindingViewHolder<RecycleHomeItemArticleBinding> holder, int position, Article bean, int viewType) {
-        holder.getBinding().tvItemAuthor.setText(bean.getAuthor());
-        holder.getBinding().tvItemTitle.setText(bean.getTitle());
+        String author = bean.getAuthor() ;
+        if (TextUtils.isEmpty(author)){
+            author = bean.getShareUser();
+            if (TextUtils.isEmpty(author))
+                holder.getBinding().tvItemAuthor.setVisibility(View.GONE);
+        }
+        holder.getBinding().tvItemAuthor.setText(author);
+        holder.getBinding().tvItemTitle.setText(Html.fromHtml(bean.getTitle()));
         holder.getBinding().tvItemCategory.setText(bean.getSuperChapterName());
         holder.getBinding().tvItemDate.setText(bean.getNiceDate());
     }

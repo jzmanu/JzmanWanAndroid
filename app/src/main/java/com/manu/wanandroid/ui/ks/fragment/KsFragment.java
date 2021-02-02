@@ -9,6 +9,7 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.Knowledge;
+import com.manu.wanandroid.common.Config;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.databinding.FragmentKsBinding;
 import com.manu.wanandroid.di.module.fragment.KsFragmentModule;
@@ -88,7 +89,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
                 .adapter(mKsCategoryAdapter)
                 .load(R.layout.recycle_ks_item_first_category_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.INSTANCE.getSkeletonDuration())
                 .show();
 
 

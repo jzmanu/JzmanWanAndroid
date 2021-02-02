@@ -1,5 +1,6 @@
 package com.manu.wanandroid.base.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -65,6 +66,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(AppStatusTrack.ACTION_HOME, AppStatusTrack.STATUS_FOCUS_KILLED);
         startActivity(intent);
+    }
+
+    protected <Activity> void startActivity(Context context, Class<Activity> clazz){
+        Intent intent = new Intent(context,clazz);
+        context.startActivity(intent);
     }
 
     protected void toast(String message){

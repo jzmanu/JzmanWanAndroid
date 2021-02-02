@@ -1,15 +1,16 @@
 package com.manu.wanandroid.http;
 
-import com.manu.wanandroid.bean.Collect;
-import com.manu.wanandroid.bean.Knowledge;
-import com.manu.wanandroid.bean.Share;
-import com.manu.wanandroid.bean.User;
-import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
-import com.manu.wanandroid.http.api.ApiService;
 import com.manu.wanandroid.bean.Banner;
+import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
+import com.manu.wanandroid.bean.Share;
+import com.manu.wanandroid.bean.User;
+import com.manu.wanandroid.http.api.ApiService;
+import com.manu.wanandroid.http.rx.BasePageBean;
 
 import java.util.List;
 
@@ -56,8 +57,8 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex) {
-        return mApiService.getCollectArticle(pageIndex);
+    public Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
+        return mApiService.mineCollectArticle(pageIndex);
     }
 
     @Override
@@ -81,7 +82,12 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex) {
-        return mApiService.getShareArticle(pageIndex);
+    public Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex) {
+        return mApiService.mineShareArticle(pageIndex);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
+        return mApiService.mineIntegral(pageIndex);
     }
 }

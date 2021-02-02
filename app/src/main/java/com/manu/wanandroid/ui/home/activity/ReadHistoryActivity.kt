@@ -1,7 +1,5 @@
 package com.manu.wanandroid.ui.home.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.activity.BaseActivity
@@ -33,13 +31,5 @@ class ReadHistoryActivity : BaseActivity() {
 
     override fun onInitData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_history)
-    }
-
-    companion object {
-        @JvmStatic
-        fun startReadHistoryActivity(context: Activity) {
-            val intent = Intent(context, ReadHistoryActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }

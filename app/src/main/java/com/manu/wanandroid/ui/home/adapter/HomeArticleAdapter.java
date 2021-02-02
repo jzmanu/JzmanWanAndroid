@@ -1,6 +1,7 @@
 package com.manu.wanandroid.ui.home.adapter;
 
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.databinding.HomeBannerHeaderBinding;
 import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding;
 import com.manu.wanandroid.databinding.RecycleProjectItemArticleBinding;
+import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
 import com.youth.banner.Banner;
 
@@ -37,18 +39,18 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<Article> {
             if (mOnBannerListener != null) mOnBannerListener.onBannerInit(mBanner);
         } else if (holder instanceof ContentViewHolder) {
             ContentViewHolder viewHolder = (ContentViewHolder) holder;
-            Article articleBean = getItem(position - 1);
+            Article articleBean = getItem(position);
             String author = TextUtils.isEmpty(articleBean.getAuthor()) ?
                     articleBean.getShareUser() : articleBean.getAuthor();
             viewHolder.binding.tvItemAuthor.setText(author);
-            viewHolder.binding.tvItemTitle.setText(articleBean.getTitle());
+            viewHolder.binding.tvItemTitle.setText(Html.fromHtml(articleBean.getTitle()));
             viewHolder.binding.tvItemCategory.setText(String.format("%s/%s", articleBean.getSuperChapterName(), articleBean.getChapterName()));
             viewHolder.binding.tvItemDate.setText(articleBean.getNiceDate());
-        }else if(holder instanceof ProjectViewHolder){
+        } else if (holder instanceof ProjectViewHolder) {
             ProjectViewHolder viewHolder = (ProjectViewHolder) holder;
-            ImageLoaderHelper.getInstance().showImageForNet(getRecyclerView().getContext(),bean.getEnvelopePic(),viewHolder.binding.ivItemPreview);
-            viewHolder.binding.tvItemProTitle.setText(bean.getTitle());
-            viewHolder.binding.tvItemProDesc.setText(bean.getDesc());
+            ImageLoaderHelper.getInstance().showImageForNet(getRecyclerView().getContext(), bean.getEnvelopePic(), viewHolder.binding.ivItemPreview);
+            viewHolder.binding.tvItemProTitle.setText(Html.fromHtml(bean.getTitle()));
+            viewHolder.binding.tvItemProDesc.setText(Html.fromHtml(bean.getDesc()));
             viewHolder.binding.tvItemProAuthor.setText(bean.getAuthor());
             viewHolder.binding.tvItemProDate.setText(bean.getNiceDate());
         }
@@ -58,8 +60,8 @@ public class HomeArticleAdapter extends BaseRecyclerViewAdapter<Article> {
     protected int getItemViewType(Article data, int position) {
         if (position == 0) {
             return R.layout.home_banner_header;
-        } else if (data.getChapterId() == 294) {
-            // 完整项目
+        } else if (data.getSuperChapterId() == 294) {
+            // 项目
             return R.layout.recycle_project_item_article;
         } else {
             return R.layout.recycle_home_item_article;

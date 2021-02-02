@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.project.adapter;
 
+import android.text.Html;
 import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
@@ -33,8 +34,8 @@ public class ProjectArticleAdapter extends SingleRecyclerViewAdapter<Project, Re
     @Override
     protected void onBindData(@NotNull BindingViewHolder<RecycleProjectItemArticleBinding> holder, int position, Project bean, int viewType) {
         ImageLoaderHelper.getInstance().showImageForNet(mContext,bean.getEnvelopePic(),holder.getBinding().ivItemPreview);
-        holder.getBinding().tvItemProTitle.setText(bean.getTitle());
-        holder.getBinding().tvItemProDesc.setText(bean.getDesc());
+        holder.getBinding().tvItemProTitle.setText(Html.fromHtml(bean.getTitle()));
+        holder.getBinding().tvItemProDesc.setText(Html.fromHtml(bean.getDesc()));
         holder.getBinding().tvItemProAuthor.setText(bean.getAuthor());
         holder.getBinding().tvItemProDate.setText(bean.getNiceDate());
     }

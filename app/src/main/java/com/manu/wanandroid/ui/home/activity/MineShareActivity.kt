@@ -1,7 +1,5 @@
 package com.manu.wanandroid.ui.home.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +10,11 @@ import com.manu.wanandroid.app.MApplication
 import com.manu.wanandroid.base.activity.BaseLoadMvpActivity
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener
 import com.manu.wanandroid.bean.Article
+import com.manu.wanandroid.common.Config
 import com.manu.wanandroid.contract.home.ShareContract
 import com.manu.wanandroid.databinding.ActivityMineShareBinding
 import com.manu.wanandroid.di.component.activity.DaggerMineShareActivityComponent
-import com.manu.wanandroid.presenter.home.SharePresenter
+import com.manu.wanandroid.presenter.home.MineSharePresenter
 import com.manu.wanandroid.ui.home.adapter.ShareArticleAdapter
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
@@ -34,7 +33,7 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
     lateinit var mCollectArticleAdapter: ShareArticleAdapter
 
     @Inject
-    lateinit var mCollPresenter: SharePresenter
+    lateinit var mCollPresenter: MineSharePresenter
 
     private lateinit var binding: ActivityMineShareBinding
     private lateinit var mSkeletonScreen: SkeletonScreen
@@ -67,14 +66,14 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_share)
         binding.normalView.setOnRefreshListener(this)
         binding.normalView.setOnLoadMoreListener(this)
-        binding.rvCollect.layoutManager = LinearLayoutManager(this)
-        mSkeletonScreen = Skeleton.bind(binding.rvCollect)
+        binding.rvShare.layoutManager = LinearLayoutManager(this)
+        mSkeletonScreen = Skeleton.bind(binding.rvShare)
                 .adapter(mCollectArticleAdapter)
-                .load(R.layout.recycle_home_item_article_skeleton)
+                .load(R.layout.recycle_mine_share_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.skeletonDuration)
                 .show()
-        binding.rvCollect.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvCollect) {
+        binding.rvShare.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvShare) {
             override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
                 val bean = mCollectArticleAdapter.getItem(holder.adapterPosition)
                 ArticleDetailActivity.startArticleDetailActivity(this@MineShareActivity, bean.id, bean.link, bean.isCollect)
@@ -123,10 +122,5 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
 
     companion object {
         private val TAG = MineShareActivity::class.java.simpleName
-        @JvmStatic
-        fun startMineShareActivity(context: Activity) {
-            val intent = Intent(context, MineShareActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }

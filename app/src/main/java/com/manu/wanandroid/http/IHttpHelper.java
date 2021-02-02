@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
@@ -61,7 +62,7 @@ public interface IHttpHelper {
      * @param pageIndex 页面
      * @return  Observable<BaseResultBean<BasePageBean<Collect>>>
      */
-    Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex);
+    Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex);
 
     /**
      * 获取项目分类Tab
@@ -100,5 +101,12 @@ public interface IHttpHelper {
      * @param pageIndex 页码，从1开始
      * @return Observable<BaseResultBean<BasePageBean<Article>>>
      */
-    Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex);
+    Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex);
+
+    /**
+     * 我的积分
+     * @param pageIndex 页码，从1开始
+     * @return Observable<BaseResultBean<BasePageBean<Integral>>>
+     */
+    Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex);
 }

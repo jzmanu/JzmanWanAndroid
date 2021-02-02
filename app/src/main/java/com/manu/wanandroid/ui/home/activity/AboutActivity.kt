@@ -1,7 +1,5 @@
 package com.manu.wanandroid.ui.home.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.activity.BaseActivity
@@ -33,13 +31,5 @@ class AboutActivity : BaseActivity() {
 
     override fun onInitData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_about)
-    }
-
-    companion object {
-        @JvmStatic
-        fun startMineAboutActivity(context: Activity) {
-            val intent = Intent(context, AboutActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }

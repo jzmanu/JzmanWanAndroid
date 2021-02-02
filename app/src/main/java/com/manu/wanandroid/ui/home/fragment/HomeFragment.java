@@ -9,6 +9,7 @@ import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
+import com.manu.wanandroid.common.Config;
 import com.manu.wanandroid.contract.home.HomeContract;
 import com.manu.wanandroid.databinding.FragmentHomeBinding;
 import com.manu.wanandroid.di.module.fragment.HomeFragmentModule;
@@ -86,14 +87,14 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
                 .adapter(mHomeArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.INSTANCE.getSkeletonDuration())
                 .show();
 
         binding.rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvHome) {
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 if (position == 0) return;
-                Article bean = mHomeArticleAdapter.getItem(position-1);
+                Article bean = mHomeArticleAdapter.getItem(position);
                 ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
             }
         });
@@ -111,15 +112,18 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         L.i(TAG, "onHomeArticleListSuccess" + result);
         onShowNormalContent();
         if (mPageIndex == 0) {
+            List<Article> newResult = result;
             mSkeletonScreen.hide();
             mHomeArticleAdapter.clear();
             if (result.size() == 0) {
                 onShowEmptyMessage();
                 binding.normalView.setEnableLoadMore(false);
             }
+            newResult.add(0, new Article());
+            mHomeArticleAdapter.addAll(newResult);
         }
 
-        mHomeArticleAdapter.addAll(result);
+        if (mPageIndex != 0) mHomeArticleAdapter.addAll(result);
         if (result.size() == 0) binding.normalView.setEnableLoadMore(false);
 
         binding.normalView.finishRefresh();
@@ -176,9 +180,9 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     public void onBannerInit(com.youth.banner.Banner banner) {
         mHomeBanner = banner;
         mBannerImages = new ArrayList<>();
-        if (mBannerImages.size() > 0){
+        if (mBannerImages.size() > 0) {
             setBannerSource();
-        }else{
+        } else {
             mHomePresenter.getHomeBannerList();
         }
     }
@@ -189,7 +193,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
             mHomeBanner.setImages(mBannerImages);
             mHomeBanner.setOnBannerListener(position -> {
                 Banner data = mBannerList.get(position);
-                ArticleDetailActivity.startArticleDetailActivityOnlyBrowser(mActivity,data.getId(),data.getUrl());
+                ArticleDetailActivity.startArticleDetailActivityOnlyBrowser(mActivity, data.getId(), data.getUrl());
             });
             mHomeBanner.start();
         }

@@ -9,6 +9,7 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener;
 import com.manu.wanandroid.base.fragment.BaseLoadMvpFragment;
 import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.common.Config;
 import com.manu.wanandroid.contract.ks.KsContract;
 import com.manu.wanandroid.databinding.FragmentKsArticleRightBinding;
 import com.manu.wanandroid.di.module.fragment.KsRightChildFragmentModule;
@@ -95,7 +96,7 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
                 .adapter(mKsCategoryArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.INSTANCE.getSkeletonDuration())
                 .show();
 
         binding.rvKsRight.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvKsRight) {

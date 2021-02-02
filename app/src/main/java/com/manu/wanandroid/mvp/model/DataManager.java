@@ -1,6 +1,7 @@
 package com.manu.wanandroid.mvp.model;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
@@ -58,8 +59,8 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Collect>>> getCollectArticle(int pageIndex) {
-        return mHttpHelper.getCollectArticle(pageIndex);
+    public Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
+        return mHttpHelper.mineCollectArticle(pageIndex);
     }
 
     @Override
@@ -83,7 +84,12 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<Share<Article>>> getShareArticle(int pageIndex) {
-        return mHttpHelper.getShareArticle(pageIndex);
+    public Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex) {
+        return mHttpHelper.mineShareArticle(pageIndex);
+    }
+
+    @Override
+    public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
+        return mHttpHelper.mineIntegral(pageIndex);
     }
 }

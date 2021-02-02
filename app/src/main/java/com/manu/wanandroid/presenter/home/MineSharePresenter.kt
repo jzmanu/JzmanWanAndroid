@@ -14,9 +14,9 @@ import javax.inject.Inject
  * @Author: jzman
  * @Date: 2021/1/31 18:25.
  */
-class SharePresenter @Inject constructor(mDataManager: DataManager?) : BasePresenter<ShareContract.View>(mDataManager), ShareContract.Presenter {
+class MineSharePresenter @Inject constructor(mDataManager: DataManager?) : BasePresenter<ShareContract.View>(mDataManager), ShareContract.Presenter {
     override fun getShareArticle(pageIndex: Int) {
-        addRxSubscribe(mDataManager.getShareArticle(pageIndex)
+        addRxSubscribe(mDataManager.mineShareArticle(pageIndex)
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
                 .subscribeWith(object : BaseObserver<Share<Article>>(mView){

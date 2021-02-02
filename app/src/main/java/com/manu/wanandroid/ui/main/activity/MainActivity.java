@@ -35,6 +35,7 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     public MainActivityComponent mMainActivityComponent;
     private ActivityMainBinding binding;
+    private int mDrawItemId;
 
     @Override
     public View onLayout() {
@@ -87,7 +89,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 new ActionBarDrawerToggle(this, binding.dlMain, binding.toolBarInclude.toolBar, R.string.common_open, R.string.common_close);
         toggle.syncState();
         binding.dlMain.addDrawerListener(toggle);
-
+        binding.dlMain.addDrawerListener(new DrawerLayout.SimpleDrawerListener(){
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                if(mDrawItemId == R.id.nv_share){
+                    startActivity(MainActivity.this,MineShareActivity.class);
+                }else if(mDrawItemId == R.id.nv_collect){
+                    startActivity(MainActivity.this,MineCollectActivity.class);
+                }else if(mDrawItemId == R.id.nv_integral){
+                    startActivity(MainActivity.this,MineIntegralActivity.class);
+                }else if(mDrawItemId == R.id.nv_history){
+                    startActivity(MainActivity.this,ReadHistoryActivity.class);
+                }else if(mDrawItemId == R.id.nv_setting){
+                    startActivity(MainActivity.this,SystemSettingActivity.class);
+                }else if(mDrawItemId == R.id.nv_about){
+                    startActivity(MainActivity.this,AboutActivity.class);
+                }
+            }
+        });
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
     }
 
@@ -124,30 +143,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int itemId = menuItem.getItemId();
-        if (itemId == R.id.bnv_home) {
+        mDrawItemId = menuItem.getItemId();
+        if (mDrawItemId == R.id.bnv_home) {
             binding.vpMain.setCurrentItem(0);
-        } else if (itemId == R.id.bnv_project) {
+        } else if (mDrawItemId == R.id.bnv_project) {
             binding.vpMain.setCurrentItem(1);
-        } else if (itemId == R.id.bnv_ks) {
+        } else if (mDrawItemId == R.id.bnv_ks) {
             binding.vpMain.setCurrentItem(2);
-        }else if(itemId == R.id.nv_share){
-            MineShareActivity.startMineShareActivity(this);
-            binding.dlMain.close();
-        }else if(itemId == R.id.nv_collect){
-            MineCollectActivity.startMineCollectActivity(this);
-            binding.dlMain.close();
-        }else if(itemId == R.id.nv_integral){
-            MineIntegralActivity.startMineIntegralActivity(this);
-            binding.dlMain.close();
-        }else if(itemId == R.id.nv_history){
-            ReadHistoryActivity.startReadHistoryActivity(this);
-            binding.dlMain.close();
-        }else if(itemId == R.id.nv_setting){
-            SystemSettingActivity.startSystemSettingActivity(this);
-            binding.dlMain.close();
-        }else if(itemId == R.id.nv_about){
-            AboutActivity.startMineAboutActivity(this);
+        }else{
             binding.dlMain.close();
         }
         return true;
@@ -182,4 +185,5 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         Intent intent = new Intent(context,MainActivity.class);
         context.startActivity(intent);
     }
+
 }

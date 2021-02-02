@@ -1,7 +1,5 @@
 package com.manu.wanandroid.ui.home.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +10,11 @@ import com.manu.wanandroid.app.MApplication
 import com.manu.wanandroid.base.activity.BaseLoadMvpActivity
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener
 import com.manu.wanandroid.bean.Collect
+import com.manu.wanandroid.common.Config
 import com.manu.wanandroid.contract.home.CollectContract
 import com.manu.wanandroid.databinding.ActivityMineCollectBinding
 import com.manu.wanandroid.di.component.activity.DaggerMineCollectActivityComponent
-import com.manu.wanandroid.presenter.home.CollectPresenter
+import com.manu.wanandroid.presenter.home.MineCollectPresenter
 import com.manu.wanandroid.ui.home.adapter.CollectArticleAdapter
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
@@ -34,7 +33,7 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
     lateinit var mCollectArticleAdapter: CollectArticleAdapter
 
     @Inject
-    lateinit var mCollPresenter: CollectPresenter
+    lateinit var mCollPresenter: MineCollectPresenter
 
     private lateinit var binding: ActivityMineCollectBinding
     private lateinit var mSkeletonScreen: SkeletonScreen
@@ -72,7 +71,7 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
                 .adapter(mCollectArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(1500)
+                .duration(Config.skeletonDuration)
                 .show()
         binding.rvCollect.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvCollect) {
             override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
@@ -125,11 +124,5 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
 
     companion object {
         private val TAG = MineCollectActivity::class.java.simpleName
-
-        @JvmStatic
-        fun startMineCollectActivity(context: Activity) {
-            val intent = Intent(context, MineCollectActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/tv_item_author"
+            android:id="@+id/tv_item_title"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="16dp"
@@ -23,24 +23,11 @@
             android:layout_marginEnd="16dp"
             android:background="@color/colorSkeleton"
             android:ellipsize="end"
-            android:singleLine="true"
+            android:maxLines="2"
+            android:textSize="@dimen/app_recycle_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="jzman" />
-
-        <View
-            android:id="@+id/tv_item_title"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorSkeleton"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textSize="@dimen/app_recycle_title_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/tv_item_author"
-            app:layout_constraintStart_toStartOf="@+id/tv_item_author"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_author"
             tools:text="标题" />
 
         <View

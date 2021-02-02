@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.home.adapter
 
+import android.view.View
 import android.view.ViewGroup
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter
@@ -23,7 +24,7 @@ class ShareArticleAdapter : SingleRecyclerViewAdapter<Article, RecycleHomeItemAr
     }
 
     override fun onBindData(holder: BindingViewHolder<RecycleHomeItemArticleBinding>, position: Int, bean: Article?, viewType: Int) {
-        holder.binding.tvItemAuthor.text = bean?.author
+        holder.binding.tvItemAuthor.visibility = View.GONE
         holder.binding.tvItemTitle.text = bean?.title
         holder.binding.tvItemCategory.text = bean?.chapterName
         holder.binding.tvItemDate.text = bean?.niceDate

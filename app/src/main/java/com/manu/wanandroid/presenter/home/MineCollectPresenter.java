@@ -19,9 +19,9 @@ import io.reactivex.annotations.NonNull;
  * @Author: jzman
  * @Date: 2019/5/16 0016 15:52
  */
-public class CollectPresenter extends BasePresenter<CollectContract.View> implements CollectContract.Presenter {
+public class MineCollectPresenter extends BasePresenter<CollectContract.View> implements CollectContract.Presenter {
     @Inject
-    public CollectPresenter(DataManager mDataManager) {
+    public MineCollectPresenter(DataManager mDataManager) {
         super(mDataManager);
     }
 
@@ -65,7 +65,7 @@ public class CollectPresenter extends BasePresenter<CollectContract.View> implem
 
     @Override
     public void getCollectArticle(int pageIndex) {
-        addRxSubscribe(mDataManager.getCollectArticle(pageIndex)
+        addRxSubscribe(mDataManager.mineCollectArticle(pageIndex)
                 .compose(RxUtil.rxSchedulers())
                 .compose(RxUtil.rxHandlerResult())
                 .subscribeWith(new BaseObserver<BasePageBean<Collect>>(mView) {

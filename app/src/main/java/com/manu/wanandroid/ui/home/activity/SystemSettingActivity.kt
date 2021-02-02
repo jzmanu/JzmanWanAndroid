@@ -1,7 +1,5 @@
 package com.manu.wanandroid.ui.home.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.activity.BaseActivity
@@ -33,13 +31,5 @@ class SystemSettingActivity : BaseActivity() {
 
     override fun onInitData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_setting)
-    }
-
-    companion object {
-        @JvmStatic
-        fun startSystemSettingActivity(context: Activity) {
-            val intent = Intent(context, SystemSettingActivity::class.java)
-            context.startActivity(intent)
-        }
     }
 }
