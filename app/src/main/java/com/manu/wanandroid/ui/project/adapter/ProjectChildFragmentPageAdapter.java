@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.project.adapter;
 
+import android.text.Html;
 import android.view.ViewGroup;
 
 import com.manu.wanandroid.bean.ProjectTab;
@@ -44,7 +45,7 @@ public class ProjectChildFragmentPageAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTabList.get(position).getName();
+        return Html.fromHtml(mTabList.get(position).getName());
     }
 
     @NonNull

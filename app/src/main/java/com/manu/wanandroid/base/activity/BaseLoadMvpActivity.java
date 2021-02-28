@@ -5,8 +5,7 @@ import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.http.exception.MException;
-import com.manu.wanandroid.mvp.presenter.BasePresenter;
-import com.manu.wanandroid.mvp.presenter.IPresenter;
+import com.manu.wanandroid.base.mvp.presenter.IPresenter;
 import com.manu.wanandroid.widget.MessageView;
 
 import java.util.ArrayList;
@@ -67,6 +66,12 @@ public abstract class BaseLoadMvpActivity<T extends IPresenter> extends BaseMvpA
     public void onShowErrorMessage(String message) {
         setNormalContentView(false);
         mMessageView.showErrorMessage(message);
+    }
+
+    @Override
+    public void onShowEmptyMessage() {
+        setNormalContentView(false);
+        mMessageView.showEmptyMessage();
     }
 
     private void initNormalContentView(ViewGroup viewGroup) {

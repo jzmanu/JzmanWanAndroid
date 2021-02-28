@@ -72,7 +72,6 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
         Bundle bundle = getArguments();
         assert bundle != null;
         mCid = bundle.getInt(ARG_PARAM_TAB_ID);
-        binding.rvProject.setLayoutManager(new LinearLayoutManager(mActivity));
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
 

@@ -5,8 +5,8 @@ import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.http.rx.RxUtil;
-import com.manu.wanandroid.mvp.model.DataManager;
-import com.manu.wanandroid.mvp.presenter.BasePresenter;
+import com.manu.wanandroid.model.DataManager;
+import com.manu.wanandroid.base.mvp.presenter.BasePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +17,7 @@ import io.reactivex.annotations.NonNull;
 /**
  * @Desc: CollectPresenter
  * @Author: jzman
- * @Date: 2019/5/16 0016 15:52
+ * @Date: 2019/5/16.
  */
 public class MineCollectPresenter extends BasePresenter<CollectContract.View> implements CollectContract.Presenter {
     @Inject

@@ -144,7 +144,7 @@ public interface ApiService {
      * @param pageIndex 页码，从1开始
      * @return
      */
-    @GET("lg/collect/list/{pageIndex}/json")
+    @GET("lg/coin/list/{pageIndex}/json")
     Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(@Path("pageIndex") int pageIndex);
 
 }

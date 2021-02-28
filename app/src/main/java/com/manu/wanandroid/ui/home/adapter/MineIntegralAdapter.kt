@@ -11,7 +11,7 @@ import com.manu.wanandroid.databinding.RecycleMineIntegralItemArticleBinding
  * @Author: jzman
  * @Date: 2021/2/1
  */
-class IntegralArticleAdapter : SingleRecyclerViewAdapter<Integral, RecycleMineIntegralItemArticleBinding>() {
+class MineIntegralAdapter : SingleRecyclerViewAdapter<Integral, RecycleMineIntegralItemArticleBinding>() {
 
     override fun getItemViewType(data: Integral?, position: Int): Int {
         return R.layout.recycle_mine_integral_item_article
@@ -23,6 +23,5 @@ class IntegralArticleAdapter : SingleRecyclerViewAdapter<Integral, RecycleMineIn
 
     override fun onBindData(holder: BindingViewHolder<RecycleMineIntegralItemArticleBinding>, position: Int, bean: Integral?, viewType: Int) {
         holder.binding.tvItemReason.text = bean?.desc
-        holder.binding.tvItemDate.text = bean?.date.toString()
     }
 }

@@ -1,7 +1,6 @@
 package com.manu.wanandroid.ui.home.activity
 
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
@@ -15,7 +14,7 @@ import com.manu.wanandroid.contract.home.CollectContract
 import com.manu.wanandroid.databinding.ActivityMineCollectBinding
 import com.manu.wanandroid.di.component.activity.DaggerMineCollectActivityComponent
 import com.manu.wanandroid.presenter.home.MineCollectPresenter
-import com.manu.wanandroid.ui.home.adapter.CollectArticleAdapter
+import com.manu.wanandroid.ui.home.adapter.MineCollectAdapter
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -30,7 +29,7 @@ import javax.inject.Inject
 class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), CollectContract.View,
         OnRefreshLoadMoreListener, OnLoadMoreListener {
     @Inject
-    lateinit var mCollectArticleAdapter: CollectArticleAdapter
+    lateinit var mCollectArticleAdapter: MineCollectAdapter
 
     @Inject
     lateinit var mCollPresenter: MineCollectPresenter
@@ -66,7 +65,6 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_collect)
         binding.normalView.setOnRefreshListener(this)
         binding.normalView.setOnLoadMoreListener(this)
-        binding.rvCollect.layoutManager = LinearLayoutManager(this)
         mSkeletonScreen = Skeleton.bind(binding.rvCollect)
                 .adapter(mCollectArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)

@@ -3,9 +3,8 @@ package com.manu.wanandroid.base.activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.manu.wanandroid.mvp.presenter.IPresenter;
-import com.manu.wanandroid.mvp.view.IView;
-import com.manu.wanandroid.utils.L;
+import com.manu.wanandroid.base.mvp.presenter.IPresenter;
+import com.manu.wanandroid.base.mvp.view.IView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

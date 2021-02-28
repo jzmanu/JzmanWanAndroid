@@ -8,9 +8,11 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseActivity;
+import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.databinding.ActivityMainBinding;
@@ -92,13 +94,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         binding.dlMain.addDrawerListener(new DrawerLayout.SimpleDrawerListener(){
             @Override
             public void onDrawerClosed(View drawerView) {
-                if(mDrawItemId == R.id.nv_share){
-                    startActivity(MainActivity.this,MineShareActivity.class);
-                }else if(mDrawItemId == R.id.nv_collect){
-                    startActivity(MainActivity.this,MineCollectActivity.class);
-                }else if(mDrawItemId == R.id.nv_integral){
-                    startActivity(MainActivity.this,MineIntegralActivity.class);
-                }else if(mDrawItemId == R.id.nv_history){
+                if (Account.INSTANCE.isLogin()){
+                    if(mDrawItemId == R.id.nv_share){
+                        startActivity(MainActivity.this,MineShareActivity.class);
+                    }else if(mDrawItemId == R.id.nv_collect){
+                        startActivity(MainActivity.this,MineCollectActivity.class);
+                    }else if(mDrawItemId == R.id.nv_integral){
+                        startActivity(MainActivity.this,MineIntegralActivity.class);
+                    }
+                }else{
+                    AgentActivity.startLoginActivity(MainActivity.this);
+                }
+
+                if(mDrawItemId == R.id.nv_history){
                     startActivity(MainActivity.this,ReadHistoryActivity.class);
                 }else if(mDrawItemId == R.id.nv_setting){
                     startActivity(MainActivity.this,SystemSettingActivity.class);

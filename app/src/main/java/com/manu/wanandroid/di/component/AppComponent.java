@@ -2,7 +2,7 @@ package com.manu.wanandroid.di.component;
 
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.di.module.AppModule;
-import com.manu.wanandroid.mvp.model.DataManager;
+import com.manu.wanandroid.model.DataManager;
 
 import javax.inject.Singleton;
 

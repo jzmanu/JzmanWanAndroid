@@ -80,7 +80,6 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         L.i(TAG, "onInitData");
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
-        binding.rvHome.setLayoutManager(new LinearLayoutManager(mActivity));
         mHomeArticleAdapter.setOnBannerListener(this);
 
         mSkeletonScreen = Skeleton.bind(binding.rvHome)

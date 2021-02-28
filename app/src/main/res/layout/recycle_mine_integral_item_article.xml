@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dp"
-    android:layout_marginTop="3dp"
-    app:cardElevation="0dp"
-    app:cardCornerRadius="6dp"
+    android:layout_marginBottom="1px"
+    android:layout_marginTop="1px"
+    app:cardElevation="0px"
+    app:cardCornerRadius="0px"
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
@@ -22,22 +22,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:textSize="@dimen/app_recycle_title_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="签到" />
-
-        <TextView
-            android:id="@+id/tv_item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_item_reason"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_reason"
-            tools:text="2019-05-10" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

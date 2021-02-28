@@ -1,7 +1,7 @@
 package com.manu.wanandroid.di.module.activity;
 
 import com.manu.wanandroid.di.scope.PreActivity;
-import com.manu.wanandroid.ui.home.adapter.IntegralArticleAdapter;
+import com.manu.wanandroid.ui.home.adapter.MineIntegralAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,7 +15,7 @@ import dagger.Provides;
 public class MineIntegralActivityModule {
     @PreActivity
     @Provides
-    IntegralArticleAdapter providerIntegralArticleAdapter(){
-        return new IntegralArticleAdapter();
+    MineIntegralAdapter providerIntegralArticleAdapter(){
+        return new MineIntegralAdapter();
     }
 }

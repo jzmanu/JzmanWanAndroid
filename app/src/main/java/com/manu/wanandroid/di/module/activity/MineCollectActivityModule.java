@@ -1,9 +1,7 @@
 package com.manu.wanandroid.di.module.activity;
 
 import com.manu.wanandroid.di.scope.PreActivity;
-import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.home.adapter.CollectArticleAdapter;
-import com.manu.wanandroid.ui.home.adapter.HomeArticleAdapter;
+import com.manu.wanandroid.ui.home.adapter.MineCollectAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,7 +15,7 @@ import dagger.Provides;
 public class MineCollectActivityModule {
     @PreActivity
     @Provides
-    CollectArticleAdapter providerCollectArticleAdapter(){
-        return new CollectArticleAdapter();
+    MineCollectAdapter providerCollectArticleAdapter(){
+        return new MineCollectAdapter();
     }
 }

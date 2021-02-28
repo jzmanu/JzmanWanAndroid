@@ -68,9 +68,6 @@ public class ProjectFragment extends BaseLoadMvpFragment<ProjectContract.TabPres
         L.i(TAG, "onProjectTabSuccess" + result);
         onShowNormalContent();
         if (result != null && result.size() > 0) {
-            for (ProjectTab tabBean : result) {
-                binding.tlProject.addTab(binding.tlProject.newTab().setText(tabBean.getName()));
-            }
             binding.tlProject.setTabMode(TabLayout.MODE_SCROLLABLE);
             binding.tlProject.addOnTabSelectedListener(this);
             ProjectChildFragmentPageAdapter mPageAdapter = new ProjectChildFragmentPageAdapter(getChildFragmentManager(), result);

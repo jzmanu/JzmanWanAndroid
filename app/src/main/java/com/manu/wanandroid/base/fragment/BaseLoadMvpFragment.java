@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.http.exception.MException;
-import com.manu.wanandroid.mvp.presenter.IPresenter;
-import com.manu.wanandroid.mvp.view.IView;
+import com.manu.wanandroid.base.mvp.presenter.IPresenter;
+import com.manu.wanandroid.base.mvp.view.IView;
 import com.manu.wanandroid.widget.MessageView;
 
 import java.util.ArrayList;

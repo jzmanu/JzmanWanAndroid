@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.activity.MineShareActivity">
 
-    <include
-        android:id="@+id/toolBarInclude"
-        layout="@layout/toolbar" />
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
         android:layout_width="match_parent"
@@ -28,12 +24,14 @@
                 android:id="@+id/rv_share"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recycle_home_item_article" />
         </LinearLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <include
+        android:id="@+id/toolBarInclude"
+        layout="@layout/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

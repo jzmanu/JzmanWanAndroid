@@ -1,6 +1,6 @@
-package com.manu.wanandroid.mvp.presenter;
+package com.manu.wanandroid.base.mvp.presenter;
 
-import com.manu.wanandroid.mvp.view.IView;
+import com.manu.wanandroid.base.mvp.view.IView;
 
 import io.reactivex.disposables.Disposable;
 

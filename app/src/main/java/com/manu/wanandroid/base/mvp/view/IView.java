@@ -1,4 +1,4 @@
-package com.manu.wanandroid.mvp.view;
+package com.manu.wanandroid.base.mvp.view;
 
 /**
  * @Desc: IView

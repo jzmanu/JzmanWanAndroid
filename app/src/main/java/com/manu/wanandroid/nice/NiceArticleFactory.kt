@@ -1,7 +1,5 @@
 package com.manu.wanandroid.nice
 
-import android.content.Context
-
 /**
  * @Desc: ArticleInterceptorFactory
  * @Author: jzman

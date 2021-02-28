@@ -2,11 +2,8 @@ package com.manu.wanandroid.http.rx;
 
 import com.google.gson.JsonParseException;
 import com.manu.wanandroid.http.exception.MException;
-import com.manu.wanandroid.http.exception.MExceptionFactory;
-import com.manu.wanandroid.mvp.view.IView;
+import com.manu.wanandroid.base.mvp.view.IView;
 import com.manu.wanandroid.utils.L;
-
-import org.apache.http.conn.ConnectTimeoutException;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -35,7 +32,7 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
         if (e instanceof HttpException) {
             mView.onShowErrorMessage("客户端错误");
         } else if (e instanceof SocketTimeoutException) {
-            mView.onShowErrorMessage("SocketTimeoutException:" + e.getMessage());
+            mView.onShowErrorMessage("网络连接超时");
         } else if (e instanceof ConnectException) {
             mView.onShowErrorMessage("ConnectException:" + e.getMessage());
         } else if (e instanceof JsonParseException) {

@@ -1,8 +1,8 @@
 package com.manu.wanandroid.contract.account
 
 import com.manu.wanandroid.bean.User
-import com.manu.wanandroid.mvp.presenter.IPresenter
-import com.manu.wanandroid.mvp.view.IView
+import com.manu.wanandroid.base.mvp.presenter.IPresenter
+import com.manu.wanandroid.base.mvp.view.IView
 
 /**
  * @Desc: LoginContract

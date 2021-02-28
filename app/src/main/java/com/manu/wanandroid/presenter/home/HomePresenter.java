@@ -1,11 +1,11 @@
 package com.manu.wanandroid.presenter.home;
 
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.mvp.model.DataManager;
+import com.manu.wanandroid.model.DataManager;
 import com.manu.wanandroid.contract.home.HomeContract;
 import com.manu.wanandroid.http.rx.BaseObserver;
 import com.manu.wanandroid.http.rx.RxUtil;
-import com.manu.wanandroid.mvp.presenter.BasePresenter;
+import com.manu.wanandroid.base.mvp.presenter.BasePresenter;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
 
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 /**
  * @Desc: HomePresenter
  * @Author: jzman
- * @Date: 2019/5/8 0008 17:07
+ * @Date: 2019/5/8.
  */
 public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {
 

@@ -13,7 +13,6 @@ import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.databinding.HomeBannerHeaderBinding;
 import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding;
 import com.manu.wanandroid.databinding.RecycleProjectItemArticleBinding;
-import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.image.ImageLoaderHelper;
 import com.youth.banner.Banner;
 

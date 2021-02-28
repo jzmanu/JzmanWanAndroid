@@ -90,7 +90,6 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
 
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
-        binding.rvKsRight.setLayoutManager(new LinearLayoutManager(mActivity));
 
         mSkeletonScreen = Skeleton.bind(binding.rvKsRight)
                 .adapter(mKsCategoryArticleAdapter)

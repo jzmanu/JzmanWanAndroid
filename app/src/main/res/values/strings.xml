@@ -23,5 +23,6 @@
     <string name="common_collect_cancel">已取消收藏</string>
 
     <string name="common_retry">点击重试</string>
+    <string name="common_retry_login">请重新登录</string>
 
 </resources>

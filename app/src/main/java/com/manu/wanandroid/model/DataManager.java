@@ -1,4 +1,4 @@
-package com.manu.wanandroid.mvp.model;
+package com.manu.wanandroid.model;
 
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Integral;

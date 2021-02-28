@@ -1,8 +1,7 @@
 package com.manu.wanandroid.di.module.activity;
 
 import com.manu.wanandroid.di.scope.PreActivity;
-import com.manu.wanandroid.ui.home.adapter.CollectArticleAdapter;
-import com.manu.wanandroid.ui.home.adapter.ShareArticleAdapter;
+import com.manu.wanandroid.ui.home.adapter.MineShareAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +15,7 @@ import dagger.Provides;
 public class MineShareActivityModule {
     @PreActivity
     @Provides
-    ShareArticleAdapter providerShareArticleAdapter(){
-        return new ShareArticleAdapter();
+    MineShareAdapter providerShareArticleAdapter(){
+        return new MineShareAdapter();
     }
 }

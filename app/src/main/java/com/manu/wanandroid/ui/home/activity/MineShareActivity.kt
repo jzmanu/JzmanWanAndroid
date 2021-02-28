@@ -1,7 +1,6 @@
 package com.manu.wanandroid.ui.home.activity
 
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
@@ -15,7 +14,7 @@ import com.manu.wanandroid.contract.home.ShareContract
 import com.manu.wanandroid.databinding.ActivityMineShareBinding
 import com.manu.wanandroid.di.component.activity.DaggerMineShareActivityComponent
 import com.manu.wanandroid.presenter.home.MineSharePresenter
-import com.manu.wanandroid.ui.home.adapter.ShareArticleAdapter
+import com.manu.wanandroid.ui.home.adapter.MineShareAdapter
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -30,7 +29,7 @@ import javax.inject.Inject
 class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareContract.View,
         OnRefreshLoadMoreListener, OnLoadMoreListener {
     @Inject
-    lateinit var mCollectArticleAdapter: ShareArticleAdapter
+    lateinit var mCollectArticleAdapter: MineShareAdapter
 
     @Inject
     lateinit var mCollPresenter: MineSharePresenter
@@ -66,7 +65,6 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_share)
         binding.normalView.setOnRefreshListener(this)
         binding.normalView.setOnLoadMoreListener(this)
-        binding.rvShare.layoutManager = LinearLayoutManager(this)
         mSkeletonScreen = Skeleton.bind(binding.rvShare)
                 .adapter(mCollectArticleAdapter)
                 .load(R.layout.recycle_mine_share_item_article_skeleton)
@@ -88,12 +86,12 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mPageIndex = 0
-        mCollPresenter.getShareArticle(mPageIndex)
+        mCollPresenter.getMineShareArticle(mPageIndex)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mPageIndex++
-        mCollPresenter.getShareArticle(mPageIndex)
+        mCollPresenter.getMineShareArticle(mPageIndex)
     }
 
     override fun onGetShareArticleSuccess(list: List<Article>) {
