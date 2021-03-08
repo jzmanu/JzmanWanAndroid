@@ -9,7 +9,6 @@ import com.manu.wanandroid.databinding.RecycleMineIntegralItemArticleBinding
 /**
  * @Desc: 我的积分
  * @Author: jzman
- * @Date: 2021/2/1
  */
 class MineIntegralAdapter : SingleRecyclerViewAdapter<Integral, RecycleMineIntegralItemArticleBinding>() {
 

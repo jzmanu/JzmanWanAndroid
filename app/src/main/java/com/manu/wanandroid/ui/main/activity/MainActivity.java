@@ -5,19 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.base.activity.BaseActivity;
+import com.manu.wanandroid.base.activity.BaseLoadMvpActivity;
+import com.manu.wanandroid.base.activity.BaseMvpActivity;
+import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.AppStatusTrack;
+import com.manu.wanandroid.common.Common;
 import com.manu.wanandroid.common.SplashActivity;
+import com.manu.wanandroid.contract.home.IntegralContract;
 import com.manu.wanandroid.databinding.ActivityMainBinding;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
 import com.manu.wanandroid.di.component.activity.MainActivityComponent;
+import com.manu.wanandroid.presenter.home.MineIntegralPresenter;
 import com.manu.wanandroid.ui.home.activity.AboutActivity;
 import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
 import com.manu.wanandroid.ui.home.activity.MineIntegralActivity;
@@ -28,7 +35,11 @@ import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
 import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
 import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
+import com.manu.wanandroid.utils.L;
+import com.manu.wanandroid.utils.SharePreferenceHelperKt;
 import com.manu.wanandroid.utils.StatusBarUtil;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -46,8 +57,8 @@ import androidx.viewpager.widget.ViewPager;
  * @Author: jzman
  * @Date: 2019/5/8 0008 9:38
  */
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-        ViewPager.OnPageChangeListener,NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> implements BottomNavigationView.OnNavigationItemSelectedListener,
+        ViewPager.OnPageChangeListener, NavigationView.OnNavigationItemSelectedListener, IntegralContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -59,10 +70,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public KsFragment mKsFragment;
     @Inject
     List<Fragment> mFragments;
+    @Inject
+    MineIntegralPresenter mMineIntegralPresenter;
 
+    private TextView tvName, tvLevel, tvRank;
     public MainActivityComponent mMainActivityComponent;
     private ActivityMainBinding binding;
     private int mDrawItemId;
+
 
     @Override
     public View onLayout() {
@@ -90,28 +105,34 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         ActionBarDrawerToggle toggle =
                 new ActionBarDrawerToggle(this, binding.dlMain, binding.toolBarInclude.toolBar, R.string.common_open, R.string.common_close);
         toggle.syncState();
+
+        View headerView = binding.nvMain.getHeaderView(0);
+        tvName = headerView.findViewById(R.id.tvName);
+        tvLevel = headerView.findViewById(R.id.tvLevel);
+        tvRank = headerView.findViewById(R.id.tvRank);
+
         binding.dlMain.addDrawerListener(toggle);
-        binding.dlMain.addDrawerListener(new DrawerLayout.SimpleDrawerListener(){
+        binding.dlMain.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerClosed(View drawerView) {
-                if (Account.INSTANCE.isLogin()){
-                    if(mDrawItemId == R.id.nv_share){
-                        startActivity(MainActivity.this,MineShareActivity.class);
-                    }else if(mDrawItemId == R.id.nv_collect){
-                        startActivity(MainActivity.this,MineCollectActivity.class);
-                    }else if(mDrawItemId == R.id.nv_integral){
-                        startActivity(MainActivity.this,MineIntegralActivity.class);
+                if (Account.INSTANCE.isLogin()) {
+                    if (mDrawItemId == R.id.nv_share) {
+                        startActivity(MainActivity.this, MineShareActivity.class);
+                    } else if (mDrawItemId == R.id.nv_collect) {
+                        startActivity(MainActivity.this, MineCollectActivity.class);
+                    } else if (mDrawItemId == R.id.nv_integral) {
+                        startActivity(MainActivity.this, MineIntegralActivity.class);
                     }
-                }else{
+                } else {
                     AgentActivity.startLoginActivity(MainActivity.this);
                 }
 
-                if(mDrawItemId == R.id.nv_history){
-                    startActivity(MainActivity.this,ReadHistoryActivity.class);
-                }else if(mDrawItemId == R.id.nv_setting){
-                    startActivity(MainActivity.this,SystemSettingActivity.class);
-                }else if(mDrawItemId == R.id.nv_about){
-                    startActivity(MainActivity.this,AboutActivity.class);
+                if (mDrawItemId == R.id.nv_history) {
+                    startActivity(MainActivity.this, ReadHistoryActivity.class);
+                } else if (mDrawItemId == R.id.nv_setting) {
+                    startActivity(MainActivity.this, SystemSettingActivity.class);
+                } else if (mDrawItemId == R.id.nv_about) {
+                    startActivity(MainActivity.this, AboutActivity.class);
                 }
             }
         });
@@ -129,6 +150,27 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         binding.vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), mFragments));
         binding.vpMain.addOnPageChangeListener(this);
         binding.vpMain.setOffscreenPageLimit(2);
+
+        tvName.setOnClickListener(v -> {
+            if (!Account.INSTANCE.isLogin()){
+                AgentActivity.startLoginActivity(MainActivity.this);
+            }
+        });
+
+        if (Account.INSTANCE.isLogin()) {
+            mMineIntegralPresenter.getMineIntegralInfo();
+        } else {
+            tvName.setText(R.string.nv_head_please_login);
+            String level = String.format(getString(R.string.nv_head_level), "-");
+            String rank = String.format(getString(R.string.nv_head_rank), "-");
+            tvLevel.setText(level);
+            tvRank.setText(rank);
+        }
+    }
+
+    @Override
+    protected IntegralContract.Presenter onPresenter() {
+        return mMineIntegralPresenter;
     }
 
     @Override
@@ -158,7 +200,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             binding.vpMain.setCurrentItem(1);
         } else if (mDrawItemId == R.id.bnv_ks) {
             binding.vpMain.setCurrentItem(2);
-        }else{
+        } else {
             binding.dlMain.close();
         }
         return true;
@@ -189,9 +231,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     }
 
-    public static void startMainActivity(Context context){
-        Intent intent = new Intent(context,MainActivity.class);
-        context.startActivity(intent);
+    @Override
+    public void onGetMineIntegralSuccess(@NotNull List<Integral> result) {
     }
 
+    @Override
+    public void onGetMineIntegralInfoSuccess(@NotNull IntegralInfo result) {
+        L.i(TAG, "onGetMineIntegralInfoSuccess:" + result);
+        tvName.setText(Account.INSTANCE.getUser().getNickname());
+        String level = String.format(getString(R.string.nv_head_level), String.valueOf(result.getLevel()));
+        String rank = String.format(getString(R.string.nv_head_rank), String.valueOf(result.getRank()));
+        tvLevel.setText(level);
+        tvRank.setText(rank);
+        String integralInfo = Common.INSTANCE.getGson().toJson(result);
+        SharePreferenceHelperKt.putSpValue(Account.INTEGRAL_INFO, integralInfo);
+    }
+
+    public static void startMainActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 }

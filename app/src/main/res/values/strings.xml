@@ -15,6 +15,10 @@
     <string name="nv_about">关于</string>
     <string name="nv_login">登录</string>
 
+    <string name="nv_head_level">等级: %1$s</string>
+    <string name="nv_head_rank">排名: %1$s</string>
+    <string name="nv_head_please_login">请登录</string>
+
     <string name="common_open">开启</string>
     <string name="common_close">关闭</string>
     <string name="common_collect">收藏</string>
@@ -24,5 +28,6 @@
 
     <string name="common_retry">点击重试</string>
     <string name="common_retry_login">请重新登录</string>
+
 
 </resources>

@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="0.1dp"
-    android:layout_marginBottom="0.1dp"
     android:orientation="vertical"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp">
@@ -13,7 +11,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="208dp">
-
 
         <ImageView
             android:id="@+id/iv_item_preview"

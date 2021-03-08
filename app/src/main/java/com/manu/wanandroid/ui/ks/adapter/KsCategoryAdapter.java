@@ -2,7 +2,6 @@ package com.manu.wanandroid.ui.ks.adapter;
 
 import android.graphics.Color;
 import android.util.SparseBooleanArray;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.manu.wanandroid.R;
@@ -17,7 +16,6 @@ import androidx.annotation.NonNull;
 /**
  * @Desc: KsCategoryAdapter
  * @Author: jzman
- * @Date: 2019/5/31 0031 13:46
  */
 public class KsCategoryAdapter extends SingleRecyclerViewAdapter<Knowledge, RecycleKsItemFirstCategoryBinding> {
     private final SparseBooleanArray mSelectSparseArray;

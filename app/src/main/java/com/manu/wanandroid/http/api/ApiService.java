@@ -2,6 +2,7 @@ package com.manu.wanandroid.http.api;
 
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.bean.Share;
@@ -139,14 +140,21 @@ public interface ApiService {
     Observable<BaseResultBean<Share<Article>>> mineShareArticle(@Path("pageIndex") int pageIndex);
 
     /**
-     * 我的积分
+     * 我的积分列表
      * https://www.wanandroid.com//lg/coin/list/1/json
      * @param pageIndex 页码，从1开始
-     * @return
+     * @return Observable<BaseResultBean<BasePageBean<Integral>>>
      */
     @GET("lg/coin/list/{pageIndex}/json")
     Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(@Path("pageIndex") int pageIndex);
 
+    /**
+     * 我的积分
+     * https://www.wanandroid.com/lg/coin/userinfo/json
+     * @return Observable<BaseResultBean<IntegralInfo>>
+     */
+    @GET("lg/coin/userinfo/json")
+    Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo();
 }
 
 

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.manu.wanandroid.app.MApplication;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.common.Account;
+import com.manu.wanandroid.common.Common;
 import com.manu.wanandroid.contract.account.LoginContract;
 import com.manu.wanandroid.http.api.ApiService;
 import com.manu.wanandroid.http.rx.BaseObserver;
@@ -15,6 +16,7 @@ import com.manu.wanandroid.utils.SharePreferenceHelperKt;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -45,14 +47,14 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     public void onNext(@NonNull User user) {
                         List<Cookie> cookies = MApplication.getApp()
                                 .getCookieJar()
-                                .loadForRequest(HttpUrl.parse(ApiService.BASE_URL + Account.LOGIN));
+                                .loadForRequest(Objects.requireNonNull(HttpUrl.parse(ApiService.BASE_URL + Account.LOGIN)));
                         for (Cookie cookie : cookies) {
                             if (cookie != null && cookie.expiresAt() != 0) {
                                 SharePreferenceHelperKt.putSpValue(Account.COOKIE_EXPIRES, cookie.expiresAt());
                                 break;
                             }
                         }
-                        String userJson = new Gson().toJson(user);
+                        String userJson = Common.INSTANCE.getGson().toJson(user);
                         SharePreferenceHelperKt.putSpValue(Account.USER_INFO, userJson);
                         mView.onLoginSuccess(user);
                     }

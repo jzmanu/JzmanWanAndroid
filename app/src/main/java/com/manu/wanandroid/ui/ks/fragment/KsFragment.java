@@ -78,13 +78,6 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
             fm.beginTransaction().add(R.id.fl_ks_right_container, mKsRightFragment).commit();
         }
 
-        binding.rvKsLeft.setLayoutManager(new LinearLayoutManager(mActivity));
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL);
-        Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.ks_category_rv_divider_bg);
-        assert drawable != null;
-        itemDecoration.setDrawable(drawable);
-//        rvKsLeft.addItemDecoration(itemDecoration);
-
         mSkeletonScreenLeft = Skeleton.bind(binding.rvKsLeft)
                 .adapter(mKsCategoryAdapter)
                 .load(R.layout.recycle_ks_item_first_category_skeleton)

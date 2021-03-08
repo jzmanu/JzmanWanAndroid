@@ -20,7 +20,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:scrimAnimationDuration="1100"
             app:scrimVisibleHeightTrigger="180dp"
-            app:title="@string/nv_integral"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Display3"
             app:titleEnabled="true">
 
             <ImageView
@@ -53,6 +53,15 @@
                     android:layout_gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </androidx.appcompat.widget.Toolbar>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/loading"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:indeterminateDrawable="@drawable/integral_progress"
+                android:layout_gravity="center"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

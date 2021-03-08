@@ -4,6 +4,7 @@ import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
@@ -89,5 +90,10 @@ public class HttpHelperImpl implements IHttpHelper {
     @Override
     public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
         return mApiService.mineIntegral(pageIndex);
+    }
+
+    @Override
+    public Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo() {
+        return mApiService.mineIntegralInfo();
     }
 }

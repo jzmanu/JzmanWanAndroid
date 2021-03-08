@@ -3,7 +3,6 @@ package com.manu.wanandroid.bean
 /**
  * @Desc:
  * @Author: jzman
- * @Date: 2021/1/17 17:29.
  */
 data class User(
     val admin: Boolean,

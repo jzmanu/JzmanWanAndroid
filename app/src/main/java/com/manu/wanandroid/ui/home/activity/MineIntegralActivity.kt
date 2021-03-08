@@ -4,13 +4,14 @@ import android.graphics.Color
 import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.core.widget.NestedScrollView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
 import com.manu.wanandroid.R
 import com.manu.wanandroid.app.MApplication
 import com.manu.wanandroid.base.activity.BaseLoadMvpActivity
 import com.manu.wanandroid.bean.Integral
+import com.manu.wanandroid.bean.IntegralInfo
+import com.manu.wanandroid.common.Account
 import com.manu.wanandroid.common.Config.skeletonDuration
 import com.manu.wanandroid.contract.home.IntegralContract
 import com.manu.wanandroid.databinding.ActivityMineIntegralBinding
@@ -21,7 +22,7 @@ import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 /**
@@ -29,7 +30,7 @@ import javax.inject.Inject
  * @Author: jzman
  */
 class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), IntegralContract.View,
-        OnRefreshLoadMoreListener, OnLoadMoreListener {
+        OnLoadMoreListener, CoroutineScope by MainScope() {
     @Inject
     lateinit var mMineIntegralAdapter: MineIntegralAdapter
 
@@ -72,9 +73,8 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onInitData() {
-        binding.normalView.setOnRefreshListener(this)
         binding.normalView.setOnLoadMoreListener(this)
-        binding.normalView.setDragRate(0.9f)
+        binding.normalView.setEnableRefresh(false)
 
         mSkeletonScreen = Skeleton.bind(binding.rvIntegral)
                 .adapter(mMineIntegralAdapter)
@@ -83,21 +83,23 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
                 .duration(skeletonDuration)
                 .show()
 
-        binding.normalView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            L.i(TAG,"normalView scrollY:$scrollY")
+        mMineIntegralPresenter.getMineIntegral(mPageIndex)
+
+        launch {
+            for (i in 1..Account.getIntegralInfo().coinCount) {
+                if (i % 4 == 0 ){
+                    delay(1)
+                    binding.ctlLayout.title = "$i"
+                }else{
+                    binding.ctlLayout.title = "$i"
+                }
+            }
         }
-
-        binding.normalView.autoRefresh()
-    }
-
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-        mPageIndex = 1
-        mMineIntegralPresenter.getMineIntegralArticle(mPageIndex)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mPageIndex++
-        mMineIntegralPresenter.getMineIntegralArticle(mPageIndex)
+        mMineIntegralPresenter.getMineIntegral(mPageIndex)
     }
 
     override fun onGetMineIntegralSuccess(result: List<Integral>) {
@@ -117,11 +119,19 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
         binding.normalView.finishLoadMore()
     }
 
+    override fun onGetMineIntegralInfoSuccess(result: IntegralInfo) {
+    }
+
     override fun onShowErrorMessage(message: String) {
         super.onShowErrorMessage(message)
         mSkeletonScreen.hide()
         binding.normalView.finishRefresh()
         binding.normalView.finishLoadMore()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 
     companion object {

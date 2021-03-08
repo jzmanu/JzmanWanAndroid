@@ -2,6 +2,7 @@ package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.rx.BasePageBean;
@@ -104,9 +105,15 @@ public interface IHttpHelper {
     Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex);
 
     /**
-     * 我的积分
+     * 我的积分列表
      * @param pageIndex 页码，从1开始
      * @return Observable<BaseResultBean<BasePageBean<Integral>>>
      */
     Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex);
+
+    /**
+     * 我的积分信息
+     * @return Observable<BaseResultBean<IntegralInfo>>
+     */
+    Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo();
 }

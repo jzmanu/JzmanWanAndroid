@@ -1,9 +1,7 @@
 package com.manu.wanandroid.ui.ks.adapter;
 
-import android.app.LauncherActivity;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 

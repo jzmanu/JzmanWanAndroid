@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.project.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +28,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,6 +77,12 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
         mCid = bundle.getInt(ARG_PARAM_TAB_ID);
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.rv_divider_bg);
+        assert drawable != null;
+        itemDecoration.setDrawable(drawable);
+        binding.rvProject.addItemDecoration(itemDecoration);
 
         mSkeletonScreen = Skeleton.bind(binding.rvProject)
                 .adapter(mProjectArticleAdapter)

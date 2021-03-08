@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.ks.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -26,13 +27,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @Desc: KsRightChildFragment
  * @Author: jzman
- * @Date: 2019/5/9 0009 10:55
  */
 public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.CategoryArticlePresenter> implements KsContract.CategoryArticleView,
         OnRefreshLoadMoreListener {
@@ -90,6 +91,12 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
 
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.rv_divider_bg);
+        assert drawable != null;
+        itemDecoration.setDrawable(drawable);
+        binding.rvKsRight.addItemDecoration(itemDecoration);
 
         mSkeletonScreen = Skeleton.bind(binding.rvKsRight)
                 .adapter(mKsCategoryArticleAdapter)

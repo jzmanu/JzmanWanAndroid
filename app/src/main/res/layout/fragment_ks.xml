@@ -26,6 +26,7 @@
                 android:layout_width="96dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recycle_ks_item_first_category" />
 
             <View

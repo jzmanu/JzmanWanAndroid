@@ -2,6 +2,7 @@ package com.manu.wanandroid.model;
 
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.bean.Integral;
+import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResultBean;
@@ -91,5 +92,10 @@ public class DataManager implements IHttpHelper {
     @Override
     public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
         return mHttpHelper.mineIntegral(pageIndex);
+    }
+
+    @Override
+    public Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo() {
+        return mHttpHelper.mineIntegralInfo();
     }
 }

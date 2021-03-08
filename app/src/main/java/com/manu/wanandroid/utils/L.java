@@ -7,7 +7,6 @@ import com.manu.wanandroid.BuildConfig;
 /**
  * @Desc: L
  * @Author: jzman
- * @Date: 2019/5/9 0009 9:56
  */
 public class L {
 

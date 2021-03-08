@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.home.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.ethanhua.skeleton.Skeleton;
@@ -29,7 +30,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -81,6 +83,12 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
         mHomeArticleAdapter.setOnBannerListener(this);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(mActivity, R.drawable.rv_divider_bg);
+        assert drawable != null;
+        itemDecoration.setDrawable(drawable);
+        binding.rvHome.addItemDecoration(itemDecoration);
 
         mSkeletonScreen = Skeleton.bind(binding.rvHome)
                 .adapter(mHomeArticleAdapter)
