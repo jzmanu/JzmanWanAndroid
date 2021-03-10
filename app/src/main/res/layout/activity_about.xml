@@ -8,6 +8,18 @@
 
     <include
         android:id="@+id/toolBarInclude"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <RelativeLayout
+        android:id="@+id/aboutContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarInclude" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

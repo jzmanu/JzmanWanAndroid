@@ -10,4 +10,14 @@
         android:id="@+id/toolBarInclude"
         layout="@layout/toolbar" />
 
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarInclude" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
