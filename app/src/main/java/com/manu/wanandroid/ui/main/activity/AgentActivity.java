@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.manu.wanandroid.app.MApplication;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.base.activity.BaseMvpFlutterActivity;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.contract.account.LoginContract;
@@ -16,7 +16,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.android.FlutterActivityLaunchConfigs;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -36,7 +40,7 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
 
     @Override
     protected void onInject() {
-        MApplication mApplication = (MApplication) getApplication();
+        App mApplication = (App) getApplication();
         DaggerAgentActivityComponent.builder()
                 .appComponent(mApplication.getAppComponent())
                 .build()
@@ -49,12 +53,12 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
         L.i(TAG, "configureFlutterEngine");
         new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL)
                 .setMethodCallHandler((methodCall, result) -> {
-                    if("login".equals(methodCall.method)){
-                        if (mLoginPresenter != null){
-                            mLoginPresenter.login(methodCall.argument("username"),methodCall.argument("password"));
+                    if ("login".equals(methodCall.method)) {
+                        if (mLoginPresenter != null) {
+                            mLoginPresenter.login(methodCall.argument("username"), methodCall.argument("password"));
                         }
                         result.success("success");
-                    }else {
+                    } else {
                         result.notImplemented();
                     }
                 });
@@ -74,20 +78,26 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
     @Override
     public void onShowErrorMessage(String message) {
         super.onShowErrorMessage(message);
-        L.i(TAG, "onShowErrorMessage > message:"+message);
+        L.i(TAG, "onShowErrorMessage > message:" + message);
         toast(message);
     }
 
     /**
      * 跳转到登陆页面
+     *
      * @param activity 上下文
      */
-    public static void startLoginActivity(Activity activity) {
+    public static void startLoginActivity(AppCompatActivity activity) {
         Intent intent = AgentActivity
                 .withNewEngine()
                 .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
                 .build(activity);
         activity.startActivity(intent);
+
+        activity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    L.i(TAG,"registerForActivityResult");
+                }).launch(intent);
     }
 
     public static Intent createDefaultIntent(@NonNull Context launchContext) {

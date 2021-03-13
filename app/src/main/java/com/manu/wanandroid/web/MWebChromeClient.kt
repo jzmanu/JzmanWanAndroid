@@ -7,6 +7,7 @@ import android.webkit.WebView
 import androidx.core.widget.ContentLoadingProgressBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.manu.wanandroid.utils.L
+import com.tencent.bugly.crashreport.CrashReport
 
 private const val TAG = "MWebChromeClient"
 
@@ -22,6 +23,7 @@ class MWebChromeClient(var progressBar: ContentLoadingProgressBar, var fab: Floa
     override fun onProgressChanged(view: WebView?, newProgress: Int) {
         super.onProgressChanged(view, newProgress)
         L.i(TAG, "onProgressChanged > url:$newProgress")
+        CrashReport.setJavascriptMonitor(view, true);
         progressBar.progress = newProgress
         fab.alpha = newProgress / 100f;
         if (newProgress == 100) progressBar.hide()

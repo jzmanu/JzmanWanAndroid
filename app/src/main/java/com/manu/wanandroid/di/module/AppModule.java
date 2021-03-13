@@ -1,7 +1,7 @@
 package com.manu.wanandroid.di.module;
 
 import com.manu.wanandroid.BuildConfig;
-import com.manu.wanandroid.app.MApplication;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.http.api.ApiService;
 
 import java.util.concurrent.TimeUnit;
@@ -35,7 +35,7 @@ public class AppModule {
     @Singleton
     @Provides
     CookieJar providerCookieJar(){
-        return MApplication.getApp().getCookieJar();
+        return App.getApp().getCookieJar();
     }
 
     @Singleton

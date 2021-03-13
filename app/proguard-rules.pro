@@ -20,5 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# okhttp
 -keep class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# bugly
+-dontwarn com.tencent.bugly.**
+-keep  class com.tencent.bugly.*
+-keep class android.support.*

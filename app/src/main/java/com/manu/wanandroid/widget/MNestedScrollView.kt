@@ -23,7 +23,6 @@ class MNestedScrollView @JvmOverloads constructor(
     private var mInterceptLastY = 0
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        val x = ev.x.toInt()
         val y = ev.y.toInt()
         L.i(tag,"action:${ev.action},y:$y,mInterceptLastY:$mInterceptLastY, mTopY:$mTopY ，canScroll:${canScrollVertically(-1)}")
         when(ev.action){

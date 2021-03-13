@@ -1,7 +1,6 @@
 package com.manu.wanandroid.presenter.account;
 
-import com.google.gson.Gson;
-import com.manu.wanandroid.app.MApplication;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.Common;
@@ -45,7 +44,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .subscribeWith(new BaseObserver<User>(mView) {
                     @Override
                     public void onNext(@NonNull User user) {
-                        List<Cookie> cookies = MApplication.getApp()
+                        List<Cookie> cookies = App.getApp()
                                 .getCookieJar()
                                 .loadForRequest(Objects.requireNonNull(HttpUrl.parse(ApiService.BASE_URL + Account.LOGIN)));
                         for (Cookie cookie : cookies) {
@@ -57,6 +56,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         String userJson = Common.INSTANCE.getGson().toJson(user);
                         SharePreferenceHelperKt.putSpValue(Account.USER_INFO, userJson);
                         mView.onLoginSuccess(user);
+                        SharePreferenceHelperKt.putSpValue("account", username);
+                        SharePreferenceHelperKt.putSpValue("password", password);
                     }
                 }));
     }

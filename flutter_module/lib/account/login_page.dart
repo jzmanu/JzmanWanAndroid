@@ -5,6 +5,7 @@ import 'package:flutter_module/common/widget/common_widget.dart';
 import 'package:flutter_module/main.dart';
 import 'package:flutter_module/model/account_model.dart';
 import 'package:flutter_module/util/log_util.dart';
+import 'package:flutter_module/util/sp_util.dart';
 import 'package:toast/toast.dart';
 
 String tag = "LoginWidget";
@@ -26,6 +27,8 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
   AccountData _accountData;
   AccountModel _accountModel;
 
+  String _account, _password;
+
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   @override
@@ -35,6 +38,13 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
     _platform = const MethodChannel('com.manu.startMainActivity');
     _accountData = AccountData();
     _accountModel = AccountModel(loginListener: this);
+
+    Sp.getString("account",(data){
+      _account = data;
+    });
+    Sp.getString("password",(data){
+      _password = data;
+    });
   }
 
   @override
@@ -42,6 +52,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
     Widget formColumn = Column(
       children: <Widget>[
         TextFormField(
+          initialValue: _account,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
@@ -67,6 +78,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
           margin: const EdgeInsets.only(bottom: 16, top: 16),
         ),
         TextFormField(
+          initialValue: _password,
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,

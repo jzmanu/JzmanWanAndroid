@@ -3,7 +3,7 @@
 package com.manu.wanandroid.utils
 
 import android.content.Context
-import com.manu.wanandroid.app.MApplication
+import com.manu.wanandroid.app.App
 
 /**
  * 备注：获取值得时候，默认值得类型决定了要使用哪种方式获取
@@ -13,7 +13,7 @@ import com.manu.wanandroid.app.MApplication
  */
 
 private const val SHARED_PREFERENCES_NAME = "FlutterSharedPreferences"
-private val sp = MApplication.getApp().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+private val sp = App.getApp().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 private val edit = sp.edit();
 
 fun <T> getSpValue(

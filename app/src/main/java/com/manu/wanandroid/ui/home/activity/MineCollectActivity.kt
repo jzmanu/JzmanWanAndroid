@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
 import com.manu.wanandroid.R
-import com.manu.wanandroid.app.MApplication
+import com.manu.wanandroid.app.App
 import com.manu.wanandroid.base.activity.BaseLoadMvpActivity
 import com.manu.wanandroid.base.adapter.OnRecycleItemClickListener
 import com.manu.wanandroid.bean.Collect
@@ -44,7 +44,7 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
     }
 
     override fun onInject() {
-        val mMApplication = application as MApplication
+        val mMApplication = application as App
         DaggerMineCollectActivityComponent.builder()
                 .appComponent(mMApplication.appComponent)
                 .build()

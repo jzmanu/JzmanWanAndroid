@@ -1,6 +1,6 @@
 package com.manu.wanandroid.di.component;
 
-import com.manu.wanandroid.app.MApplication;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.di.module.AppModule;
 import com.manu.wanandroid.model.DataManager;
 
@@ -17,7 +17,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
-    void injectApp(MApplication application);
+    void injectApp(App application);
     // for dependencies component use.
     DataManager getDataManager();
 }

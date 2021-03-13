@@ -1,16 +1,14 @@
 package com.manu.wanandroid.widget
 
 import android.animation.Animator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.manu.wanandroid.app.MApplication
+import com.manu.wanandroid.app.App
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.Util
 
@@ -37,7 +35,7 @@ class FabHideBehavior @JvmOverloads constructor(
 
         if (dyConsumed > 3 && !isAnimateStart) {
             // hide
-            animate(child, Util.dpToPx(MApplication.getApp().resources, 106f), 0.2f, 0.1f)
+            animate(child, Util.dpToPx(App.getApp().resources, 106f), 0.2f, 0.1f)
         } else if (dyConsumed < -3 && !isAnimateStart) {
             // show
             animate(child, 0f, 1f, 1f)

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.manu.wanandroid.widget.MRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTransparentHalf">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/colorWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorPrimary"
+                    android:contentDescription="@string/app_name"
+                    android:tag="beta_upgrade_banner" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/upgrade_new_version"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerInParent="true"
+                    tools:text="标题" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:tag="beta_title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:tag="beta_upgrade_info"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorTextTitle"
+                tools:text="版本信息" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:tag="beta_upgrade_feature"
+                android:textColor="@color/colorTextTitle"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                tools:text="主要更新" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:tag="beta_confirm_button"
+                android:text="@string/upgrade_now"
+                android:background="@drawable/upgrade_button_bg"
+                android:textColor="@color/colorWhite"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/upgradeCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/upgrade_cancel"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="beta_cancel_button"/>
+</com.manu.wanandroid.widget.MRelativeLayout>

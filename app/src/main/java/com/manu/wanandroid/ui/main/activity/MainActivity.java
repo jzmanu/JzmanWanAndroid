@@ -10,9 +10,7 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.manu.wanandroid.R;
-import com.manu.wanandroid.app.MApplication;
-import com.manu.wanandroid.base.activity.BaseActivity;
-import com.manu.wanandroid.base.activity.BaseLoadMvpActivity;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
 import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
@@ -46,6 +44,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -87,7 +86,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
 
     @Override
     public void onInject() {
-        MApplication mApplication = (MApplication) getApplication();
+        App mApplication = (App) getApplication();
         mMainActivityComponent = DaggerMainActivityComponent.builder()
                 .appComponent(mApplication.getAppComponent())
                 .build();
@@ -124,7 +123,10 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
                         startActivity(MainActivity.this, MineIntegralActivity.class);
                     }
                 } else {
-                    AgentActivity.startLoginActivity(MainActivity.this);
+                    if (mDrawItemId == R.id.nv_share || mDrawItemId == R.id.nv_collect ||
+                            mDrawItemId == R.id.nv_integral){
+                        AgentActivity.startLoginActivity(MainActivity.this);
+                    }
                 }
 
                 if (mDrawItemId == R.id.nv_history) {

@@ -7,7 +7,7 @@ import android.webkit.WebSettings;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.manu.wanandroid.R;
-import com.manu.wanandroid.app.MApplication;
+import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.common.Account;
@@ -58,9 +58,9 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     @Override
     public void onInject() {
-        MApplication mMApplication = (MApplication) getApplication();
+        App mApp = (App) getApplication();
         DaggerArticleDetailActivityComponent.builder()
-                .appComponent(mMApplication.getAppComponent())
+                .appComponent(mApp.getAppComponent())
                 .build()
                 .injectArticleDetailActivity(this);
     }

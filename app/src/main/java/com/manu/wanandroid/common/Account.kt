@@ -17,7 +17,7 @@ object Account {
     const val COOKIE_EXPIRES = "flutter.expires"
     /** 用户信息 */
     const val USER_INFO = "user_info"
-
+    /** 积分等级信息 */
     const val INTEGRAL_INFO = "integral_info"
 
     /**

@@ -5,13 +5,17 @@ import android.annotation.SuppressLint;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.manu.wanandroid.BuildConfig;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
 import com.manu.wanandroid.di.component.DaggerAppComponent;
+import com.manu.wanandroid.utils.Upgrade;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 
 import io.flutter.app.FlutterApplication;
@@ -21,15 +25,15 @@ import io.flutter.app.FlutterApplication;
  * @Author: jzman
  * @Date: 2019/5/7 0007 16:38
  */
-public class MApplication extends FlutterApplication {
+public class App extends FlutterApplication {
 
-    private static final String TAG = MApplication.class.getSimpleName();
+    private static final String TAG = App.class.getSimpleName();
     @SuppressLint("StaticFieldLeak")
-    private static MApplication app;
+    private static App app;
     private AppComponent mAppComponent;
     private PersistentCookieJar mCookieJar;
 
-    public static MApplication getApp() {
+    public static App getApp() {
         return app;
     }
 
@@ -45,6 +49,9 @@ public class MApplication extends FlutterApplication {
         mAppComponent.injectApp(this);
         mCookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this));
         app = this;
+
+        Upgrade.INSTANCE.initUpgradeConfig();
+        Bugly.init(getApplicationContext(), "e545211e2c", BuildConfig.DEBUG);
     }
 
     public AppComponent getAppComponent() {
@@ -64,5 +71,4 @@ public class MApplication extends FlutterApplication {
             return new ClassicsFooter(context).setDrawableSize(20);
         });
     }
-
 }

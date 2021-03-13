@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'bugly'
+
+bugly {
+    appId = 'e545211e2c'
+    appKey = '40f4f7af-05f6-44fc-90b0-071da346253d'
+    debug = true
+}
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -13,8 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            // Filter for architectures supported by Flutter.
-//            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+            abiFilters "armeabi-v7a"
         }
     }
     buildTypes {
@@ -22,8 +28,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
-    // Butterknife requires Java 8.
+
     // Flutter Module requires Java 8.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -40,6 +50,10 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
     }
 }
 dependencies {
@@ -65,11 +79,6 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.22.1'
     kapt 'com.google.dagger:dagger-compiler:2.22.1'
 
-    // dagger-android
-//    compile 'com.google.dagger:dagger-android:2.22.1'
-//    compile 'com.google.dagger:dagger-android-support:2.22.1' // if you use the support libraries
-//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.22.1'
-
     // Banner
     implementation 'com.youth.banner:banner:1.4.10'
     // 圆形头像
@@ -94,6 +103,10 @@ dependencies {
     implementation 'com.github.medyo:android-about-page:1.3.1'
     // util
     implementation 'com.blankj:utilcodex:1.30.6'
+
+    // bugly
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.5.0'
+    implementation 'com.tencent.bugly:nativecrashreport:3.8.0'
 
     // flutter login module
     implementation project(path: ':flutter')
