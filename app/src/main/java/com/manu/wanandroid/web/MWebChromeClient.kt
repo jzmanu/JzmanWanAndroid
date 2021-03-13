@@ -1,7 +1,5 @@
 package com.manu.wanandroid.web
 
-import android.annotation.SuppressLint
-import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.core.widget.ContentLoadingProgressBar
@@ -23,9 +21,9 @@ class MWebChromeClient(var progressBar: ContentLoadingProgressBar, var fab: Floa
     override fun onProgressChanged(view: WebView?, newProgress: Int) {
         super.onProgressChanged(view, newProgress)
         L.i(TAG, "onProgressChanged > url:$newProgress")
-        CrashReport.setJavascriptMonitor(view, true);
+        CrashReport.setJavascriptMonitor(view, true)
         progressBar.progress = newProgress
-        fab.alpha = newProgress / 100f;
+        fab.alpha = newProgress / 100f
         if (newProgress == 100) progressBar.hide()
     }
 }

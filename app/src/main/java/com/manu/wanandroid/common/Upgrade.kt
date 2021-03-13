@@ -1,12 +1,11 @@
-package com.manu.wanandroid.utils
+package com.manu.wanandroid.common
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import com.manu.wanandroid.R
+import com.manu.wanandroid.utils.L
 import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.beta.UpgradeInfo
 import com.tencent.bugly.beta.ui.BetaActivity
@@ -40,7 +39,7 @@ object Upgrade {
          */
         Beta.enableNotification = false
 
-        Beta.showInterruptedStrategy = true;
+        Beta.showInterruptedStrategy = true
 
         Beta.upgradeDialogLifecycleListener = object : UILifecycleListener<UpgradeInfo?> {
             override fun onCreate(context: Context?, view: View?, upgradeInfo: UpgradeInfo?) {
@@ -49,7 +48,7 @@ object Upgrade {
                 if (context is BetaActivity) {
                     val betaActivity:BetaActivity = context
                     val window = betaActivity.window
-                    window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
                 }
             }
 

@@ -2,6 +2,7 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 
@@ -27,6 +28,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -43,11 +47,14 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     public static final String PARAM_COLLECT = "param_collect";
     public static final String PARAM_ONLY_BROWSER = "param_only_browser";
 
+    public static final String ARTICLE_REFRESH = "article_refresh";
+
     @Inject
     MineCollectPresenter mCollectPresenter;
 
     private int mId;
-    private boolean isCollect;
+    private static boolean isCollect;
+    private static boolean isRefresh;
     private ActivityArticleDetailBinding binding;
 
     @Override
@@ -84,6 +91,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
         if (intent != null) {
             mId = intent.getIntExtra(PARAM_ID, -1);
             isCollect = intent.getBooleanExtra(PARAM_COLLECT, false);
+            isRefresh = isCollect;
             boolean isBrowser = intent.getBooleanExtra(PARAM_ONLY_BROWSER, false);
             binding.fab.setActivated(isCollect);
             if (isBrowser) binding.fab.hide();
@@ -99,19 +107,26 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             binding.webView.setWebChromeClient(new MWebChromeClient(binding.loadingProgressBar, binding.fab));
             binding.webView.loadUrl(mUrl);
 
-            binding.webView.setOnDoubleClickListener(v -> finish());
+            binding.webView.setOnDoubleClickListener(v -> {
+                setResult();
+                finish();
+            });
             binding.fab.setOnClickListener(v -> {
                 if (Account.INSTANCE.isLogin()) {
-                    if (isCollect){
-                        mCollectPresenter.unCollectArticle(String.valueOf(mId));
-                    }else {
-                        mCollectPresenter.collectArticle(String.valueOf(mId));
-                    }
+                    collectOrUnCollect();
                 } else {
-                    AgentActivity.startLoginActivity(this);
+                    AgentActivity.startLoginActivityForResult(this, result -> {
+                        collectOrUnCollect();
+                    });
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) setResult();
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -143,19 +158,44 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     }
 
     public static void startArticleDetailActivity(AppCompatActivity activity, int id, String url, boolean collect) {
-        startArticleDetailActivity(activity,id,url,collect,false);
+        startArticleDetailActivity(activity, id, url, collect, false, null);
+    }
+
+    public static void startArticleDetailActivityForResult(
+            AppCompatActivity activity, int id, String url,
+            boolean collect, ActivityResultCallback<ActivityResult> callback) {
+        startArticleDetailActivity(activity, id, url, collect, false, callback);
     }
 
     public static void startArticleDetailActivityOnlyBrowser(AppCompatActivity activity, int id, String url) {
-        startArticleDetailActivity(activity,id,url,false,true);
+        startArticleDetailActivity(activity, id, url, false, true, null);
     }
 
-    public static void startArticleDetailActivity(AppCompatActivity activity, int id, String url, boolean collect, boolean onlyBrowser) {
+    public static void startArticleDetailActivity(
+            AppCompatActivity activity, int id, String url,
+            boolean collect, boolean onlyBrowser, ActivityResultCallback<ActivityResult> callback) {
         Intent intent = new Intent(activity, ArticleDetailActivity.class);
         intent.putExtra(PARAM_ID, id);
         intent.putExtra(PARAM_URL, url);
         intent.putExtra(PARAM_COLLECT, collect);
         intent.putExtra(PARAM_ONLY_BROWSER, onlyBrowser);
-        activity.startActivity(intent);
+        activity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), callback).launch(intent);
+    }
+
+    /**
+     * 收藏还是取消收藏
+     */
+    private void collectOrUnCollect() {
+        if (isCollect) {
+            mCollectPresenter.unCollectArticle(String.valueOf(mId));
+        } else {
+            mCollectPresenter.collectArticle(String.valueOf(mId));
+        }
+    }
+
+    private void setResult() {
+        Intent intent = new Intent();
+        intent.putExtra(ARTICLE_REFRESH, isRefresh == !isCollect);
+        setResult(RESULT_OK,intent);
     }
 }

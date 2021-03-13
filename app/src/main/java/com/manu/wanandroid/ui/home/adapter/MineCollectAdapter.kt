@@ -21,10 +21,11 @@ class MineCollectAdapter : SingleRecyclerViewAdapter<Collect, RecycleHomeItemArt
         return RecycleHomeItemArticleBinding.inflate(mLayoutInflater, viewGroup, false)
     }
 
-    override fun onBindData(holder: BindingViewHolder<RecycleHomeItemArticleBinding>, position: Int, bean: Collect?, viewType: Int) {
-        holder.binding.tvItemAuthor.text = bean?.author
-        holder.binding.tvItemTitle.text = bean?.title
-        holder.binding.tvItemCategory.text = bean?.chapterName
-        holder.binding.tvItemDate.text = bean?.niceDate
+    override fun onBindData(holder: BindingViewHolder<RecycleHomeItemArticleBinding>, position: Int, bean: Collect, viewType: Int) {
+        val author = if (bean.author.isEmpty()) "匿名" else bean.author
+        holder.binding.tvItemAuthor.text = author
+        holder.binding.tvItemTitle.text = bean.title
+        holder.binding.tvItemCategory.text = bean.chapterName
+        holder.binding.tvItemDate.text = bean.niceDate
     }
 }

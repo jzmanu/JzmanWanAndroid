@@ -43,7 +43,7 @@ class AboutActivity : BaseActivity() {
                 .addWebsite("https://github.com/jzmanu/JzmanWanAndroid/issues","意见反馈",R.drawable.about_suggest)
                 .addWebsite("https://www.wanandroid.com/","致谢")
                 .addItem(Element("微信搜索「躬行之」公众号交流学习",R.drawable.about_zan),false)
-                .create();
+                .create()
         binding.aboutContainer.addView(aboutPage)
     }
 }

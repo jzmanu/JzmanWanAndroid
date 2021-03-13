@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".common.SplashActivity">
+    tools:context=".ui.main.activity.SplashActivity">
 
     <FrameLayout
         android:id="@+id/ff_container"

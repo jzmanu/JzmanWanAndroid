@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".common.SplashActivity"
+            android:name=".ui.main.activity.SplashActivity"
             android:theme="@style/AppTheme.Main">
 
             <!-- <intent-filter> -->

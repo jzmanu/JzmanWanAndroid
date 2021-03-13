@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.project.fragment;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,6 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -95,7 +95,15 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 Project bean = mProjectArticleAdapter.getItem(holder.getAdapterPosition());
-                ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
+                ArticleDetailActivity.startArticleDetailActivityForResult(
+                        mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
+                        result -> {
+                            boolean isRefresh = result.getData().getBooleanExtra(
+                                    ArticleDetailActivity.ARTICLE_REFRESH, false);
+                            if (result.getResultCode() == Activity.RESULT_OK && isRefresh) {
+                                binding.normalView.autoRefresh();
+                            }
+                        });
             }
         });
         binding.normalView.autoRefresh();

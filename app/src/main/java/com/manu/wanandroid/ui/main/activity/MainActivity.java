@@ -17,7 +17,6 @@ import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.common.Account;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.common.Common;
-import com.manu.wanandroid.common.SplashActivity;
 import com.manu.wanandroid.contract.home.IntegralContract;
 import com.manu.wanandroid.databinding.ActivityMainBinding;
 import com.manu.wanandroid.di.component.activity.DaggerMainActivityComponent;
@@ -44,7 +43,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -125,7 +123,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
                 } else {
                     if (mDrawItemId == R.id.nv_share || mDrawItemId == R.id.nv_collect ||
                             mDrawItemId == R.id.nv_integral){
-                        AgentActivity.startLoginActivity(MainActivity.this);
+                        startLoginActivityForResult();
                     }
                 }
 
@@ -155,7 +153,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
 
         tvName.setOnClickListener(v -> {
             if (!Account.INSTANCE.isLogin()){
-                AgentActivity.startLoginActivity(MainActivity.this);
+                startLoginActivityForResult();
             }
         });
 
@@ -252,5 +250,11 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
     public static void startMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+    }
+
+    private void startLoginActivityForResult(){
+        AgentActivity.startLoginActivityForResult(this, result -> {
+            mMineIntegralPresenter.getMineIntegralInfo();
+        });
     }
 }

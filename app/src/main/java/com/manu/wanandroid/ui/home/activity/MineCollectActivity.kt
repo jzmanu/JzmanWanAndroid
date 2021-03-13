@@ -1,6 +1,8 @@
 package com.manu.wanandroid.ui.home.activity
 
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
@@ -71,10 +73,24 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
                 .color(R.color.colorAnimator)
                 .duration(Config.skeletonDuration)
                 .show()
+
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val drawable = ContextCompat.getDrawable(this, R.drawable.rv_divider_bg)!!
+        itemDecoration.setDrawable(drawable)
+        binding.rvCollect.addItemDecoration(itemDecoration)
+
         binding.rvCollect.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvCollect) {
             override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
                 val bean = mCollectArticleAdapter.getItem(holder.adapterPosition)
-                ArticleDetailActivity.startArticleDetailActivity(this@MineCollectActivity, bean.id, bean.link, true)
+                ArticleDetailActivity.startArticleDetailActivityForResult(
+                        this@MineCollectActivity, bean.originId, bean.link, true) {
+                    val intent = it.data ?: return@startArticleDetailActivityForResult
+                    val isRefresh: Boolean = intent.getBooleanExtra(
+                            ArticleDetailActivity.ARTICLE_REFRESH, false)
+                    if (it.resultCode == RESULT_OK && isRefresh) {
+                        binding.normalView.autoRefresh()
+                    }
+                }
             }
         })
         binding.normalView.autoRefresh()

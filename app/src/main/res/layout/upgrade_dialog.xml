@@ -73,9 +73,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:layout_marginBottom="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:tag="beta_confirm_button"
                 android:text="@string/upgrade_now"
                 android:background="@drawable/upgrade_button_bg"
@@ -89,7 +89,7 @@
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/upgrade_cancel"/>
 
     <TextView

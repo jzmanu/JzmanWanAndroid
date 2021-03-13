@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.ks.fragment;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -109,10 +110,17 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
             @Override
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 Article bean = mKsCategoryArticleAdapter.getItem(holder.getAdapterPosition());
-                ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
+                ArticleDetailActivity.startArticleDetailActivityForResult(
+                        mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
+                        result -> {
+                            boolean isRefresh = result.getData().getBooleanExtra(
+                                    ArticleDetailActivity.ARTICLE_REFRESH, false);
+                            if (result.getResultCode() == Activity.RESULT_OK && isRefresh) {
+                                binding.normalView.autoRefresh();
+                            }
+                        });
             }
         });
-
         binding.normalView.autoRefresh();
     }
 

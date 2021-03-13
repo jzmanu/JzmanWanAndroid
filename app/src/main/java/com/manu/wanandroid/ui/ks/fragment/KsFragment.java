@@ -1,6 +1,5 @@
 package com.manu.wanandroid.ui.ks.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.ethanhua.skeleton.Skeleton;
@@ -22,10 +21,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

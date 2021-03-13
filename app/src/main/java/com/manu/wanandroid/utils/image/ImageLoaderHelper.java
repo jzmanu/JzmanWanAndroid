@@ -3,8 +3,6 @@ package com.manu.wanandroid.utils.image;
 import android.content.Context;
 import android.widget.ImageView;
 
-import androidx.fragment.app.Fragment;
-
 /**
  * @Desc: ImageLoaderHelper
  * @Author: jzman

@@ -1,6 +1,8 @@
 package com.manu.wanandroid.ui.home.activity
 
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
@@ -71,6 +73,12 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
                 .color(R.color.colorAnimator)
                 .duration(Config.skeletonDuration)
                 .show()
+
+        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val drawable = ContextCompat.getDrawable(this, R.drawable.rv_divider_bg)!!
+        itemDecoration.setDrawable(drawable)
+        binding.rvShare.addItemDecoration(itemDecoration)
+
         binding.rvShare.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvShare) {
             override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
                 val bean = mCollectArticleAdapter.getItem(holder.adapterPosition)

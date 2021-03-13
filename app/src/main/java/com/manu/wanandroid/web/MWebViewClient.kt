@@ -1,16 +1,12 @@
 package com.manu.wanandroid.web
 
 import android.net.Uri
-import android.os.Handler
-import android.os.Looper
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.manu.wanandroid.nice.NiceArticleFactory
 import com.manu.wanandroid.utils.L
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import java.io.ByteArrayInputStream
 
 private const val TAG = "MWebViewClient"

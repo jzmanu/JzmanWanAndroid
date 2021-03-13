@@ -10,12 +10,11 @@ import com.manu.wanandroid.R;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.di.component.AppComponent;
 import com.manu.wanandroid.di.component.DaggerAppComponent;
-import com.manu.wanandroid.utils.Upgrade;
+import com.manu.wanandroid.common.Upgrade;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 
 
 import io.flutter.app.FlutterApplication;

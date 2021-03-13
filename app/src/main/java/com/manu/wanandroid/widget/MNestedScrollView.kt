@@ -6,8 +6,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import com.manu.wanandroid.utils.L
-import com.manu.wanandroid.utils.Util
-import kotlin.properties.Delegates
 
 /**
  * @Desc: 待完善
@@ -65,8 +63,8 @@ class MNestedScrollView @JvmOverloads constructor(
 
     override fun onScrollChanged(x: Int, y: Int, oldx: Int, oldy: Int) {
         super.onScrollChanged(x, y, oldx, oldy)
-        val yyy = getY();
+        val yyy = getY()
         L.i(tag,"x:$x, y:$y, oldX:$oldx, oldy:$oldy, yyy:$yyy")
-        mTopY = y;
+        mTopY = y
     }
 }

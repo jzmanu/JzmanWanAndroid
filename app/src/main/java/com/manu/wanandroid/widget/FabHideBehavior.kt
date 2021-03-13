@@ -22,7 +22,7 @@ class FabHideBehavior @JvmOverloads constructor(
         context: Context? = null, attrs: AttributeSet? = null
 ) : FloatingActionButton.Behavior(context, attrs) {
     private val tag = "FabHideBehavior"
-    private var isAnimateStart = false;
+    private var isAnimateStart = false
 
     override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, directTargetChild: View, target: View, axes: Int, type: Int): Boolean {
         L.i(tag, "axes:$axes , type:$type")

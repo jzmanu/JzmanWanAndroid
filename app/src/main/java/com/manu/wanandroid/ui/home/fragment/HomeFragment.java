@@ -1,5 +1,6 @@
 package com.manu.wanandroid.ui.home.fragment;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -102,7 +103,15 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 if (position == 0) return;
                 Article bean = mHomeArticleAdapter.getItem(position);
-                ArticleDetailActivity.startArticleDetailActivity(mActivity, bean.getId(), bean.getLink(), bean.isCollect());
+                ArticleDetailActivity.startArticleDetailActivityForResult(
+                        mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
+                        result -> {
+                            boolean isRefresh = result.getData().getBooleanExtra(
+                                    ArticleDetailActivity.ARTICLE_REFRESH, false);
+                            if (result.getResultCode() == Activity.RESULT_OK && isRefresh) {
+                                binding.normalView.autoRefresh();
+                            }
+                        });
             }
         });
 

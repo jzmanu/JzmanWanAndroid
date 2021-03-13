@@ -1,7 +1,6 @@
 package com.manu.wanandroid.nice
 
 import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
 
 /**
  * @Desc: 文章拦截器

@@ -1,6 +1,5 @@
 package com.manu.wanandroid.ui.main.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -93,11 +92,16 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
                 .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
                 .build(activity);
         activity.startActivity(intent);
+    }
 
-        activity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    L.i(TAG,"registerForActivityResult");
-                }).launch(intent);
+    public static void startLoginActivityForResult(AppCompatActivity activity,
+                                                   ActivityResultCallback<ActivityResult> callback) {
+        Intent intent = AgentActivity
+                .withNewEngine()
+                .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
+                .build(activity);
+        activity.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), callback).launch(intent);
     }
 
     public static Intent createDefaultIntent(@NonNull Context launchContext) {

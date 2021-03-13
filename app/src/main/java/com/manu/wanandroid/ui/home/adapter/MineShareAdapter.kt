@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.manu.wanandroid.R
 import com.manu.wanandroid.base.adapter.SingleRecyclerViewAdapter
 import com.manu.wanandroid.bean.Article
-import com.manu.wanandroid.bean.Collect
 import com.manu.wanandroid.databinding.RecycleHomeItemArticleBinding
 
 /**

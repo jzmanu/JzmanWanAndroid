@@ -14,7 +14,7 @@ import com.manu.wanandroid.app.App
 
 private const val SHARED_PREFERENCES_NAME = "FlutterSharedPreferences"
 private val sp = App.getApp().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
-private val edit = sp.edit();
+private val edit = sp.edit()
 
 fun <T> getSpValue(
         key: String,
@@ -44,15 +44,15 @@ fun <T> putSpValue(
         is Set<*> -> edit.putStringSet(key, value as Set<String>)
         else -> throw UnsupportedOperationException("Unrecognized value $value")
     }
-    edit.apply();
+    edit.apply()
 }
 
 fun removeSpValue(key: String) {
     edit.remove(key)
-    edit.apply();
+    edit.apply()
 }
 
 fun clearSpValue() {
     edit.clear()
-    edit.apply();
+    edit.apply()
 }
