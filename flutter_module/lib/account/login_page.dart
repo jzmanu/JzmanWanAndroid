@@ -38,13 +38,6 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
     _platform = const MethodChannel('com.manu.startMainActivity');
     _accountData = AccountData();
     _accountModel = AccountModel(loginListener: this);
-
-    Sp.getString("account",(data){
-      _account = data;
-    });
-    Sp.getString("password",(data){
-      _password = data;
-    });
   }
 
   @override
@@ -52,7 +45,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
     Widget formColumn = Column(
       children: <Widget>[
         TextFormField(
-          initialValue: _account,
+          // initialValue: _account,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
@@ -78,7 +71,7 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
           margin: const EdgeInsets.only(bottom: 16, top: 16),
         ),
         TextFormField(
-          initialValue: _password,
+          // initialValue: _password,
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,
@@ -107,8 +100,11 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
           overflow: Overflow.visible,
           children: <Widget>[
             Container(
-              width: MediaQuery.of(context).size.width * 3 / 4,
-              height: 200,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 3 / 4,
+              height: 230,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -119,7 +115,10 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
             ),
             Positioned(
               bottom: -25,
-              left: MediaQuery.of(context).size.width * 3 / 4 / 4,
+              left: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 3 / 4 / 4,
               child: buildAccountButton(context, () => _login()),
             ),
           ],
@@ -183,9 +182,11 @@ class _LoginWidgetState extends State<LoginWidget> implements OnLoginListener {
 
   /// 登录
   void _login() {
+    Log.d(tag, "login");
     /// 表单校验
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+
       /// Flutter方式进行登录
       // _accountModel.login(_accountData.name, _accountData.password);
       /// 使用原生的方式登录，便于Cookie统一管理

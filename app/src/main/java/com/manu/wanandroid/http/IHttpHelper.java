@@ -26,94 +26,81 @@ public interface IHttpHelper {
      * 登录
      * @param username 用户名称
      * @param password 密码
-     * @return Observable<BaseResultBean<User>>
      */
-    Observable<BaseResultBean<User>> login(String username, String password);
+    Observable<BaseResult<User>> login(String username, String password);
+
+    /**
+     * 退出登录
+     */
+    Observable<BaseResult<Object>> logout();
     /**
      * 获取首页文章列表
-     *
      * @param pageIndex page index
-     * @return
      */
-    Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex);
+    Observable<BaseResult<BasePageBean<Article>>> getHomeArticleList(int pageIndex);
 
     /**
      * 获取banner列表
-     *
-     * @return
      */
-    Observable<BaseResultBean<List<Banner>>> getHomeBannerList();
+    Observable<BaseResult<List<Banner>>> getHomeBannerList();
 
     /**
      * 收藏文章
      *  @param id 收藏内容id
-     * @return Observable<BaseResultBean<Object>>
      */
-    Observable<BaseResultBean<Object>> collectArticle(String id);
+    Observable<BaseResult<Object>> collectArticle(String id);
 
     /**
      * 取消收藏文章
      * @param id 收藏内容id
-     * @return Observable<BaseResultBean<Object>>
      */
-    Observable<BaseResultBean<Object>> unCollectArticle(String id);
+    Observable<BaseResult<Object>> unCollectArticle(String id);
 
     /**
      * 收藏的文章列表
      * @param pageIndex 页面
-     * @return  Observable<BaseResultBean<BasePageBean<Collect>>>
      */
-    Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex);
+    Observable<BaseResult<BasePageBean<Collect>>> mineCollectArticle(int pageIndex);
 
     /**
      * 获取项目分类Tab
-     *
-     * @return
      */
-    Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList();
+    Observable<BaseResult<List<ProjectTab>>> getProjectTabList();
 
     /**
      * 获取项目分类Tab下的文章
      *
      * @param pageIndex
      * @param cid
-     * @return
      */
-    Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid);
+    Observable<BaseResult<BasePageBean<Project>>> getProjectList(int pageIndex, int cid);
 
     /**
      * 获取知识体系分类
-     *
-     * @return
      */
-    Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData();
+    Observable<BaseResult<List<Knowledge>>> getKsCategoryData();
 
     /**
      * 获取知识体系分类下面的文章
-     *
      * @param pageIndex
      * @param cid
-     * @return
      */
-    Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid);
+    Observable<BaseResult<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid);
 
     /**
      * 我的分享
      * @param pageIndex 页码，从1开始
-     * @return Observable<BaseResultBean<BasePageBean<Article>>>
      */
-    Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex);
+    Observable<BaseResult<Share<Article>>> mineShareArticle(int pageIndex);
 
     /**
      * 我的积分列表
      * @param pageIndex 页码，从1开始
-     * @return Observable<BaseResultBean<BasePageBean<Integral>>>
      */
-    Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex);
+    Observable<BaseResult<BasePageBean<Integral>>> mineIntegral(int pageIndex);
 
     /**
      * 我的积分信息
-     * @return Observable<BaseResultBean<IntegralInfo>>
      */
-    Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo();
+    Observable<BaseResult<IntegralInfo>> mineIntegralInfo();
 }

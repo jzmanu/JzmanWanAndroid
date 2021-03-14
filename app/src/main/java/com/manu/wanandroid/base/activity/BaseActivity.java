@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,23 +20,24 @@ import androidx.appcompat.app.AppCompatActivity;
  * @Author: jzman
  * @Date: 2019/5/7 0007 16:30
  */
-public abstract class BaseActivity extends AppCompatActivity {
-
-    private static final String TAG = BaseActivity.class.getSimpleName();
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     public abstract View onLayout();
 
-    public abstract void onInitData();
+    public abstract void onData();
 
-    public void onInitMessageView() {
+    public void onMessageView() {
     }
 
     public abstract void onInject();
 
-    public void onInitToolbar() {
+    public void onToolbar() {
     }
 
     public void onAttach() {
+    }
+
+    public void onClick(View v, @IdRes int id) {
     }
 
     @Override
@@ -47,10 +49,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             onInject();
             onAttach();
-            onInitMessageView();
-            onInitToolbar();
-            onInitData();
+            onMessageView();
+            onToolbar();
+            onData();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        onClick(v, v.getId());
     }
 
     @Override
@@ -68,17 +75,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected <Activity> void startActivity(Context context, Class<Activity> clazz){
-        Intent intent = new Intent(context,clazz);
+    protected <Activity> void startActivity(Context context, Class<Activity> clazz) {
+        Intent intent = new Intent(context, clazz);
         context.startActivity(intent);
     }
 
-    protected void toast(String message){
+    protected void toast(String message) {
         if (message == null) return;
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void toast(@StringRes int messageId){
-        Toast.makeText(this,messageId, Toast.LENGTH_SHORT).show();
+    protected void toast(@StringRes int messageId) {
+        Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show();
     }
 }

@@ -20,7 +20,7 @@ import retrofit2.HttpException;
 public abstract class BaseObserver<T> extends ResourceObserver<T> {
 
     private static final String TAG = BaseObserver.class.getSimpleName();
-    private IView mView;
+    private final IView mView;
 
     public BaseObserver(IView iView) {
         this.mView = iView;

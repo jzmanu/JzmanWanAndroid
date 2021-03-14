@@ -33,67 +33,72 @@ public class HttpHelperImpl implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<User>> login(String username, String password) {
+    public Observable<BaseResult<User>> login(String username, String password) {
         return mApiService.login(username,password);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
+    public Observable<BaseResult<Object>> logout() {
+        return mApiService.logout();
+    }
+
+    @Override
+    public Observable<BaseResult<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
         return mApiService.getHomeArticleList(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<Banner>>> getHomeBannerList() {
+    public Observable<BaseResult<List<Banner>>> getHomeBannerList() {
         return mApiService.getBannerList();
     }
 
     @Override
-    public Observable<BaseResultBean<Object>> collectArticle(String id) {
+    public Observable<BaseResult<Object>> collectArticle(String id) {
         return mApiService.collectArticle(id);
     }
 
     @Override
-    public Observable<BaseResultBean<Object>> unCollectArticle(String id) {
+    public Observable<BaseResult<Object>> unCollectArticle(String id) {
         return mApiService.unCollectArticle(id);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
+    public Observable<BaseResult<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
         return mApiService.mineCollectArticle(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList() {
+    public Observable<BaseResult<List<ProjectTab>>> getProjectTabList() {
         return mApiService.getProjectTabList();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
+    public Observable<BaseResult<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
         return mApiService.getProjectList(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData() {
+    public Observable<BaseResult<List<Knowledge>>> getKsCategoryData() {
         return mApiService.getKsCagegoryData();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
+    public Observable<BaseResult<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
         return mApiService.getKsCategoryArticle(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex) {
+    public Observable<BaseResult<Share<Article>>> mineShareArticle(int pageIndex) {
         return mApiService.mineShareArticle(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
+    public Observable<BaseResult<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
         return mApiService.mineIntegral(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo() {
+    public Observable<BaseResult<IntegralInfo>> mineIntegralInfo() {
         return mApiService.mineIntegralInfo();
     }
 }

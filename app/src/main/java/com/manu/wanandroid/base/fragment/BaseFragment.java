@@ -30,10 +30,10 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void onInject();
 
-    public void onInitMessageView() {
+    public void onMessageView() {
     }
 
-    public abstract void onInitData();
+    public abstract void onData();
 
     public void onLazyLoad() {
     }
@@ -52,14 +52,14 @@ public abstract class BaseFragment extends Fragment {
         View view = onLayout();
         onInject();
         onAttach();
-        onInitData();
+        onData();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onInitMessageView();
+        onMessageView();
         isInitView = true;
         //第一次加载且用户可见时加载数据
         if (isFirstLoad && getUserVisibleHint()) {

@@ -1,6 +1,6 @@
 package com.manu.wanandroid.http.rx;
 
-import com.manu.wanandroid.http.BaseResultBean;
+import com.manu.wanandroid.http.BaseResult;
 import com.manu.wanandroid.http.exception.MException;
 
 import io.reactivex.Observable;
@@ -34,8 +34,8 @@ public class RxUtil {
      * @param <T>
      * @return
      */
-    public static <T> ObservableTransformer<BaseResultBean<T>, T> rxHandlerResult() {
-        return observable -> observable.flatMap((Function<BaseResultBean<T>, ObservableSource<T>>) baseResultBean -> {
+    public static <T> ObservableTransformer<BaseResult<T>, T> rxHandlerResult() {
+        return observable -> observable.flatMap((Function<BaseResult<T>, ObservableSource<T>>) baseResultBean -> {
             if (baseResultBean.getErrorCode() == 0) {
                 return rxCreateObservable(baseResultBean.getData());
             }

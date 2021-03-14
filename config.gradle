@@ -22,5 +22,7 @@ ext {
             constraintLayout: "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             lifecycle       : "android.arch.lifecycle:common-java8:${version.lifecycle}",
             design          : 'com.google.android.material:material:1.0.0'
+
+            // ...
     ]
 }

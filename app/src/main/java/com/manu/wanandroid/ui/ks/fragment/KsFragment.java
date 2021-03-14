@@ -66,7 +66,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         L.i(TAG, "onInitData");
         FragmentManager fm = getFragmentManager();
         if (!mKsRightFragment.isAdded()) {
@@ -78,7 +78,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
                 .adapter(mKsCategoryAdapter)
                 .load(R.layout.recycle_ks_item_first_category_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(Config.INSTANCE.getSkeletonDuration())
+                .duration(Config.skeletonDuration)
                 .show();
 
 

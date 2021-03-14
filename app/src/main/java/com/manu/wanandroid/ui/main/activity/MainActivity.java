@@ -27,7 +27,7 @@ import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
 import com.manu.wanandroid.ui.home.activity.MineIntegralActivity;
 import com.manu.wanandroid.ui.home.activity.MineShareActivity;
 import com.manu.wanandroid.ui.home.activity.ReadHistoryActivity;
-import com.manu.wanandroid.ui.home.activity.SystemSettingActivity;
+import com.manu.wanandroid.ui.home.activity.SettingActivity;
 import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
 import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
@@ -52,7 +52,6 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * @Desc: MainActivity
  * @Author: jzman
- * @Date: 2019/5/8 0008 9:38
  */
 public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> implements BottomNavigationView.OnNavigationItemSelectedListener,
         ViewPager.OnPageChangeListener, NavigationView.OnNavigationItemSelectedListener, IntegralContract.View {
@@ -75,7 +74,6 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
     private ActivityMainBinding binding;
     private int mDrawItemId;
 
-
     @Override
     public View onLayout() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -92,8 +90,8 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
     }
 
     @Override
-    public void onInitToolbar() {
-        super.onInitToolbar();
+    public void onToolbar() {
+        super.onToolbar();
         setSupportActionBar(binding.toolBarInclude.toolBar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -122,7 +120,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
                     }
                 } else {
                     if (mDrawItemId == R.id.nv_share || mDrawItemId == R.id.nv_collect ||
-                            mDrawItemId == R.id.nv_integral){
+                            mDrawItemId == R.id.nv_integral) {
                         startLoginActivityForResult();
                     }
                 }
@@ -130,7 +128,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
                 if (mDrawItemId == R.id.nv_history) {
                     startActivity(MainActivity.this, ReadHistoryActivity.class);
                 } else if (mDrawItemId == R.id.nv_setting) {
-                    startActivity(MainActivity.this, SystemSettingActivity.class);
+                    startActivity(MainActivity.this, SettingActivity.class);
                 } else if (mDrawItemId == R.id.nv_about) {
                     startActivity(MainActivity.this, AboutActivity.class);
                 }
@@ -141,7 +139,8 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
 
 
     @Override
-    public void onInitData() {
+    public void onData() {
+        Intent intent = getIntent();
         mFragments.add(mHomeFragment);
         mFragments.add(mProjectFragment);
         mFragments.add(mKsFragment);
@@ -152,7 +151,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
         binding.vpMain.setOffscreenPageLimit(2);
 
         tvName.setOnClickListener(v -> {
-            if (!Account.INSTANCE.isLogin()){
+            if (!Account.INSTANCE.isLogin()) {
                 startLoginActivityForResult();
             }
         });
@@ -180,6 +179,12 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
         String action = intent.getStringExtra(AppStatusTrack.ACTION_HOME);
         if (AppStatusTrack.STATUS_FOCUS_KILLED.equals(action)) {
             onProtectApp();
+        }
+
+        String event = intent.getStringExtra(Account.LOGOUT);
+        if (Account.LOGOUT.equals(event)) {
+            AgentActivity.startLoginActivity(this);
+            finish();
         }
     }
 
@@ -252,7 +257,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
         context.startActivity(intent);
     }
 
-    private void startLoginActivityForResult(){
+    private void startLoginActivityForResult() {
         AgentActivity.startLoginActivityForResult(this, result -> {
             mMineIntegralPresenter.getMineIntegralInfo();
         });

@@ -19,8 +19,8 @@ class ReadHistoryActivity : BaseActivity() {
 
     override fun onInject() {}
 
-    override fun onInitToolbar() {
-        super.onInitToolbar()
+    override fun onToolbar() {
+        super.onToolbar()
         setSupportActionBar(binding.toolBarInclude.toolBar)
         val actionBar = supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -29,7 +29,7 @@ class ReadHistoryActivity : BaseActivity() {
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this)
     }
 
-    override fun onInitData() {
+    override fun onData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_history)
     }
 }

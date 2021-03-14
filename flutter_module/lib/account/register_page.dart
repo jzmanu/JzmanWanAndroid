@@ -108,7 +108,7 @@ class _RegisterWidgetState extends State<RegisterWidget> implements OnRegisterLi
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width * 3 / 4,
-              height: 280,
+              height: 330,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),

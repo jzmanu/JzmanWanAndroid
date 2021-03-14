@@ -83,7 +83,7 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         L.i(TAG, "onInitData");
 
         Bundle bundle = getArguments();
@@ -103,7 +103,7 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
                 .adapter(mKsCategoryArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(Config.INSTANCE.getSkeletonDuration())
+                .duration(Config.skeletonDuration)
                 .show();
 
         binding.rvKsRight.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvKsRight) {

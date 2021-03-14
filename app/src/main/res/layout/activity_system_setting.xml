@@ -1,23 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.activity.SystemSettingActivity">
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context=".ui.home.activity.SettingActivity">
 
     <include
         android:id="@+id/toolBarInclude"
         layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/tvDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolBarInclude" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/colorSkeleton"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/AppTheme.Setting.Item"
+            android:layout_centerVertical="true"
+            android:text="@string/account_force_login"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/colorSkeleton"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/AppTheme.Setting.Item"
+            android:layout_centerVertical="true"
+            android:text="@string/upgrade_auto_download" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scAutoDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/colorSkeleton"/>
+
+    <RelativeLayout
+        android:id="@+id/rlVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/setting_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/AppTheme.Setting.Item"
+            android:layout_centerVertical="true"
+            android:text="@string/upgrade_version" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            app:drawableEndCompat="@drawable/about_in_black_24dp"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/colorSkeleton"/>
+
+    <RelativeLayout
+        android:id="@+id/rlLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/setting_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/AppTheme.Setting.Item"
+            android:layout_centerVertical="true"
+            android:text="@string/account_logout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            app:drawableEndCompat="@drawable/about_in_black_24dp"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+</LinearLayout>

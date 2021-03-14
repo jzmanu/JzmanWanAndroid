@@ -54,8 +54,8 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
                 .injectMineIntegralActivity(this)
     }
 
-    override fun onInitToolbar() {
-        super.onInitToolbar()
+    override fun onToolbar() {
+        super.onToolbar()
         binding.toolBar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(binding.toolBar)
         val actionBar = supportActionBar!!
@@ -72,7 +72,7 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun onInitData() {
+    override fun onData() {
         binding.normalView.setOnLoadMoreListener(this)
         binding.normalView.setEnableRefresh(false)
 

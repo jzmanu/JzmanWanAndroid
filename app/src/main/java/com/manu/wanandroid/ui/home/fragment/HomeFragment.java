@@ -79,7 +79,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         L.i(TAG, "onInitData");
         binding.normalView.setOnRefreshListener(this);
         binding.normalView.setOnLoadMoreListener(this);
@@ -95,7 +95,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
                 .adapter(mHomeArticleAdapter)
                 .load(R.layout.recycle_home_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(Config.INSTANCE.getSkeletonDuration())
+                .duration(Config.skeletonDuration)
                 .show();
 
         binding.rvHome.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvHome) {

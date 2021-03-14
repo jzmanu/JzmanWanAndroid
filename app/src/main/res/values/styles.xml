@@ -29,13 +29,13 @@
         <!--Toolbar标题颜色-->
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <!--Toolbar背景颜色-->
-<!--        <item name="android:background">@color/colorPrimary</item>-->
+        <!--        <item name="android:background">@color/colorPrimary</item>-->
         <!--Toolbar左侧切换图标颜色-->
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
 
     <!--Android 4.4以上支持透明状态栏，5.0有一个渐变色-->
-    <style name="AppTheme.TransStatusBar.Base" parent="AppTheme"/>
+    <style name="AppTheme.TransStatusBar.Base" parent="AppTheme" />
 
     <style name="AppTheme.TransStatusBar" parent="AppTheme.TransStatusBar.Base">
         <item name="android:fitsSystemWindows">false</item>
@@ -46,11 +46,22 @@
     </style>
 
     <!--MainActivity主题-->
-    <style name="AppTheme.Main" parent="AppTheme.TransStatusBar"/>
+    <style name="AppTheme.Main" parent="AppTheme.TransStatusBar" />
 
     <style name="FlutterTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-<!--        <item name="android:windowBackground">@drawable/start</item>-->
-<!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!--        <item name="android:windowBackground">@drawable/start</item>-->
+        <!--        <item name="android:windowIsTranslucent">true</item>-->
     </style>
+
+
+    <style name="AppTheme.Setting.Item" parent="TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">@color/colorTextTitle</item>
+    </style>
+
 
 </resources>

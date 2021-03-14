@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:insetForeground="@android:color/transparent"
-            app:headerLayout="@layout/header"
+            app:headerLayout="@layout/nv_header"
             app:menu="@menu/nv_main" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

@@ -59,7 +59,7 @@ public class KsRightFragment extends BaseLoadMvpFragment<KsContract.CategoryArti
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         L.i(TAG, "onInitData");
 
         mActivity.mKsFragment.setOnKsCategoryInfoListener(this);
@@ -69,7 +69,7 @@ public class KsRightFragment extends BaseLoadMvpFragment<KsContract.CategoryArti
         mSkeletonScreenRight = Skeleton.bind(binding.normalView)
                 .load(R.layout.fragment_ks_right_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(Config.INSTANCE.getSkeletonDuration())
+                .duration(Config.skeletonDuration)
                 .show();
     }
 

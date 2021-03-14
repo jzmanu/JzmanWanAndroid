@@ -53,8 +53,8 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
                 .injectMineCollectActivity(this)
     }
 
-    override fun onInitToolbar() {
-        super.onInitToolbar()
+    override fun onToolbar() {
+        super.onToolbar()
         setSupportActionBar(binding.toolBarInclude.toolBar)
         val actionBar = supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -63,7 +63,7 @@ class MineCollectActivity : BaseLoadMvpActivity<CollectContract.Presenter?>(), C
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this)
     }
 
-    override fun onInitData() {
+    override fun onData() {
         binding.toolBarInclude.tvCenterTitle.setText(R.string.nv_collect)
         binding.normalView.setOnRefreshListener(this)
         binding.normalView.setOnLoadMoreListener(this)

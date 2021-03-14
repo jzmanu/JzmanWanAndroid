@@ -2,7 +2,7 @@
 /// 日志工具类
 class Log{
 
-  static bool debug = true;
+  static bool debug = false;
 
   static d(String tag, String message){
     if(debug){

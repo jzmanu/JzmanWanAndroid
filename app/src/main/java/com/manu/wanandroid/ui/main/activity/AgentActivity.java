@@ -2,6 +2,8 @@ package com.manu.wanandroid.ui.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.base.activity.BaseMvpFlutterActivity;
@@ -12,6 +14,7 @@ import com.manu.wanandroid.presenter.account.LoginPresenter;
 import com.manu.wanandroid.utils.L;
 
 import org.jetbrains.annotations.NotNull;
+
 
 import javax.inject.Inject;
 
@@ -36,6 +39,8 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
 
     @Inject
     LoginPresenter mLoginPresenter;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onInject() {
@@ -71,7 +76,8 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
     @Override
     public void onLoginSuccess(@NotNull User user) {
         L.i(TAG, "onLoginSuccess");
-        finish();
+        MainActivity.startMainActivity(this);
+        mHandler.postDelayed(this::finish,100);
     }
 
     @Override
@@ -92,6 +98,7 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
                 .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
                 .build(activity);
         activity.startActivity(intent);
+        activity.finish();
     }
 
     public static void startLoginActivityForResult(AppCompatActivity activity,
@@ -110,6 +117,11 @@ public class AgentActivity extends BaseMvpFlutterActivity<LoginContract.Presente
 
     public static FlutterActivity.NewEngineIntentBuilder withNewEngine() {
         return new MNewEngineIntentBuilder(AgentActivity.class);
+    }
+
+    @Override
+    public void onLogoutSuccess() {
+
     }
 
     static class MNewEngineIntentBuilder extends NewEngineIntentBuilder {

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/portraitView"
         app:layout_constraintStart_toStartOf="@+id/portraitView"
         app:layout_constraintTop_toBottomOf="@+id/portraitView"

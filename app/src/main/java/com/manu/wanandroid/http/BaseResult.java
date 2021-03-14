@@ -5,7 +5,7 @@ package com.manu.wanandroid.http;
  * @Author: jzman
  * @Date: 2019/5/8 0008 11:11
  */
-public class BaseResultBean<T> {
+public class BaseResult<T> {
     private int errorCode;
     private String errorMsg;
     private T data;

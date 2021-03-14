@@ -71,7 +71,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         Bundle bundle = getArguments();
         assert bundle != null;
         mCid = bundle.getInt(ARG_PARAM_TAB_ID);
@@ -88,7 +88,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
                 .adapter(mProjectArticleAdapter)
                 .load(R.layout.recycle_project_item_article_skeleton)
                 .color(R.color.colorAnimator)
-                .duration(Config.INSTANCE.getSkeletonDuration())
+                .duration(Config.skeletonDuration)
                 .show();
 
         binding.rvProject.addOnItemTouchListener(new OnRecycleItemClickListener(binding.rvProject) {

@@ -33,7 +33,7 @@ public abstract class BaseLoadMvpFragment<T extends IPresenter> extends BaseFrag
     }
 
     @Override
-    public void onInitMessageView() {
+    public void onMessageView() {
         mContentViews = new ArrayList<>();
 
         if (getView() == null) {

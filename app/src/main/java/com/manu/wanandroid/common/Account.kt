@@ -15,6 +15,8 @@ object Account {
     const val LOGIN = "user/login"
     /** cookie过期时间 */
     const val COOKIE_EXPIRES = "flutter.expires"
+    /** 退出登陆 */
+    const val LOGOUT = "logout"
     /** 用户信息 */
     const val USER_INFO = "user_info"
     /** 积分等级信息 */

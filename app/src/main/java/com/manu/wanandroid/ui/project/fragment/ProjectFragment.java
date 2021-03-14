@@ -52,7 +52,7 @@ public class ProjectFragment extends BaseLoadMvpFragment<ProjectContract.TabPres
     }
 
     @Override
-    public void onInitData() {
+    public void onData() {
         L.i(TAG, "onInitData");
         mProjectTabPresenter.getProjectTabList();
     }

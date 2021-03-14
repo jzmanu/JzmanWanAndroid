@@ -8,7 +8,7 @@ import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.http.rx.BasePageBean;
 import com.manu.wanandroid.bean.Article;
-import com.manu.wanandroid.http.BaseResultBean;
+import com.manu.wanandroid.http.BaseResult;
 import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.bean.Project;
 import com.manu.wanandroid.bean.ProjectTab;
@@ -35,126 +35,108 @@ public interface ApiService {
     /**
      * 登录
      * https://www.wanandroid.com/user/login
-     * @return
      */
     @FormUrlEncoded
     @POST("user/login")
-    Observable<BaseResultBean<User>> login(@Field("username") String name,@Field("password") String password);
+    Observable<BaseResult<User>> login(@Field("username") String name, @Field("password") String password);
+
+    /**
+     * 退出登录
+     * https://www.wanandroid.com/user/logout/json
+     */
+    @GET("user/logout/json")
+    Observable<BaseResult<Object>> logout();
 
     /**
      * 获取banner列表
      * https://www.wanandroid.com/banner/json
-     *
-     * @return
      */
     @GET("banner/json")
-    Observable<BaseResultBean<List<Banner>>> getBannerList();
+    Observable<BaseResult<List<Banner>>> getBannerList();
 
     /**
      * 获取首页文章列表
      * https://www.wanandroid.com/article/list/0/json
-     *
      * @param pageIndex page index
-     * @return
      */
     @GET("article/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(@Path("pageIndex") int pageIndex);
+    Observable<BaseResult<BasePageBean<Article>>> getHomeArticleList(@Path("pageIndex") int pageIndex);
 
     /**
      * 收藏文章
      * https://www.wanandroid.com/lg/collect/1165/json
-     *
-     * @param id
-     * @return
+     * @param id 文章id
      */
     @POST("lg/collect/{id}/json")
-    Observable<BaseResultBean<Object>> collectArticle(@Path("id") String id);
+    Observable<BaseResult<Object>> collectArticle(@Path("id") String id);
 
     /**
      * 取消收藏文章
      * https://www.wanandroid.com/lg/uncollect_originId/2333/json
-     *
-     * @param id
-     * @return
+     * @param id 文章id
      */
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<BaseResultBean<Object>> unCollectArticle(@Path("id") String id);
+    Observable<BaseResult<Object>> unCollectArticle(@Path("id") String id);
 
     /**
      * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
      * @param pageIndex 页码
-     * @return Observable<BaseResultBean<BasePageBean<Article>>>
      */
     @GET("lg/collect/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(@Path("pageIndex") int pageIndex);
+    Observable<BaseResult<BasePageBean<Collect>>> mineCollectArticle(@Path("pageIndex") int pageIndex);
 
 
     /**
      * 获取项目分类Tab
      * https://www.wanandroid.com/project/tree/json
-     *
-     * @return
      */
-
     @GET("project/tree/json")
-    Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList();
+    Observable<BaseResult<List<ProjectTab>>> getProjectTabList();
 
     /**
      * 获取项目分类下的文章
      * https://www.wanandroid.com/project/list/1/json?cid=294
-     *
-     * @param pageIndex
-     * @param cid
-     * @return
      */
     @GET("project/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
+    Observable<BaseResult<BasePageBean<Project>>> getProjectList(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
 
     /**
      * 获取知识体系分类数据
      * https://www.wanandroid.com/tree/json
      */
-
     @GET("tree/json")
-    Observable<BaseResultBean<List<Knowledge>>> getKsCagegoryData();
+    Observable<BaseResult<List<Knowledge>>> getKsCagegoryData();
 
     /**
      * 获取知识体系下面的文章
      * https://www.wanandroid.com/article/list/0/json?cid=60
-     *
-     * @param pageIndex
-     * @param cid
-     * @return
      */
     @GET("article/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
+    Observable<BaseResult<BasePageBean<Article>>> getKsCategoryArticle(@Path("pageIndex") int pageIndex, @Query("cid") int cid);
 
     /**
      * 我的分享
      * https://wanandroid.com/user/lg/private_articles/1/json
      * @param pageIndex 页码，从1开始
-     * @return Observable<BaseResultBean<BasePageBean<BaseResultBean<List<Article>>>>>
      */
     @GET("user/lg/private_articles/{pageIndex}/json")
-    Observable<BaseResultBean<Share<Article>>> mineShareArticle(@Path("pageIndex") int pageIndex);
+    Observable<BaseResult<Share<Article>>> mineShareArticle(@Path("pageIndex") int pageIndex);
 
     /**
      * 我的积分列表
      * https://www.wanandroid.com//lg/coin/list/1/json
      * @param pageIndex 页码，从1开始
-     * @return Observable<BaseResultBean<BasePageBean<Integral>>>
      */
     @GET("lg/coin/list/{pageIndex}/json")
-    Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(@Path("pageIndex") int pageIndex);
+    Observable<BaseResult<BasePageBean<Integral>>> mineIntegral(@Path("pageIndex") int pageIndex);
 
     /**
      * 我的积分
      * https://www.wanandroid.com/lg/coin/userinfo/json
-     * @return Observable<BaseResultBean<IntegralInfo>>
      */
     @GET("lg/coin/userinfo/json")
-    Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo();
+    Observable<BaseResult<IntegralInfo>> mineIntegralInfo();
 }
 
 

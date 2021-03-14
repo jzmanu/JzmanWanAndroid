@@ -26,7 +26,6 @@ import okhttp3.HttpUrl;
 /**
  * @Desc: LoginPresenter
  * @Author: jzman
- * @Date: 2021/1/18 21:57.
  */
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
     private static final String TAG = LoginPresenter.class.getSimpleName();
@@ -60,5 +59,26 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         SharePreferenceHelperKt.putSpValue("password", password);
                     }
                 }));
+    }
+
+    @Override
+    public void logout() {
+        addRxSubscribe(mDataManager.logout()
+        .compose(RxUtil.rxSchedulers())
+        .compose(RxUtil.rxHandlerResult())
+        .subscribeWith(new BaseObserver<Object>(mView) {
+            @Override
+            public void onNext(@NonNull Object o) {
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                SharePreferenceHelperKt.removeSpValue(Account.USER_INFO);
+                SharePreferenceHelperKt.removeSpValue(Account.COOKIE_EXPIRES);
+                SharePreferenceHelperKt.removeSpValue(Account.INTEGRAL_INFO);
+                mView.onLogoutSuccess();
+            }
+        }));
     }
 }

@@ -5,7 +5,7 @@ import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
 import com.manu.wanandroid.bean.User;
-import com.manu.wanandroid.http.BaseResultBean;
+import com.manu.wanandroid.http.BaseResult;
 import com.manu.wanandroid.http.HttpHelperImpl;
 import com.manu.wanandroid.http.IHttpHelper;
 import com.manu.wanandroid.bean.Share;
@@ -35,67 +35,72 @@ public class DataManager implements IHttpHelper {
     }
 
     @Override
-    public Observable<BaseResultBean<User>> login(String username, String password) {
+    public Observable<BaseResult<User>> login(String username, String password) {
         return mHttpHelper.login(username,password);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
+    public Observable<BaseResult<Object>> logout() {
+        return mHttpHelper.logout();
+    }
+
+    @Override
+    public Observable<BaseResult<BasePageBean<Article>>> getHomeArticleList(int pageIndex) {
         return mHttpHelper.getHomeArticleList(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<Banner>>> getHomeBannerList() {
+    public Observable<BaseResult<List<Banner>>> getHomeBannerList() {
         return mHttpHelper.getHomeBannerList();
     }
 
     @Override
-    public Observable<BaseResultBean<Object>> collectArticle(String id) {
+    public Observable<BaseResult<Object>> collectArticle(String id) {
         return mHttpHelper.collectArticle(id);
     }
 
     @Override
-    public Observable<BaseResultBean<Object>> unCollectArticle(String id) {
+    public Observable<BaseResult<Object>> unCollectArticle(String id) {
         return mHttpHelper.unCollectArticle(id);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
+    public Observable<BaseResult<BasePageBean<Collect>>> mineCollectArticle(int pageIndex) {
         return mHttpHelper.mineCollectArticle(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<List<ProjectTab>>> getProjectTabList() {
+    public Observable<BaseResult<List<ProjectTab>>> getProjectTabList() {
         return mHttpHelper.getProjectTabList();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
+    public Observable<BaseResult<BasePageBean<Project>>> getProjectList(int pageIndex, int cid) {
         return mHttpHelper.getProjectList(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<List<Knowledge>>> getKsCategoryData() {
+    public Observable<BaseResult<List<Knowledge>>> getKsCategoryData() {
         return mHttpHelper.getKsCategoryData();
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
+    public Observable<BaseResult<BasePageBean<Article>>> getKsCategoryArticle(int pageIndex, int cid) {
         return mHttpHelper.getKsCategoryArticle(pageIndex, cid);
     }
 
     @Override
-    public Observable<BaseResultBean<Share<Article>>> mineShareArticle(int pageIndex) {
+    public Observable<BaseResult<Share<Article>>> mineShareArticle(int pageIndex) {
         return mHttpHelper.mineShareArticle(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
+    public Observable<BaseResult<BasePageBean<Integral>>> mineIntegral(int pageIndex) {
         return mHttpHelper.mineIntegral(pageIndex);
     }
 
     @Override
-    public Observable<BaseResultBean<IntegralInfo>> mineIntegralInfo() {
+    public Observable<BaseResult<IntegralInfo>> mineIntegralInfo() {
         return mHttpHelper.mineIntegralInfo();
     }
 }

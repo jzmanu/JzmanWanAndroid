@@ -22,7 +22,7 @@ public abstract class BaseLoadMvpActivity<T extends IPresenter> extends BaseMvpA
     private List<View> mContentViews;
 
     @Override
-    public void onInitMessageView() {
+    public void onMessageView() {
         mContentViews = new ArrayList<>();
 
         ViewGroup viewGroup = findViewById(R.id.normal_view);

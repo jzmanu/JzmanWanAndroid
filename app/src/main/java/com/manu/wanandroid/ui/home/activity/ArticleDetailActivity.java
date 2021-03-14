@@ -78,7 +78,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
     }
 
     @Override
-    public void onInitToolbar() {
+    public void onToolbar() {
         binding.loadingProgressBar.setMax(100);
         StatusBarUtil.setImmerseStatusBarSystemUiVisibility(this);
         StatusBarUtil.setDarkMode(this);
@@ -86,7 +86,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void onInitData() {
+    public void onData() {
         Intent intent = getIntent();
         if (intent != null) {
             mId = intent.getIntExtra(PARAM_ID, -1);

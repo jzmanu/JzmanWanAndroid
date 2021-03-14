@@ -27,7 +27,7 @@ object Upgrade {
         /**
          * 设置wifi下自动下载
          */
-        Beta.autoDownloadOnWifi = false
+        Beta.autoDownloadOnWifi = Config.configAutoDownloadUpgradeOnWifi
 
         /**
          * 是否显示要升级的apk的信息
@@ -39,7 +39,10 @@ object Upgrade {
          */
         Beta.enableNotification = false
 
-        Beta.showInterruptedStrategy = true
+        /**
+         * 关闭热更新能力
+         */
+        Beta.enableHotfix = false;
 
         Beta.upgradeDialogLifecycleListener = object : UILifecycleListener<UpgradeInfo?> {
             override fun onCreate(context: Context?, view: View?, upgradeInfo: UpgradeInfo?) {

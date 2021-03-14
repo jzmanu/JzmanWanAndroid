@@ -10,11 +10,13 @@ import com.manu.wanandroid.base.mvp.view.IView
  * @Date: 2021/1/17 19:43.
  */
 interface LoginContract {
-    interface View : IView{
-        fun onLoginSuccess(user: User)
+    interface View : IView {
+        fun onLoginSuccess(user: User){}
+        fun onLogoutSuccess(){}
     }
 
-    interface Presenter :IPresenter<View>{
-        fun login(username:String, password:String)
+    interface Presenter : IPresenter<View> {
+        fun login(username: String, password: String)
+        fun logout()
     }
 }
