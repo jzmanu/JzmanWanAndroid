@@ -6,11 +6,32 @@ apply plugin: 'bugly'
 bugly {
     appId = 'e545211e2c'
     appKey = '40f4f7af-05f6-44fc-90b0-071da346253d'
-    debug = true
+    debug = false
 }
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    android {
+        //签名文件配置
+        signingConfigs {
+            //读取配置的与签名文件信息对应的环境变量
+            def appStoreFile = System.getenv('STORE_FILE')
+            def appStorePassword = System.getenv('STORE_PASSWORD')
+            def appKeyAlias = System.getenv('KEY_ALIAS')
+            def appKeyPassword = System.getenv('KEY_PASSWORD')
+
+            release {
+                storeFile file(appStoreFile)
+                storePassword appStorePassword
+                keyAlias appKeyAlias
+                keyPassword appKeyPassword
+            }
+            debug {
+            }
+        }
+    }
+
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -18,7 +39,7 @@ android {
         versionCode rootProject.ext.version.versionCode
         versionName rootProject.ext.version.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        signingConfig signingConfigs.release
         ndk {
             abiFilters "armeabi-v7a"
         }
@@ -84,7 +105,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     // Refresh
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-8'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-8'
 
     // Glide
