@@ -30,6 +30,13 @@
 | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735071598-9378a1fe-e660-4686-b509-20a3aa236877.gif) | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735080167-b47770fe-2c43-4cab-83ce-c55185295dde.gif) | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735096755-7f28f940-e6d7-4d55-ac17-3475178311b7.gif) |
 
 
+#### apk下载体验
+
+下载地址：[JzmanWanAndroid-1.0-release.apk](https://github.com/jzmanu/JzmanWanAndroid/releases/download/v1.0/JzmanWanAndroid-v1.0-release.apk)
+
+![jzmanwanandroid](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00fcae9d8d2749dda60eaf379a5a2975~tplv-k3u1fbpfcp-watermark.image)
+
+
 ### 后续计划
 
 首先作为练手项目当然要引入新的技术，**时刻保持技术更新**，并体现在项目上，其次继续添加新模块，优化显示细节，比如目前的版本中优化了简书文章的显示等，还有其他小众站点的文章显示待优化，后续会优先不定期完成如下模块：
