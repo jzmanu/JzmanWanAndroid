@@ -1,10 +1,13 @@
 package com.manu.wanandroid.web
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.manu.wanandroid.app.App
 import com.manu.wanandroid.nice.NiceArticleFactory
 import com.manu.wanandroid.utils.L
 import java.io.ByteArrayInputStream
@@ -26,6 +29,12 @@ class MWebViewClient(var agent: String) : WebViewClient() {
         val uri: Uri = Uri.parse(url)
         return when (uri.scheme) {
             "jianshu" -> true
+            "bilibili" -> {
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
+                App.getApp().baseContext.startActivity(intent)
+                true
+            }
             else -> false
         }
     }
