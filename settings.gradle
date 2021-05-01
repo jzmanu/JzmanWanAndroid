@@ -7,3 +7,12 @@ evaluate(new File(
         'JzmanWanAndroid/flutter_module/.android/include_flutter.groovy'
 ))
 
+// 避免出现couldn't find "libflutter.so"
+// Flutter/sdk/flutter/packages/flutter_tools/gradle/flutter.gradle
+// flutter module设置ABI
+gradle.beforeProject({ project->
+    if (project.hasProperty("target-platform") && !project.getProperty("target-platform").split(",").contains("android-arm")) {
+        project.setProperty("target-platform", "android-arm")
+    }
+})
+
