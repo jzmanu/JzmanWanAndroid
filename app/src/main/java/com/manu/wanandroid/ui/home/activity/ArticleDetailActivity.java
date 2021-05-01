@@ -2,6 +2,7 @@ package com.manu.wanandroid.ui.home.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -12,9 +13,11 @@ import com.manu.wanandroid.app.App;
 import com.manu.wanandroid.base.activity.BaseMvpActivity;
 import com.manu.wanandroid.bean.Collect;
 import com.manu.wanandroid.common.Account;
+import com.manu.wanandroid.common.Common;
 import com.manu.wanandroid.contract.home.CollectContract;
 import com.manu.wanandroid.databinding.ActivityArticleDetailBinding;
 import com.manu.wanandroid.di.component.activity.DaggerArticleDetailActivityComponent;
+import com.manu.wanandroid.http.api.ApiService;
 import com.manu.wanandroid.presenter.home.MineCollectPresenter;
 import com.manu.wanandroid.ui.main.activity.AgentActivity;
 import com.manu.wanandroid.utils.L;
@@ -24,6 +27,7 @@ import com.manu.wanandroid.web.MWebViewClient;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -95,7 +99,12 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             boolean isBrowser = intent.getBooleanExtra(PARAM_ONLY_BROWSER, false);
             binding.fab.setActivated(isCollect);
             if (isBrowser) binding.fab.hide();
-            String mUrl = intent.getStringExtra(PARAM_URL);
+            String url = intent.getStringExtra(PARAM_URL);
+            // 兼容某些文章返回的link只有路径的情况
+            if (!TextUtils.isEmpty(url) && url.startsWith("/")){
+                url = ApiService.BASE_URL+url.substring(1);
+            }
+            L.i(TAG,"url:"+ url);
 
             WebSettings webSettings = binding.webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
@@ -105,7 +114,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<CollectContract.Prese
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             binding.webView.setWebViewClient(new MWebViewClient(webSettings.getUserAgentString()));
             binding.webView.setWebChromeClient(new MWebChromeClient(binding.loadingProgressBar, binding.fab));
-            binding.webView.loadUrl(mUrl);
+            binding.webView.loadUrl(url);
 
             binding.webView.setOnDoubleClickListener(v -> {
                 setResult();
