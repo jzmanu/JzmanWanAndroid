@@ -84,9 +84,10 @@ class MineIntegralActivity : BaseLoadMvpActivity<IntegralContract.Presenter>(), 
                 .show()
 
         mMineIntegralPresenter.getMineIntegral(mPageIndex)
+        val info = Account.getIntegralInfo() ?: return;
 
         launch {
-            for (i in 1..Account.getIntegralInfo().coinCount) {
+            for (i in 1..info.coinCount) {
                 if (i % 4 == 0 ){
                     delay(1)
                     binding.ctlLayout.title = "$i"

@@ -1,6 +1,7 @@
 package com.manu.wanandroid.ui.project.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -98,7 +99,9 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
                 ArticleDetailActivity.startArticleDetailActivityForResult(
                         mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
                         result -> {
-                            boolean isRefresh = result.getData().getBooleanExtra(
+                            Intent intent = result.getData();
+                            if (intent == null) return;
+                            boolean isRefresh = intent.getBooleanExtra(
                                     ArticleDetailActivity.ARTICLE_REFRESH, false);
                             if (result.getResultCode() == Activity.RESULT_OK && isRefresh) {
                                 binding.normalView.autoRefresh();

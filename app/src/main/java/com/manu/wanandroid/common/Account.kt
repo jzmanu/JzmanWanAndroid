@@ -41,8 +41,9 @@ object Account {
     /**
      * 获取当前用户的积分信息
      */
-    fun getIntegralInfo() :IntegralInfo{
+    fun getIntegralInfo() :IntegralInfo?{
         val info: String = getSpValue(INTEGRAL_INFO,"")
+        if (info.isEmpty()) return null
         return Common.gson.fromJson(info,IntegralInfo::class.java)
     }
 

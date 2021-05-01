@@ -6,7 +6,9 @@ apply plugin: 'bugly'
 bugly {
     appId = 'e545211e2c'
     appKey = '40f4f7af-05f6-44fc-90b0-071da346253d'
-    debug = false
+    appVersion= '1.0'
+    appPackage = "com.manu.wanandroid"
+    debug = true
 }
 
 android {

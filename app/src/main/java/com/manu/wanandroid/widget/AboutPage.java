@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.manu.wanandroid.R;
+import com.manu.wanandroid.utils.BitmapUtil;
 
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
@@ -578,7 +581,8 @@ public class AboutPage {
 
         int size = ScreenUtils.getScreenWidth();
         if (mImage > 0) {
-            image.setImageResource(mImage);
+            Bitmap bitmap = BitmapUtil.INSTANCE.decodeSampleFromBitmap(mContext,mImage,size / 4, size / 4);
+            image.setImageBitmap(bitmap);
             ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(size / 4, size / 4);
             image.setLayoutParams(params);
         }
