@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.search.fragment.SearchFragment">
+
+    <com.moxun.tagcloudlib.view.TagCloudView
+        android:id="@+id/tagCloud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:autoScrollMode="uniform"
+        app:darkColor="@color/colorSkeleton"
+        app:layout_constraintBottom_toTopOf="@+id/normal_view"
+        app:layout_constraintEnd_toStartOf="@+id/normal_view"
+        app:layout_constraintStart_toEndOf="@+id/normal_view"
+        app:layout_constraintTop_toBottomOf="@+id/normal_view"
+        app:lightColor="@color/colorPrimary"
+        app:radiusPercent="0.8"
+        android:visibility="gone"
+        app:scrollSpeed="2" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/normal_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/recycle_home_item_article" />
+        </LinearLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

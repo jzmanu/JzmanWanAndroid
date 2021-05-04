@@ -3,6 +3,7 @@ package com.manu.wanandroid.http;
 import com.manu.wanandroid.bean.Article;
 import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.HotWord;
 import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
@@ -22,7 +23,6 @@ import io.reactivex.Observable;
 /**
  * @Desc: HttpHelperImpl
  * @Author: jzman
- * @Date: 2019/5/8 0008 13:21
  */
 public class HttpHelperImpl implements IHttpHelper {
     private final ApiService mApiService;
@@ -100,5 +100,15 @@ public class HttpHelperImpl implements IHttpHelper {
     @Override
     public Observable<BaseResult<IntegralInfo>> mineIntegralInfo() {
         return mApiService.mineIntegralInfo();
+    }
+
+    @Override
+    public Observable<BaseResult<List<HotWord>>> hotWords() {
+        return mApiService.hotWords();
+    }
+
+    @Override
+    public Observable<BaseResult<BasePageBean<Article>>> search(int pageIndex, String key) {
+        return mApiService.search(pageIndex,key);
     }
 }

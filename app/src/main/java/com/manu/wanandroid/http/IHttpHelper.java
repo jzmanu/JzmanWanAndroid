@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.HotWord;
 import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Share;
@@ -15,6 +16,9 @@ import com.manu.wanandroid.bean.ProjectTab;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * @Desc: IHttpHelper
@@ -24,6 +28,7 @@ import io.reactivex.Observable;
 public interface IHttpHelper {
     /**
      * 登录
+     *
      * @param username 用户名称
      * @param password 密码
      */
@@ -33,8 +38,10 @@ public interface IHttpHelper {
      * 退出登录
      */
     Observable<BaseResult<Object>> logout();
+
     /**
      * 获取首页文章列表
+     *
      * @param pageIndex page index
      */
     Observable<BaseResult<BasePageBean<Article>>> getHomeArticleList(int pageIndex);
@@ -46,18 +53,21 @@ public interface IHttpHelper {
 
     /**
      * 收藏文章
-     *  @param id 收藏内容id
+     *
+     * @param id 收藏内容id
      */
     Observable<BaseResult<Object>> collectArticle(String id);
 
     /**
      * 取消收藏文章
+     *
      * @param id 收藏内容id
      */
     Observable<BaseResult<Object>> unCollectArticle(String id);
 
     /**
      * 收藏的文章列表
+     *
      * @param pageIndex 页面
      */
     Observable<BaseResult<BasePageBean<Collect>>> mineCollectArticle(int pageIndex);
@@ -82,6 +92,7 @@ public interface IHttpHelper {
 
     /**
      * 获取知识体系分类下面的文章
+     *
      * @param pageIndex
      * @param cid
      */
@@ -89,12 +100,14 @@ public interface IHttpHelper {
 
     /**
      * 我的分享
+     *
      * @param pageIndex 页码，从1开始
      */
     Observable<BaseResult<Share<Article>>> mineShareArticle(int pageIndex);
 
     /**
      * 我的积分列表
+     *
      * @param pageIndex 页码，从1开始
      */
     Observable<BaseResult<BasePageBean<Integral>>> mineIntegral(int pageIndex);
@@ -103,4 +116,14 @@ public interface IHttpHelper {
      * 我的积分信息
      */
     Observable<BaseResult<IntegralInfo>> mineIntegralInfo();
+
+    /**
+     * 搜索热词
+     */
+    Observable<BaseResult<List<HotWord>>> hotWords();
+
+    /**
+     * 搜索
+     */
+    Observable<BaseResult<BasePageBean<Article>>> search(int pageIndex, String key);
 }

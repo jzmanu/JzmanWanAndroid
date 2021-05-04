@@ -111,7 +111,7 @@ public class KsRightArticleFragment extends BaseLoadMvpFragment<KsContract.Categ
             public void onRecycleItemClick(View view, int position, RecyclerView.ViewHolder holder) {
                 Article bean = mKsCategoryArticleAdapter.getItem(holder.getAdapterPosition());
                 ArticleDetailActivity.startArticleDetailActivityForResult(
-                        mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
+                        mActivity, bean.getId(), bean.getLink(), bean.getCollect(),
                         result -> {
                             boolean isRefresh = result.getData().getBooleanExtra(
                                     ArticleDetailActivity.ARTICLE_REFRESH, false);

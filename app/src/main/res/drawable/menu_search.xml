@@ -1,0 +1,8 @@
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/main_search"
+    android:insetBottom="6dp"
+    android:insetLeft="6dp"
+    android:insetRight="6dp"
+    android:insetTop="6dp"
+    tools:ignore="ResourceCycle" />

@@ -1,4 +1,4 @@
-include ':app', ':test'
+include ':app'
 
 // Flutter Module add exist App
 setBinding(new Binding([gradle: this]))

@@ -1,6 +1,7 @@
 package com.manu.wanandroid.http.api;
 
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.HotWord;
 import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
@@ -57,6 +58,7 @@ public interface ApiService {
     /**
      * 获取首页文章列表
      * https://www.wanandroid.com/article/list/0/json
+     *
      * @param pageIndex page index
      */
     @GET("article/list/{pageIndex}/json")
@@ -65,6 +67,7 @@ public interface ApiService {
     /**
      * 收藏文章
      * https://www.wanandroid.com/lg/collect/1165/json
+     *
      * @param id 文章id
      */
     @POST("lg/collect/{id}/json")
@@ -73,6 +76,7 @@ public interface ApiService {
     /**
      * 取消收藏文章
      * https://www.wanandroid.com/lg/uncollect_originId/2333/json
+     *
      * @param id 文章id
      */
     @POST("lg/uncollect_originId/{id}/json")
@@ -81,6 +85,7 @@ public interface ApiService {
     /**
      * 我的收藏
      * https://www.wanandroid.com/lg/collect/list/0/json
+     *
      * @param pageIndex 页码
      */
     @GET("lg/collect/list/{pageIndex}/json")
@@ -118,6 +123,7 @@ public interface ApiService {
     /**
      * 我的分享
      * https://wanandroid.com/user/lg/private_articles/1/json
+     *
      * @param pageIndex 页码，从1开始
      */
     @GET("user/lg/private_articles/{pageIndex}/json")
@@ -126,6 +132,7 @@ public interface ApiService {
     /**
      * 我的积分列表
      * https://www.wanandroid.com//lg/coin/list/1/json
+     *
      * @param pageIndex 页码，从1开始
      */
     @GET("lg/coin/list/{pageIndex}/json")
@@ -137,6 +144,21 @@ public interface ApiService {
      */
     @GET("lg/coin/userinfo/json")
     Observable<BaseResult<IntegralInfo>> mineIntegralInfo();
+
+    /**
+     * 搜索热词
+     * https://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    Observable<BaseResult<List<HotWord>>> hotWords();
+
+    /**
+     * 搜索
+     * https://www.wanandroid.com/article/query/0/json
+     */
+    @FormUrlEncoded
+    @POST("article/query/{pageIndex}/json")
+    Observable<BaseResult<BasePageBean<Article>>> search(@Path("pageIndex") int pageIndex, @Field("k") String key);
 }
 
 

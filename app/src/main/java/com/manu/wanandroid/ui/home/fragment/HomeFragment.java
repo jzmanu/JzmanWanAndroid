@@ -105,7 +105,7 @@ public class HomeFragment extends BaseLoadMvpFragment<HomeContract.Presenter> im
                 if (position == 0) return;
                 Article bean = mHomeArticleAdapter.getItem(position);
                 ArticleDetailActivity.startArticleDetailActivityForResult(
-                        mActivity, bean.getId(), bean.getLink(), bean.isCollect(),
+                        mActivity, bean.getId(), bean.getLink(), bean.getCollect(),
                         result -> {
                             Intent intent = result.getData();
                             if (intent == null) return;

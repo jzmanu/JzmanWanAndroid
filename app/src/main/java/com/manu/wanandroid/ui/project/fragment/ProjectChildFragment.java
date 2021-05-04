@@ -129,7 +129,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
     public void onProjectSuccess(List<Project> result) {
         L.i(TAG, "onProjectSuccess");
         onShowNormalContent();
-        if (mPageIndex == 0) {
+        if (mPageIndex == 1) {
             mSkeletonScreen.hide();
             mProjectArticleAdapter.clear();
             if (result.size() == 0) {
@@ -140,7 +140,6 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
 
         mProjectArticleAdapter.addAll(result);
         if (result.size() == 0) binding.normalView.setEnableLoadMore(false);
-
         binding.normalView.finishRefresh();
         binding.normalView.finishLoadMore();
     }
@@ -161,7 +160,7 @@ public class ProjectChildFragment extends BaseLoadMvpFragment<ProjectContract.Pr
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPageIndex = 0;
+        mPageIndex = 1;
         mProjectPresenter.getProjectList(mPageIndex, mCid);
     }
 }

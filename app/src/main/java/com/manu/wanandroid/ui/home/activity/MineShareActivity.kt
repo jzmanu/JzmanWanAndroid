@@ -82,7 +82,7 @@ class MineShareActivity : BaseLoadMvpActivity<ShareContract.Presenter>(), ShareC
         binding.rvShare.addOnItemTouchListener(object : OnRecycleItemClickListener(binding.rvShare) {
             override fun onRecycleItemClick(view: View, position: Int, holder: RecyclerView.ViewHolder) {
                 val bean = mCollectArticleAdapter.getItem(holder.adapterPosition)
-                ArticleDetailActivity.startArticleDetailActivity(this@MineShareActivity, bean.id, bean.link, bean.isCollect)
+                ArticleDetailActivity.startArticleDetailActivity(this@MineShareActivity, bean.id, bean.link, bean.collect)
             }
         })
         binding.normalView.autoRefresh()

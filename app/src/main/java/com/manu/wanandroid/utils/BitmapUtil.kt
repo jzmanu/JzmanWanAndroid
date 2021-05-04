@@ -11,7 +11,6 @@ import kotlin.math.roundToInt
 /**
  * @Desc: BitmapUtil
  * @Author: jzman
- * @Date: 2021/5/1 17:47.
  */
 object BitmapUtil {
 
@@ -19,7 +18,6 @@ object BitmapUtil {
 
     /**
      * 位图采样
-     * @param resources Resources
      * @param resId 资源id
      * @param reqWidth 显示宽
      * @param reqHeight 显示高

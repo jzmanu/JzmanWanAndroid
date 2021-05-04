@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.manu.wanandroid.common.AppStatusTrack;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
+import com.manu.wanandroid.utils.KeyBoardUtil;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
@@ -67,6 +69,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             return true;
         }
         return false;
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = this.getCurrentFocus();
+            KeyBoardUtil.INSTANCE.hideKeyboard(ev, view, this);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     protected void onProtectApp() {

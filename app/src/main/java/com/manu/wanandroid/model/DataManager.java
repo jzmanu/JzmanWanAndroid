@@ -1,19 +1,20 @@
 package com.manu.wanandroid.model;
 
+import com.manu.wanandroid.bean.Article;
+import com.manu.wanandroid.bean.Banner;
 import com.manu.wanandroid.bean.Collect;
+import com.manu.wanandroid.bean.HotWord;
 import com.manu.wanandroid.bean.Integral;
 import com.manu.wanandroid.bean.IntegralInfo;
 import com.manu.wanandroid.bean.Knowledge;
+import com.manu.wanandroid.bean.Project;
+import com.manu.wanandroid.bean.ProjectTab;
+import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.bean.User;
 import com.manu.wanandroid.http.BaseResult;
 import com.manu.wanandroid.http.HttpHelperImpl;
 import com.manu.wanandroid.http.IHttpHelper;
-import com.manu.wanandroid.bean.Share;
 import com.manu.wanandroid.http.rx.BasePageBean;
-import com.manu.wanandroid.bean.Article;
-import com.manu.wanandroid.bean.Banner;
-import com.manu.wanandroid.bean.Project;
-import com.manu.wanandroid.bean.ProjectTab;
 
 import java.util.List;
 
@@ -24,7 +25,6 @@ import io.reactivex.Observable;
 /**
  * @Desc: DataManager
  * @Author: jzman
- * @Date: 2019/5/9 0009 9:45
  */
 public class DataManager implements IHttpHelper {
     private final IHttpHelper mHttpHelper;
@@ -36,7 +36,7 @@ public class DataManager implements IHttpHelper {
 
     @Override
     public Observable<BaseResult<User>> login(String username, String password) {
-        return mHttpHelper.login(username,password);
+        return mHttpHelper.login(username, password);
     }
 
     @Override
@@ -102,5 +102,15 @@ public class DataManager implements IHttpHelper {
     @Override
     public Observable<BaseResult<IntegralInfo>> mineIntegralInfo() {
         return mHttpHelper.mineIntegralInfo();
+    }
+
+    @Override
+    public Observable<BaseResult<List<HotWord>>> hotWords() {
+        return mHttpHelper.hotWords();
+    }
+
+    @Override
+    public Observable<BaseResult<BasePageBean<Article>>> search(int pageIndex, String key) {
+        return mHttpHelper.search(pageIndex, key);
     }
 }

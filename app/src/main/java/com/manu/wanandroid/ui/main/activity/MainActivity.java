@@ -27,6 +27,7 @@ import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
 import com.manu.wanandroid.ui.home.activity.MineIntegralActivity;
 import com.manu.wanandroid.ui.home.activity.MineShareActivity;
 import com.manu.wanandroid.ui.home.activity.ReadHistoryActivity;
+import com.manu.wanandroid.ui.search.activity.SearchActivity;
 import com.manu.wanandroid.ui.home.activity.SettingActivity;
 import com.manu.wanandroid.ui.home.fragment.HomeFragment;
 import com.manu.wanandroid.ui.ks.fragment.KsFragment;
@@ -140,7 +141,6 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
 
     @Override
     public void onData() {
-        Intent intent = getIntent();
         mFragments.add(mHomeFragment);
         mFragments.add(mProjectFragment);
         mFragments.add(mKsFragment);
@@ -165,6 +165,9 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
             tvLevel.setText(level);
             tvRank.setText(rank);
         }
+
+        binding.toolBarInclude.ivSearch.setVisibility(View.VISIBLE);
+        binding.toolBarInclude.ivSearch.setOnClickListener(v -> startActivity(MainActivity.this, SearchActivity.class));
     }
 
     @Override

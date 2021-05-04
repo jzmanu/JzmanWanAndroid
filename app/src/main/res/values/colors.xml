@@ -12,6 +12,7 @@
     <color name="colorAnimator">#05000000</color>
     <color name="colorDraw">#0000ff</color>
     <color name="colorBoomNav">#dd000000</color>
+    <color name="colorSearch">#D5C4C4</color>
 
     <!--标题颜色-->
     <color name="colorTextTitle">#333333</color>
