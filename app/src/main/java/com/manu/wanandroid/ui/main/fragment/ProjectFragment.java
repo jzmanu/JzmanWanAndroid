@@ -1,4 +1,4 @@
-package com.manu.wanandroid.ui.project.fragment;
+package com.manu.wanandroid.ui.main.fragment;
 
 import android.view.View;
 

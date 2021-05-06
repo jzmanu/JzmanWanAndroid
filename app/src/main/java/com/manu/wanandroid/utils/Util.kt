@@ -1,8 +1,12 @@
 package com.manu.wanandroid.utils
 
+import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.content.res.Resources
 import android.util.Base64
+import android.util.DisplayMetrics
 import android.util.TypedValue
+import com.manu.wanandroid.app.App
 
 
 /**
@@ -38,4 +42,12 @@ object Util {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics)
     }
 
+    /**
+     * 获取Density
+     */
+    fun getDensity(activity: Activity): Float {
+        val dm = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getMetrics(dm)
+        return dm.density
+    }
 }

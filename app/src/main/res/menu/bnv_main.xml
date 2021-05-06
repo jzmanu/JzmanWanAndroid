@@ -15,5 +15,4 @@
         android:id="@+id/bnv_ks"
         android:icon="@drawable/main_ks_black_24dp"
         android:title="@string/bnv_title_ks"/>
-
 </menu>

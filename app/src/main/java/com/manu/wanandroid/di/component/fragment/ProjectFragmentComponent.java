@@ -2,7 +2,7 @@ package com.manu.wanandroid.di.component.fragment;
 
 import com.manu.wanandroid.di.module.fragment.ProjectFragmentModule;
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
+import com.manu.wanandroid.ui.main.fragment.ProjectFragment;
 
 import dagger.Subcomponent;
 

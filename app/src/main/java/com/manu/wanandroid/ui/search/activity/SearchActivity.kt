@@ -1,10 +1,12 @@
 package com.manu.wanandroid.ui.search.activity
 
 import android.app.SearchManager
+import android.content.Context
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import com.manu.wanandroid.R
@@ -14,6 +16,7 @@ import com.manu.wanandroid.databinding.ActivitySearchBinding
 import com.manu.wanandroid.di.component.activity.DaggerSearchActivityComponent
 import com.manu.wanandroid.di.component.activity.SearchActivityComponent
 import com.manu.wanandroid.ui.search.fragment.SearchFragment
+import com.manu.wanandroid.utils.KeyBoardUtil
 import com.manu.wanandroid.utils.L
 import com.manu.wanandroid.utils.StatusBarUtil
 import javax.inject.Inject
@@ -93,6 +96,7 @@ class SearchActivity : BaseActivity(), SearchView.OnQueryTextListener {
         L.i(TAG, "onQueryTextSubmit > newText:$query")
         // 点击提交按钮的时候
         searQuery(query)
+        KeyBoardUtil.hideKeyboard(this)
         return true
     }
 

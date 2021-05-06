@@ -3,6 +3,7 @@ package com.manu.wanandroid.ui.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,15 +28,19 @@ import com.manu.wanandroid.ui.home.activity.MineCollectActivity;
 import com.manu.wanandroid.ui.home.activity.MineIntegralActivity;
 import com.manu.wanandroid.ui.home.activity.MineShareActivity;
 import com.manu.wanandroid.ui.home.activity.ReadHistoryActivity;
+import com.manu.wanandroid.ui.main.fragment.MineFragment;
 import com.manu.wanandroid.ui.search.activity.SearchActivity;
 import com.manu.wanandroid.ui.home.activity.SettingActivity;
-import com.manu.wanandroid.ui.home.fragment.HomeFragment;
-import com.manu.wanandroid.ui.ks.fragment.KsFragment;
+import com.manu.wanandroid.ui.main.fragment.HomeFragment;
+import com.manu.wanandroid.ui.main.fragment.KsFragment;
 import com.manu.wanandroid.ui.main.adapter.MainPagerAdapter;
-import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
+import com.manu.wanandroid.ui.main.fragment.ProjectFragment;
+import com.manu.wanandroid.utils.BitmapUtil;
 import com.manu.wanandroid.utils.L;
 import com.manu.wanandroid.utils.SharePreferenceHelperKt;
 import com.manu.wanandroid.utils.StatusBarUtil;
+import com.manu.wanandroid.utils.Util;
+import com.manu.wanandroid.widget.PortraitView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -71,6 +76,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
     MineIntegralPresenter mMineIntegralPresenter;
 
     private TextView tvName, tvLevel, tvRank;
+    private PortraitView portraitView;
     public MainActivityComponent mMainActivityComponent;
     private ActivityMainBinding binding;
     private int mDrawItemId;
@@ -106,6 +112,10 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
         tvName = headerView.findViewById(R.id.tvName);
         tvLevel = headerView.findViewById(R.id.tvLevel);
         tvRank = headerView.findViewById(R.id.tvRank);
+        portraitView = headerView.findViewById(R.id.portraitView);
+        Bitmap bitmap = BitmapUtil.INSTANCE.decodeSampleFromBitmap(this,R.drawable.default_portrait,
+                90, 90, Util.INSTANCE.getDensity(this));
+        portraitView.setImageBitmap(bitmap);
 
         binding.dlMain.addDrawerListener(toggle);
         binding.dlMain.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
@@ -208,7 +218,7 @@ public class MainActivity extends BaseMvpActivity<IntegralContract.Presenter> im
             binding.vpMain.setCurrentItem(1);
         } else if (mDrawItemId == R.id.bnv_ks) {
             binding.vpMain.setCurrentItem(2);
-        } else {
+        }else {
             binding.dlMain.close();
         }
         return true;

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.manu.wanandroid.R;
 import com.manu.wanandroid.utils.BitmapUtil;
+import com.manu.wanandroid.utils.Util;
 
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;

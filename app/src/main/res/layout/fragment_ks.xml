@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ks.fragment.KsFragment">
+    tools:context=".ui.main.fragment.KsFragment">
 
     <LinearLayout
         android:id="@+id/normal_view"

@@ -1,4 +1,4 @@
-package com.manu.wanandroid.ui.ks.fragment;
+package com.manu.wanandroid.ui.main.fragment;
 
 import android.view.View;
 
@@ -14,6 +14,7 @@ import com.manu.wanandroid.databinding.FragmentKsBinding;
 import com.manu.wanandroid.di.module.fragment.KsFragmentModule;
 import com.manu.wanandroid.presenter.ks.KsCategoryDataPresenter;
 import com.manu.wanandroid.ui.ks.adapter.KsCategoryAdapter;
+import com.manu.wanandroid.ui.ks.fragment.KsRightFragment;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
 import com.manu.wanandroid.utils.L;
 
@@ -46,7 +47,7 @@ public class KsFragment extends BaseLoadMvpFragment<KsContract.CategoryPresenter
     private int mCurrentClickPosition;
     private SkeletonScreen mSkeletonScreenLeft;
 
-    void setOnKsCategoryInfoListener(OnKsCategoryInfoListener mOnKsCategoryInfoListener) {
+    public void setOnKsCategoryInfoListener(OnKsCategoryInfoListener mOnKsCategoryInfoListener) {
         this.mOnKsCategoryInfoListener = mOnKsCategoryInfoListener;
     }
 

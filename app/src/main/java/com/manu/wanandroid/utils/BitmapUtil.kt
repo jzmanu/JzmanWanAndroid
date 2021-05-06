@@ -1,10 +1,8 @@
 package com.manu.wanandroid.utils
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.annotation.RawRes
 import kotlin.math.roundToInt
 
 
@@ -16,6 +14,15 @@ object BitmapUtil {
 
     private const val TAG = "BitmapUtil"
 
+    fun decodeSampleFromBitmap(
+            context: Context,
+            resId: Int,
+            reqWidth: Int,
+            reqHeight: Int
+    ): Bitmap? {
+        return decodeSampleFromBitmap(context, resId, reqWidth, reqHeight, 1.0f)
+    }
+
     /**
      * 位图采样
      * @param resId 资源id
@@ -24,10 +31,11 @@ object BitmapUtil {
      * @return 返回重新采样后的Bitmap
      */
     fun decodeSampleFromBitmap(
-        context: Context,
-        @RawRes resId: Int,
-        reqWidth: Int,
-        reqHeight: Int
+            context: Context,
+            resId: Int,
+            reqWidth: Int,
+            reqHeight: Int,
+            density: Float
     ): Bitmap? {
         val resource = context.resources
         //创建一个位图工厂的设置选项
@@ -37,7 +45,8 @@ object BitmapUtil {
         //解码
         BitmapFactory.decodeResource(resource, resId, options)
         //计算采样比例
-        options.inSampleSize = calculateSampleSize(options, reqWidth, reqHeight)
+        options.inSampleSize = calculateSampleSize(options,
+                (reqWidth * density).toInt(), (reqHeight * density).toInt())
         val inSampleSize = options.inSampleSize
         //设置该属性为false，实现真正解码
         options.inJustDecodeBounds = false
@@ -54,9 +63,9 @@ object BitmapUtil {
      * @return 返回采样大小
      */
     private fun calculateSampleSize(
-        option: BitmapFactory.Options,
-        reqWidth: Int,
-        reqHeight: Int
+            option: BitmapFactory.Options,
+            reqWidth: Int,
+            reqHeight: Int
     ): Int {
         //获得图片的原宽高
         val width = option.outWidth

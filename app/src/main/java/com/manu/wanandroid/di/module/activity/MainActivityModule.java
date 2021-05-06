@@ -1,9 +1,10 @@
 package com.manu.wanandroid.di.module.activity;
 
 import com.manu.wanandroid.di.scope.PreActivity;
-import com.manu.wanandroid.ui.home.fragment.HomeFragment;
-import com.manu.wanandroid.ui.ks.fragment.KsFragment;
-import com.manu.wanandroid.ui.project.fragment.ProjectFragment;
+import com.manu.wanandroid.ui.main.fragment.HomeFragment;
+import com.manu.wanandroid.ui.main.fragment.KsFragment;
+import com.manu.wanandroid.ui.main.fragment.MineFragment;
+import com.manu.wanandroid.ui.main.fragment.ProjectFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,12 @@ public class MainActivityModule {
     @Provides
     KsFragment providerKsFragment() {
         return new KsFragment();
+    }
+
+    @PreActivity
+    @Provides
+    MineFragment providerMineFragment() {
+        return new MineFragment();
     }
 
     @PreActivity

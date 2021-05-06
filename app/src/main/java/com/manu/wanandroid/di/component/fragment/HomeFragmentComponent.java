@@ -2,7 +2,7 @@ package com.manu.wanandroid.di.component.fragment;
 
 import com.manu.wanandroid.di.module.fragment.HomeFragmentModule;
 import com.manu.wanandroid.di.scope.PreFragment;
-import com.manu.wanandroid.ui.home.fragment.HomeFragment;
+import com.manu.wanandroid.ui.main.fragment.HomeFragment;
 
 import dagger.Subcomponent;
 

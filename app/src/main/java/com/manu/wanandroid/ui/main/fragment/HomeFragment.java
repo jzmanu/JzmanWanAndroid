@@ -1,4 +1,4 @@
-package com.manu.wanandroid.ui.home.fragment;
+package com.manu.wanandroid.ui.main.fragment;
 
 import android.app.Activity;
 import android.content.Intent;

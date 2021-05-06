@@ -14,6 +14,7 @@ import com.manu.wanandroid.databinding.FragmentKsRightBinding;
 import com.manu.wanandroid.di.module.fragment.KsRightFragmentModule;
 import com.manu.wanandroid.ui.ks.adapter.KsRightChildPageAdapter;
 import com.manu.wanandroid.ui.main.activity.MainActivity;
+import com.manu.wanandroid.ui.main.fragment.KsFragment;
 import com.manu.wanandroid.utils.L;
 
 import java.util.List;
