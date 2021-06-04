@@ -5,7 +5,7 @@
 - https://github.com/jzmanu/JzmanWanAndroid
 
 
-#### 实现功能
+### 实现功能
 
 - 登录注册
 - 首页文章
@@ -20,7 +20,7 @@
 
 欢迎在[issue](https://github.com/jzmanu/JzmanWanAndroid/issues)上反应 bug 以便及时修复。
 
-#### 项目效果 
+### 项目效果 
 
 如果效果图不能清晰展示建议查看：[玩安卓开源客户端介绍](https://www.yuque.com/docs/share/9bbf8265-56a3-42a2-81cd-c470beb0de8c?#)。
 
@@ -30,7 +30,7 @@
 | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735071598-9378a1fe-e660-4686-b509-20a3aa236877.gif) | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735080167-b47770fe-2c43-4cab-83ce-c55185295dde.gif) | ![](https://cdn.nlark.com/yuque/0/2021/gif/644330/1615735096755-7f28f940-e6d7-4d55-ac17-3475178311b7.gif) |
 
 
-#### apk下载体验
+### apk下载体验
 
 下载地址：[JzmanWanAndroid-1.0-release.apk](https://github.com/jzmanu/JzmanWanAndroid/releases/download/v1.0/JzmanWanAndroid-v1.0-release.apk)
 
@@ -49,7 +49,7 @@
 - 继续补充中...
 
 
-#### 联系作者
+### 联系作者
 
 个人微信公众号：**躬行之** 。
 
