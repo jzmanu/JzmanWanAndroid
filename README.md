@@ -48,6 +48,14 @@
 - 深色主题
 - 继续补充中...
 
+### 如何运行项目
+
+某个网友微信公众号反馈项目不能运行，由于时间过了几天不能够主动回复消息，这个补充到 README 中，如果自己环境不能直接运行：
+
+1. 先运行 Android 子项目 JzmanWanAndroid\flutter_module\.android 能够远行无报错，如有报错多半是环境问题，按照提示处理。
+2. 再运行 JzmanWanAndroid 原项目则可正常运行。
+
+亲测没问题，如还有问题提个 [issue](https://github.com/jzmanu/JzmanWanAndroid/issues) 。
 
 ### 联系作者
 
